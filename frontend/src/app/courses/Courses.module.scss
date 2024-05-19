@@ -1,0 +1,41 @@
+.courses {
+    @apply mt-10 max-w-[820px] w-full mx-auto;
+
+    .courses__header {
+        @apply flex gap-3 items-center;
+    }
+
+    .courses__welcome {
+        
+    }
+
+    .courses__searchbar {
+        @apply ml-auto;
+    }
+
+    .courses__row {
+        .row__header {
+            @apply flex gap-x-3 flex-wrap items-center mb-3 mt-10;
+        }
+
+        .row__title {
+            @apply text-white font-bold text-[16px];
+        }
+
+        .row__content {
+            @apply flex gap-5;
+        }
+
+        .row__link {
+            @apply text-sm text-white/50 transition;
+
+            &:hover {
+                @apply text-white underline;
+            }
+        }
+
+        .row__description {
+            @apply text-white/50 w-full;
+        }
+    }
+}

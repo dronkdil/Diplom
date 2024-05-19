@@ -1,0 +1,44 @@
+.embla {
+    @apply inline-flex flex-col justify-center max-md:-mt-20 max-md:h-full;
+
+    &__viewport {
+        @apply overflow-hidden mb-10 md:mb-3;
+    }
+
+    &__container {
+        @apply inline-flex gap-x-2;
+    }
+
+    &__slide {
+        @apply mx-2;
+        flex: 0 0 100%;
+    }
+
+    &__footer {
+        @apply contents md:flex relative;
+    }
+
+    &__dots {
+        @apply flex space-x-1;
+    }
+
+    &__dot {
+        @apply w-1 h-1 rounded-full bg-white/50 transition-all cursor-pointer;
+
+        &--selected {
+            @apply w-4 bg-white;
+        }
+
+        &:hover {
+            @apply bg-white;
+        }
+    }
+
+    &__buttons {
+        @apply max-md:px-10 max-md:fixed max-md:bottom-10 max-md:left-0 max-md:w-full max-md:justify-between md:ml-auto;
+
+        & > *:first-child {
+            @apply max-md:-ml-[22px];
+        }
+    }
+}

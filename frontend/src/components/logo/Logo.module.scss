@@ -1,0 +1,19 @@
+.logo {
+    @apply inline-flex space-x-2 items-center transition cursor-pointer;
+
+    &__cube {
+        @apply w-10 h-10 bg-white rounded-lg;
+    }
+
+    &__text {
+        @apply font-bold text-white text-lg;
+    }
+
+    &:hover {
+        @apply opacity-70;
+    }
+
+    &:active {
+        @apply scale-95;
+    }
+}

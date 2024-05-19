@@ -1,0 +1,70 @@
+{
+  "pages": {
+    "/(home)/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(home)/page.css",
+      "static/chunks/app/(home)/page.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/courses/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/courses/page.css",
+      "static/chunks/app/courses/page.js"
+    ],
+    "/(auth)/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(auth)/login/page.css",
+      "static/chunks/app/(auth)/login/page.js"
+    ],
+    "/(auth)/registration/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(auth)/registration/page.css",
+      "static/chunks/app/(auth)/registration/page.js"
+    ],
+    "/profile/(student)/my-courses/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profile/(student)/my-courses/page.css",
+      "static/chunks/app/profile/(student)/my-courses/page.js"
+    ],
+    "/profile/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profile/layout.css",
+      "static/chunks/app/profile/layout.js"
+    ],
+    "/profile/(student)/my-certificates/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profile/(student)/my-certificates/page.css",
+      "static/chunks/app/profile/(student)/my-certificates/page.js"
+    ],
+    "/profile/(common)/notifications/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profile/(common)/notifications/page.css",
+      "static/chunks/app/profile/(common)/notifications/page.js"
+    ],
+    "/profile/(common)/my-data/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profile/(common)/my-data/page.css",
+      "static/chunks/app/profile/(common)/my-data/page.js"
+    ],
+    "/profile/(common)/settings/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profile/(common)/settings/page.css",
+      "static/chunks/app/profile/(common)/settings/page.js"
+    ]
+  }
+}

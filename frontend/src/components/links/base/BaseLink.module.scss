@@ -1,0 +1,7 @@
+.base {
+    @apply scale-100 transition text-center;
+
+    &:active {
+        @apply scale-95;
+    }
+}

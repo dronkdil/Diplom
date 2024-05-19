@@ -1,0 +1,7 @@
+.group {
+    @apply flex space-x-1;
+
+    &__space-between {
+        @apply justify-between w-full;
+    }
+}

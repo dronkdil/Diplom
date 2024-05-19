@@ -1,0 +1,11 @@
+.wrapper {
+    @apply text-white/50 space-x-2 inline-flex border-2 border-white/50 rounded-[6px] py-[8px] px-[10px] cursor-text transition;
+
+    &__icon {
+        @apply text-sm;
+    }
+
+    &:hover {
+        @apply border-white bg-white/10;
+    }
+}

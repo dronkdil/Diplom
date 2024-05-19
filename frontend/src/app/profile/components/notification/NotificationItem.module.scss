@@ -1,0 +1,27 @@
+.notification {
+    @apply p-5 rounded-md text-white bg-gray-700 flex max-md:flex-col;
+
+    &__content {
+        @apply flex;
+    }
+
+    &__icon {
+        @apply mr-4 stroke-white/50;
+    }
+
+    &__title {
+        @apply text-[18px] font-bold;
+    }
+
+    &__description {
+
+    }
+
+    &__buttons {
+        @apply md:ml-auto h-full flex justify-center items-center gap-2 mt-2;
+
+        & > * {
+            @apply flex-1;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+.icon {
+    @apply p-[5px] bg-transparent rounded-[4px] font-semibold transition duration-150 text-white;
+
+    &:hover {
+        @apply bg-gray-400/30 border-gray-300;
+    }
+}

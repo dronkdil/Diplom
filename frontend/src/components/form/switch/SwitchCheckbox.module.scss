@@ -1,0 +1,25 @@
+.switch {
+    @apply flex gap-2;
+
+    &__control {
+        @apply relative flex h-6 w-10 cursor-pointer rounded-full bg-white/10 p-1 transition-colors duration-200 ease-in-out focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-white/10;
+
+        &[data-checked] {
+            .switch__dot {
+                @apply translate-x-4;
+            }
+        }
+    }
+
+    &__dot {
+        @apply pointer-events-none inline-block size-4 translate-x-0 rounded-full bg-white ring-0 shadow-lg transition duration-200 ease-in-out;
+    }
+
+    &__label {
+        @apply text-white/50 transition;
+
+        &--selected {
+            @apply text-white;
+        }
+    }
+}

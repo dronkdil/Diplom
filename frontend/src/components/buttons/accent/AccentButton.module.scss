@@ -1,0 +1,7 @@
+.accent {
+    @apply py-[8px] px-[22px] bg-gray-950 rounded-[4px] font-semibold transition duration-150 text-white;
+
+    &:hover {
+        @apply bg-gray-950/60 border-gray-300;
+    }
+}

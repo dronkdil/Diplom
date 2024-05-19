@@ -1,0 +1,23 @@
+.page {
+    @apply flex-auto grid place-content-center;
+}
+
+.form {
+    @apply flex flex-col gap-3;
+}
+
+.switch-field {
+    @apply text-white flex gap-2 cursor-pointer;
+
+    &--between {
+        @apply justify-between;
+    }
+
+    &__label {
+        @apply text-white/50 transition;
+
+        &--selected {
+            @apply text-white;
+        }
+    }
+}

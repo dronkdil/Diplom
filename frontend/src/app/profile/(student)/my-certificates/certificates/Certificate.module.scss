@@ -1,0 +1,27 @@
+.wrapper {
+    @apply flex flex-col items-center;
+}
+
+.certificate {
+    @apply w-[150px] p-3 rounded-md cursor-pointer transition flex flex-col items-center relative;
+
+    &__image {
+        @apply mb-3;
+    }
+
+    &__title {
+        @apply text-white font-bold text-center line-clamp-2;
+    }
+
+    &__buttons {
+        @apply flex;
+
+        * {
+            @apply  stroke-white/50;
+        }
+    }
+
+    &:hover {
+        @apply bg-white/10;
+    }
+}

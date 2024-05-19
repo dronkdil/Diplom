@@ -1,0 +1,19 @@
+.setting {
+    @apply bg-gray-700 p-5 rounded-md text-white relative flex;
+
+    &__title {
+
+    }
+
+    &__actual-data {
+        @apply text-white/50;
+    }
+
+    &__inputs {
+        @apply mt-2;
+    }
+
+    &__buttons {
+        @apply flex gap-2 items-center ml-auto;
+    }
+}

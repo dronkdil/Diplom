@@ -1,0 +1,11 @@
+.body {
+  @apply min-h-full from-violet-700 bg-violet-900 bg-gradient-to-b p-5 flex flex-col flex-auto bg-no-repeat;
+
+  h2 {
+    @apply text-white font-bold text-[24px];
+  }
+
+  h3 {
+    @apply text-white font-semibold text-[18px];
+  }
+}

@@ -1,0 +1,6 @@
+- @headlessui/react (components)
+- embla-carousel
+- tailwind css (styles)
+- lucide (icons)
+- @react-input/mask
+- redux, react-redux, @reduxjs/toolkit (save state)

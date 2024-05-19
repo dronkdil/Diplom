@@ -1,0 +1,25 @@
+.radio-item {
+    @apply text-white/50 inline-flex border-2 border-white/50 rounded-[6px] py-[8px] px-[10px] cursor-text transition relative;
+
+    .radio-item__icon {
+        @apply absolute size-6 opacity-0 transition-all mr-0;
+    }
+
+    &__content {
+        @apply opacity-100 transition;
+    }
+
+    &[data-checked] {
+        .radio-item__icon {
+            @apply opacity-100;
+        }
+
+        .radio-item__content {
+            @apply opacity-0;
+        }
+    }
+
+    &:hover {
+        @apply cursor-pointer border-white bg-white/10;
+    }
+}
