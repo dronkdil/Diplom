@@ -10,5 +10,6 @@ export const Routes = {
 	},
 	Login: '/login',
 	Registration: '/registration',
-	Courses: '/courses'
+	Courses: '/courses',
+	Course: (id: number) => `/courses/${id}`
 }

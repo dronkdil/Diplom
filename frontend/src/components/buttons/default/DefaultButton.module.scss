@@ -1,5 +1,5 @@
 .default {
-    @apply py-[8px] px-[22px] bg-gray-400/50 rounded-[4px] font-semibold transition duration-150 text-white;
+    @apply py-[8px] px-[22px] bg-gray-400/50 rounded-[4px] font-semibold transition duration-150 text-white flex justify-center;
 
     &:hover {
         @apply bg-gray-400/30 border-gray-300;

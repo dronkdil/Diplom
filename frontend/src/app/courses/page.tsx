@@ -1,8 +1,8 @@
-import Course from "@/components/course/Course"
 import Searchbar from "@/components/searchbar/Searchbar"
 import CourseExampleImage from "@public/images/CourseExample.png"
 import Link from "next/link"
 import styles from "./Courses.module.scss"
+import Course from "./components/course/Course"
 
 const CoursesPage = () => {
   return (
@@ -23,7 +23,7 @@ const CoursesPage = () => {
                 imageSrc={CourseExampleImage.src}
                 title="Python"
                 level="Початковий"
-                href="#"
+                id={1}
             />)}
         </div>
       </div>
@@ -38,7 +38,7 @@ const CoursesPage = () => {
                 imageSrc={CourseExampleImage.src}
                 title="Python"
                 level="Початковий"
-                href="#"
+                id={1}
             />)}
         </div>
       </div>
@@ -53,7 +53,7 @@ const CoursesPage = () => {
                 imageSrc={CourseExampleImage.src}
                 title="Python"
                 level="Початковий"
-                href="#"
+                id={1}
                 inDeveloping
             />)}
         </div>

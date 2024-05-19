@@ -1,0 +1,39 @@
+.course {
+    @apply flex gap-2 w-full max-w-[850px] mx-auto mt-20;
+
+    .course__info {
+        @apply w-full max-w-[300px] flex flex-col items-center gap-3;
+    }   
+
+    .course__description {
+        @apply text-white/65;
+    }
+
+    .course__modules {  
+        @apply w-full flex flex-col gap-2;
+
+        .course__modules-header {
+            @apply flex justify-between items-center text-white/70;
+        }
+
+        .course__module {
+            @apply bg-white/10 px-4 py-2 text-white rounded-md w-full text-start;
+    
+            .module__button {
+                @apply w-full text-start flex justify-between;
+
+                .module__progress {
+                    @apply text-white/50;
+                }
+            }
+    
+            .module__items {
+                @apply mt-3 flex flex-col gap-2;
+
+                .lesson {
+                    @apply gap-3;
+                }
+            }
+        }
+    }   
+}

@@ -2,6 +2,6 @@
     @apply hidden md:flex;
 
     &__auth {
-        @apply ml-auto space-x-1 cursor-pointer;
+        @apply ml-auto cursor-pointer flex gap-1;
     }
 }

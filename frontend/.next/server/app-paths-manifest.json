@@ -1,10 +1,6 @@
 {
   "/courses/page": "app/courses/page.js",
-  "/(auth)/login/page": "app/(auth)/login/page.js",
-  "/(auth)/registration/page": "app/(auth)/registration/page.js",
-  "/profile/(student)/my-certificates/page": "app/profile/(student)/my-certificates/page.js",
-  "/profile/(common)/notifications/page": "app/profile/(common)/notifications/page.js",
-  "/profile/(common)/settings/page": "app/profile/(common)/settings/page.js",
-  "/profile/(student)/my-courses/page": "app/profile/(student)/my-courses/page.js",
-  "/profile/(common)/my-data/page": "app/profile/(common)/my-data/page.js"
+  "/courses/[id]/page": "app/courses/[id]/page.js",
+  "/(home)/page": "app/(home)/page.js",
+  "/profile/(student)/my-courses/page": "app/profile/(student)/my-courses/page.js"
 }
