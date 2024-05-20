@@ -19,7 +19,8 @@ const CoursesPage = () => {
             <span className={styles.row__description}>Рекомендовано на основі ваших вподобань та вибраних курсів</span>
         </div>
         <div className={styles.row__content}>
-            {Array.from(Array(5).keys()).map(() => <Course 
+            {Array.from(Array(5).keys()).map((_, i) => <Course 
+                key={i}
                 imageSrc={CourseExampleImage.src}
                 title="Python"
                 level="Початковий"
@@ -34,7 +35,8 @@ const CoursesPage = () => {
             <Link className={styles.row__link} href="#">Більше</Link>
         </div>
         <div className={styles.row__content}>
-            {Array.from(Array(5).keys()).map(() => <Course 
+            {Array.from(Array(5).keys()).map((_, i) => <Course 
+                key={i}
                 imageSrc={CourseExampleImage.src}
                 title="Python"
                 level="Початковий"
@@ -49,7 +51,8 @@ const CoursesPage = () => {
             <Link className={styles.row__link} href="#">Більше</Link>
         </div>
         <div className={styles.row__content}>
-            {Array.from(Array(5).keys()).map(() => <Course 
+            {Array.from(Array(5).keys()).map((_, i) => <Course 
+                key={i}
                 imageSrc={CourseExampleImage.src}
                 title="Python"
                 level="Початковий"

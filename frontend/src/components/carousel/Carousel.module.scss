@@ -35,7 +35,7 @@
     }
 
     &__buttons {
-        @apply max-md:px-10 max-md:fixed max-md:bottom-10 max-md:left-0 max-md:w-full max-md:justify-between md:ml-auto;
+        @apply max-sm:pb-12 max-md:px-10 max-md:fixed max-md:bottom-10 max-md:left-0 max-md:w-full max-md:justify-between md:ml-auto;
 
         & > *:first-child {
             @apply max-md:-ml-[22px];

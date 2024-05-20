@@ -11,6 +11,60 @@
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
+    ],
+    "/(home)/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(home)/page.css",
+      "static/chunks/app/(home)/page.js"
+    ],
+    "/profile/(student)/my-courses/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profile/(student)/my-courses/page.css",
+      "static/chunks/app/profile/(student)/my-courses/page.js"
+    ],
+    "/profile/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profile/layout.css",
+      "static/chunks/app/profile/layout.js"
+    ],
+    "/profile/(student)/my-certificates/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profile/(student)/my-certificates/page.css",
+      "static/chunks/app/profile/(student)/my-certificates/page.js"
+    ],
+    "/profile/(common)/my-data/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profile/(common)/my-data/page.css",
+      "static/chunks/app/profile/(common)/my-data/page.js"
+    ],
+    "/courses/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/courses/page.css",
+      "static/chunks/app/courses/page.js"
+    ],
+    "/(auth)/registration/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(auth)/registration/page.css",
+      "static/chunks/app/(auth)/registration/page.js"
+    ],
+    "/(auth)/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(auth)/login/page.css",
+      "static/chunks/app/(auth)/login/page.js"
+    ],
+    "/courses/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/courses/[id]/page.css",
+      "static/chunks/app/courses/[id]/page.js"
     ]
   }
 }

@@ -1,0 +1,7 @@
+.wrapper {
+    @apply sm:hidden flex fixed bottom-0 left-0 justify-center items-center w-full z-10 bg-gradient-to-b from-transparent to-violet-900 pb-5 pt-8
+}
+
+.navigation {
+    @apply rounded-lg bg-white flex w-[270px] justify-between;
+}

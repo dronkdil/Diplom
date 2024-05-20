@@ -1,0 +1,11 @@
+.link {
+    @apply px-5 py-3;
+
+    &:not(.link--active) * {
+        @apply stroke-gray-500;
+    }
+
+    .link--active * {
+        @apply stroke-black fill-black;
+    }
+}

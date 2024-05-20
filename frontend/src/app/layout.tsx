@@ -1,4 +1,5 @@
 import Header from "@/layouts/header/Header"
+import MobileNavigation from "@/layouts/mobile-navigation/MobileNavigation"
 import type { Metadata } from "next"
 import Providers from "./Providers"
 import styles from "./globals.module.scss"
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className={styles.body}>
         <Providers>
+          <MobileNavigation />
           <Header />
           {children}
         </Providers>
