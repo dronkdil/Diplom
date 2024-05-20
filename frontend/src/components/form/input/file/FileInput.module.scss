@@ -1,0 +1,11 @@
+.input-wrapper {
+    @apply items-center cursor-pointer min-w-[200px];
+}
+
+.input-label {
+    @apply text-white/50 cursor-pointer;
+}
+
+.input {
+    @apply hidden;
+}

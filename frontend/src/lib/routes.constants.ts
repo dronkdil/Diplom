@@ -11,5 +11,6 @@ export const Routes = {
 	Login: '/login',
 	Registration: '/registration',
 	Courses: '/courses',
-	Course: (id: number) => `/courses/${id}`
+	Course: (id: number) => `/courses/${id}`,
+	Lesson: (id: number) => `/courses/lesson/${id}`
 }

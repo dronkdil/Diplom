@@ -5,6 +5,7 @@ import CourseExampleImage from "@public/images/CourseExample.png"
 import { CheckIcon } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
+import LessonButton from "../components/lesson/LessonButton"
 import styles from "./Course.module.scss"
 
 const CoursePage = () => {
@@ -34,26 +35,11 @@ const CoursePage = () => {
                         <span><CheckIcon /></span>
                     </DisclosureButton>
                     <DisclosurePanel className={styles.module__items}>
-                    <DefaultButton className={styles.lesson}>
-                            <span>Урок 2</span>
-                            <CheckIcon className={styles.lesson__checkicon} />
-                        </DefaultButton>
-                        <DefaultButton className={styles.lesson}>
-                            <span>Урок 3</span>
-                            <CheckIcon className={styles.lesson__checkicon} />
-                        </DefaultButton>
-                        <DefaultButton className={styles.lesson}>
-                            <span>Урок 4</span>
-                            <CheckIcon className={styles.lesson__checkicon} />
-                        </DefaultButton>
-                        <DefaultButton className={styles.lesson}>
-                            <span>Урок 5</span>
-                            <CheckIcon className={styles.lesson__checkicon} />
-                        </DefaultButton>
-                        <DefaultButton className={styles.lesson}>
-                            <span>Урок 6</span>
-                            <CheckIcon className={styles.lesson__checkicon} />
-                        </DefaultButton>
+                        {Array.from(Array(5).keys()).map((_, i) => <LessonButton 
+                            title={`Урок ${i+1}`}
+                            id={i+1}
+                            isCompleted
+                        />)}
                     </DisclosurePanel>
                 </Disclosure>
 
