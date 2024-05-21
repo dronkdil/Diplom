@@ -20,6 +20,7 @@ export const Routes = {
 		Course: (id: number) => `/profile/teacher-courses/${id}`,
 		LessonSettings: (id: number) => `/profile/teacher-courses/lesson/${id}`,
 		LessonHomeworks: (id: number) =>
-			`/profile/teacher-courses/lesson/${id}/homeworks`
+			`/profile/teacher-courses/lesson/${id}/homeworks`,
+		ModuleSettings: (id: number) => `/profile/teacher-courses/module/${id}`
 	}
 }

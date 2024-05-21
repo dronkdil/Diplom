@@ -3,7 +3,7 @@ import { DefaultButton, IconButton } from "@/components/buttons"
 import { DefaultLink } from "@/components/links"
 import { getProfileTitle } from "@/lib/redux/slices/ProfileTitleSlice"
 import { Routes } from "@/lib/routes.constants"
-import { ArrowLeftIcon, PenIcon, XIcon } from "lucide-react"
+import { MenuIcon, PenIcon, XIcon } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
@@ -30,7 +30,7 @@ const ProfileLayout = ({children}: ProfileLayoutProps) => {
           onClick={() => setIsMenuOpened(false)}
         >
           <XIcon />
-          </IconButton>
+        </IconButton>
         <div className={styles.about}>
           <div className={styles.avatar}>
               DS
@@ -61,7 +61,7 @@ const ProfileLayout = ({children}: ProfileLayoutProps) => {
             className={styles.right__open}
             onClick={() => setIsMenuOpened(true)}
           >
-            <ArrowLeftIcon />
+            <MenuIcon />
           </IconButton>
           {title}
         </h2>

@@ -1,6 +1,6 @@
 'use client'
 import { Field, Label } from "@headlessui/react"
-import { InputHTMLAttributes, createRef } from "react"
+import { InputHTMLAttributes, createRef, useState } from "react"
 import InputWrapper from "../wrapper/InputWrapper"
 import styles from "./FileInput.module.scss"
 
@@ -14,12 +14,16 @@ export type FileInput =
 
 const FileInput = ({wrapperClassName, icon, placeholder, onChange,  ...props}: FileInput) => {
   const ref = createRef<HTMLInputElement>()
+  const [fileCount, setFileCount] = useState(0)
 
   return (
     <InputWrapper wrapperClassName={`${styles['input-wrapper']} ${wrapperClassName}`} icon={icon} onFocus={() => ref.current?.click()}>
         <Field>
-            <Label className={styles["input-label"]}>{placeholder}</Label>
-            <input ref={ref} className={styles.input} type="file" multiple {...props} onChange={(e) => onChange && onChange(ref.current?.files ?? [])} />
+            <Label className={styles["input-label"]}>{fileCount === 0 ? placeholder : `(${fileCount}) файлів`}</Label>
+            <input ref={ref} className={styles.input} type="file" {...props} onChange={(e) => {
+              onChange && onChange(ref.current?.files ?? [])
+              setFileCount(ref.current?.files?.length ?? 0)
+            }} />
         </Field>
     </InputWrapper>
   )

@@ -14,7 +14,7 @@ const LessonButton = ({title, id}: LessonButtonProps) => {
     <span className={styles.lesson}>
         <div className={styles.lesson__content}>
           <span>{title}</span>
-          <IconLink href={Routes.Teacher.LessonSettings(id)}><SettingsIcon className={styles["lesson__settings-icon"]} /></IconLink>
+          <IconLink href={Routes.Teacher.LessonSettings(id)} className={styles.lesson__settings}><SettingsIcon /></IconLink>
           <GhostLink href={Routes.Teacher.LessonHomeworks(id)} className={styles.lesson__homework}>Домашні завдання</GhostLink>
         </div>
     </span>

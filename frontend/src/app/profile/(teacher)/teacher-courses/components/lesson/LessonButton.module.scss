@@ -1,6 +1,6 @@
 .lesson {
     .lesson__content {
-        @apply gap-3 flex justify-start items-center w-full;
+        @apply flex justify-start items-center w-full;
     }
 
     .lesson__icon {
@@ -11,11 +11,10 @@
         }
     }
 
-    .lesson__settings-icon {
-        @apply stroke-white/70 size-6;
+    .lesson__settings {
+        @apply block ml-auto;
     }
 
     .lesson__homework {
-        @apply ml-auto;
     }
 }

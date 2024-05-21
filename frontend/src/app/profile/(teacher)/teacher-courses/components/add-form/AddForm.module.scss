@@ -1,0 +1,11 @@
+.forms {
+    @apply w-full sm:flex place-content-center gap-3 mt-7;
+}
+
+.form {
+    @apply flex flex-col items-start gap-2 max-sm:mb-6;
+
+    & > * {
+        @apply w-full;
+    }
+}

@@ -1,24 +1,30 @@
 import { IconButton } from '@/components/buttons'
+import IconLink from '@/components/links/icon/IconLink'
+import { Routes } from '@/lib/routes.constants'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
-import { ChevronDownIcon, PencilIcon } from 'lucide-react'
+import { ChevronDownIcon, SettingsIcon, TrashIcon } from 'lucide-react'
 import styles from "./Module.module.scss"
 
 export type ModuleProps = {
     title: string
     children: any
+    id: number
 }
 
-const Module = ({title, children}: ModuleProps) => {
+const Module = ({title, children, id}: ModuleProps) => {
   return (
     <Disclosure as={"div"} className={styles.module}>
+      {({open}) => <>
         <DisclosureButton className={styles.module__header}>
             <span className={styles.module__title}>{title}</span>
-            <IconButton><PencilIcon /></IconButton>
-            <IconButton className={styles["module__down-icon"]}><ChevronDownIcon /></IconButton>
+            <IconButton className={`${styles["module__down-icon"]} ${open && styles["module__down-icon--active"]}`}><ChevronDownIcon /></IconButton>
+            <IconLink href={Routes.Teacher.ModuleSettings(id)}><SettingsIcon /></IconLink>
+            <IconButton><TrashIcon /></IconButton>
         </DisclosureButton>
         <DisclosurePanel className={styles.module__items}>
             {children}
         </DisclosurePanel>
+      </>}
     </Disclosure>
   )
 }

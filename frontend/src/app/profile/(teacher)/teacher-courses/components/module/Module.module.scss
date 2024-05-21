@@ -10,6 +10,10 @@
 
         .module__down-icon {
             @apply ml-auto;
+
+            &--active {
+                @apply rotate-180;
+            }
         }
     }
 

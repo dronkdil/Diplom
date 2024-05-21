@@ -23,6 +23,7 @@ const LessonPage = () => {
                   wrapperClassName={styles.homework__input} 
                   icon={<BookIcon />} 
                   placeholder="Завантажити"
+                  multiple
                   onChange={(files) => {
                     if (files) setUploadedFiles(Array.from(files))
                   }}
