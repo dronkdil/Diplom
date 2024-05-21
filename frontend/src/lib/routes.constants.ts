@@ -14,5 +14,12 @@ export const Routes = {
 	Registration: '/registration',
 	Courses: '/courses',
 	Course: (id: number) => `/courses/${id}`,
-	Lesson: (id: number) => `/courses/lesson/${id}`
+	Lesson: (id: number) => `/courses/lesson/${id}`,
+	Teacher: {
+		Courses: '/profile/teacher-courses',
+		Course: (id: number) => `/profile/teacher-courses/${id}`,
+		LessonSettings: (id: number) => `/profile/teacher-courses/lesson/${id}`,
+		LessonHomeworks: (id: number) =>
+			`/profile/teacher-courses/lesson/${id}/homeworks`
+	}
 }

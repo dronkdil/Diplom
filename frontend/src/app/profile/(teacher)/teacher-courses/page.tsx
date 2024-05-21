@@ -1,9 +1,9 @@
 "use client"
-import CourseExampleImage from "@/../public/images/CourseExample.png"
 import { useReduxActions } from "@/hooks/useReduxActions"
+import CourseExampleImage from "@public/images/CourseExample.png"
 import { useEffect } from "react"
 import styles from "./MyCourses.module.scss"
-import TeacherCourse from "./course/Course"
+import TeacherCourse from "./components/course/Course"
 
 const TeacherCoursesPage = () => {
   const {setProfileTitle} = useReduxActions()

@@ -1,3 +1,4 @@
+"use client"
 import { Field, Label, Switch } from "@headlessui/react"
 import { InputHTMLAttributes, useState } from "react"
 import styles from './SwitchCheckbox.module.scss'

@@ -1,6 +1,3 @@
 {
-  "/(home)/page": "app/(home)/page.js",
-  "/courses/page": "app/courses/page.js",
-  "/profile/(student)/student-courses/page": "app/profile/(student)/student-courses/page.js",
-  "/profile/(teacher)/teacher-courses/page": "app/profile/(teacher)/teacher-courses/page.js"
+  "/profile/(teacher)/teacher-courses/lesson/[id]/homeworks/page": "app/profile/(teacher)/teacher-courses/lesson/[id]/homeworks/page.js"
 }

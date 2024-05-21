@@ -1,4 +1,4 @@
-import Searchbar from "@/components/searchbar/Searchbar"
+import Searchbar from "@/components/form/searchbar/Searchbar"
 import CourseExampleImage from "@public/images/CourseExample.png"
 import Link from "next/link"
 import styles from "./Courses.module.scss"

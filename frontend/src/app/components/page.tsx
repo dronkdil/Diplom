@@ -2,8 +2,8 @@
 import { AccentButton, DefaultButton, GhostButton, IconButton } from "@/components/buttons"
 import { SwitchCheckbox } from "@/components/form"
 import { DefaultInput } from "@/components/form/input"
+import Searchbar from "@/components/form/searchbar/Searchbar"
 import Logo from "@/components/logo/Logo"
-import Searchbar from "@/components/searchbar/Searchbar"
 import { SearchIcon, User2Icon } from "lucide-react"
 
 const page = () => {

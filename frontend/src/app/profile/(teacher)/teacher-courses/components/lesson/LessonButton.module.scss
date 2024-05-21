@@ -1,0 +1,21 @@
+.lesson {
+    .lesson__content {
+        @apply gap-3 flex justify-start items-center w-full;
+    }
+
+    .lesson__icon {
+        @apply py-1 transition;
+
+        &:hover {
+            @apply text-white/50;
+        }
+    }
+
+    .lesson__settings-icon {
+        @apply stroke-white/70 size-6;
+    }
+
+    .lesson__homework {
+        @apply ml-auto;
+    }
+}

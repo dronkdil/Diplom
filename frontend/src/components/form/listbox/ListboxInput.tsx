@@ -1,10 +1,11 @@
+"use client"
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react"
 import { useState } from "react"
 import InputWrapper from "../input/wrapper/InputWrapper"
 import styles from "./ListboxInput.module.scss"
 
 export type ListboxInputProps = {
-    values: string[]
+    values: any[]
     icon: React.ReactElement
     placeholder?: string
 }

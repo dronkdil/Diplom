@@ -1,0 +1,21 @@
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+self["webpackHotUpdate_N_E"]("app/profile/(teacher)/teacher-courses/lesson/[id]/homeworks/page",{
+
+/***/ "(app-pages-browser)/./src/app/profile/(teacher)/teacher-courses/lesson/[id]/homeworks/components/homework/Homework.module.scss":
+/*!******************************************************************************************************************!*\
+  !*** ./src/app/profile/(teacher)/teacher-courses/lesson/[id]/homeworks/components/homework/Homework.module.scss ***!
+  \******************************************************************************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+eval(__webpack_require__.ts("// extracted by mini-css-extract-plugin\nmodule.exports = {\"homework\":\"Homework_homework__qltqH\",\"homework__header\":\"Homework_homework__header__Ww_ag\",\"homework__evaluation\":\"Homework_homework__evaluation__m0HuK\",\"homework__content\":\"Homework_homework__content__BsqVv\",\"homework__file\":\"Homework_homework__file__T9B0t\"};\n    if(true) {\n      // 1716295652253\n      var cssReload = __webpack_require__(/*! ./node_modules/next/dist/compiled/mini-css-extract-plugin/hmr/hotModuleReplacement.js */ \"(app-pages-browser)/./node_modules/next/dist/compiled/mini-css-extract-plugin/hmr/hotModuleReplacement.js\")(module.id, {\"publicPath\":\"/_next/\",\"esModule\":false,\"locals\":true});\n      module.hot.dispose(cssReload);\n      \n    }\n  \nmodule.exports.__checksum = \"41babb557702\"\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwcC1wYWdlcy1icm93c2VyKS8uL3NyYy9hcHAvcHJvZmlsZS8odGVhY2hlcikvdGVhY2hlci1jb3Vyc2VzL2xlc3Nvbi9baWRdL2hvbWV3b3Jrcy9jb21wb25lbnRzL2hvbWV3b3JrL0hvbWV3b3JrLm1vZHVsZS5zY3NzIiwibWFwcGluZ3MiOiJBQUFBO0FBQ0Esa0JBQWtCO0FBQ2xCLE9BQU8sSUFBVTtBQUNqQjtBQUNBLHNCQUFzQixtQkFBTyxDQUFDLHdNQUFtSCxjQUFjLHNEQUFzRDtBQUNyTixNQUFNLFVBQVU7QUFDaEI7QUFDQTtBQUNBO0FBQ0EseUJBQXlCIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vX05fRS8uL3NyYy9hcHAvcHJvZmlsZS8odGVhY2hlcikvdGVhY2hlci1jb3Vyc2VzL2xlc3Nvbi9baWRdL2hvbWV3b3Jrcy9jb21wb25lbnRzL2hvbWV3b3JrL0hvbWV3b3JrLm1vZHVsZS5zY3NzPzAzNGMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gZXh0cmFjdGVkIGJ5IG1pbmktY3NzLWV4dHJhY3QtcGx1Z2luXG5tb2R1bGUuZXhwb3J0cyA9IHtcImhvbWV3b3JrXCI6XCJIb21ld29ya19ob21ld29ya19fcWx0cUhcIixcImhvbWV3b3JrX19oZWFkZXJcIjpcIkhvbWV3b3JrX2hvbWV3b3JrX19oZWFkZXJfX1d3X2FnXCIsXCJob21ld29ya19fZXZhbHVhdGlvblwiOlwiSG9tZXdvcmtfaG9tZXdvcmtfX2V2YWx1YXRpb25fX20wSHVLXCIsXCJob21ld29ya19fY29udGVudFwiOlwiSG9tZXdvcmtfaG9tZXdvcmtfX2NvbnRlbnRfX0JzcVZ2XCIsXCJob21ld29ya19fZmlsZVwiOlwiSG9tZXdvcmtfaG9tZXdvcmtfX2ZpbGVfX1Q5QjB0XCJ9O1xuICAgIGlmKG1vZHVsZS5ob3QpIHtcbiAgICAgIC8vIDE3MTYyOTU2NTIyNTNcbiAgICAgIHZhciBjc3NSZWxvYWQgPSByZXF1aXJlKFwiQzovUHJvamVjdHMvU3RhZHlFcmEvZnJvbnRlbmQvbm9kZV9tb2R1bGVzL25leHQvZGlzdC9jb21waWxlZC9taW5pLWNzcy1leHRyYWN0LXBsdWdpbi9obXIvaG90TW9kdWxlUmVwbGFjZW1lbnQuanNcIikobW9kdWxlLmlkLCB7XCJwdWJsaWNQYXRoXCI6XCIvX25leHQvXCIsXCJlc01vZHVsZVwiOmZhbHNlLFwibG9jYWxzXCI6dHJ1ZX0pO1xuICAgICAgbW9kdWxlLmhvdC5kaXNwb3NlKGNzc1JlbG9hZCk7XG4gICAgICBcbiAgICB9XG4gIFxubW9kdWxlLmV4cG9ydHMuX19jaGVja3N1bSA9IFwiNDFiYWJiNTU3NzAyXCJcbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(app-pages-browser)/./src/app/profile/(teacher)/teacher-courses/lesson/[id]/homeworks/components/homework/Homework.module.scss\n"));
+
+/***/ })
+
+});
