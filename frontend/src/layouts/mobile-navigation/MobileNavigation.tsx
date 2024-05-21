@@ -8,7 +8,7 @@ const MobileNavigation = () => {
     <div className={styles.wrapper}>
       <div className={styles.navigation}>
         <NavigationLink icon={<HomeIcon />} href={Routes.Courses} />
-        <NavigationLink icon={<BookIcon />} href={Routes.Profile.Courses} />
+        <NavigationLink icon={<BookIcon />} href={Routes.Profile.StudentCourses} />
         <NavigationLink icon={<TicketCheckIcon />} href={Routes.Profile.Certificates} />
         <NavigationLink icon={<UserRoundIcon />} href={Routes.Profile.MyData} />
       </div>

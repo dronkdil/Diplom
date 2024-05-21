@@ -1,0 +1,27 @@
+.course {
+    @apply w-[150px] p-3 rounded-md cursor-pointer transition flex flex-col items-center relative;
+
+    &--in-developing {
+        @apply grayscale;
+    }
+
+    &__image {
+        @apply mb-3;
+    }
+
+    &__title {
+        @apply text-white font-bold text-center line-clamp-2;
+    }
+
+    &__level {
+        @apply text-white/60 text-center;
+    }
+
+    &__progress {
+        @apply text-white/60;
+    }
+
+    &:hover {
+        @apply bg-white/10;
+    }
+}

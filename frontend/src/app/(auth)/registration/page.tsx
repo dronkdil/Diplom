@@ -34,7 +34,7 @@ const RegistrationPage = () => {
             <Field>
 				<PasswordInput icon={<LockIcon />} placeholder="Пароль" />
 			</Field>
-			<AccentLink href={Routes.Profile.Courses}>Зареєструватись</AccentLink>
+			<AccentLink href={Routes.Profile.StudentCourses}>Зареєструватись</AccentLink>
             <Link href={Routes.Login} className="text-white hover:underline">
                 Вже э аккаунт? <span className="text-white/50">Вхід</span>
             </Link>

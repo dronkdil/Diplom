@@ -46,7 +46,8 @@ const ProfileLayout = ({children}: ProfileLayoutProps) => {
           </div>
         </div>
         <div className={styles.buttons}>
-            <DefaultLink href={Routes.Profile.Courses}>Мої курси</DefaultLink>
+            <DefaultLink href={Routes.Profile.TeacherCourses}>Мої курси (для вчителя)</DefaultLink>
+            <DefaultLink href={Routes.Profile.StudentCourses}>Мої курси</DefaultLink>
             <DefaultLink href={Routes.Profile.Certificates}>Мої сертифікати</DefaultLink>
             <DefaultLink href={Routes.Profile.Notification}>Повідомлення</DefaultLink>
             <DefaultLink href={Routes.Profile.MyData}>Власні дані</DefaultLink>

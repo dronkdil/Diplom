@@ -2,7 +2,9 @@ export const Routes = {
 	Home: '/',
 	Profile: {
 		MyData: '/profile/my-data',
-		Courses: '/profile/my-courses',
+		StudentCourses: '/profile/student-courses',
+		TeacherCourses: '/profile/teacher-courses',
+		TeacherCourse: (id: number) => `/profile/teacher-courses/${id}`,
 		Certificates: '/profile/my-certificates',
 		CertificateById: (id: number) => `/profile/certifications/${id}`,
 		Notification: '/profile/notifications',

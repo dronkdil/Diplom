@@ -25,7 +25,7 @@ const LoginPage = () => {
 				<Label>Запам’ятати мене</Label>
 				<SwitchCheckbox />
 			</Field>
-			<AccentLink href={Routes.Profile.Courses}>Увійти</AccentLink>
+			<AccentLink href={Routes.Profile.StudentCourses}>Увійти</AccentLink>
 			<Link href={Routes.Registration} className="text-white hover:underline">
                 Немає облікового запису? <br /> <span className="text-white/50">Зареєструватись</span>
             </Link>
