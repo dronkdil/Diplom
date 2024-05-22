@@ -1,6 +1,10 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/(home)/page": "app/(home)/page.js",
-  "/courses/[id]/page": "app/courses/[id]/page.js",
-  "/(auth)/login/page": "app/(auth)/login/page.js",
-  "/courses/page": "app/courses/page.js"
+  "/profile/(teacher)/teacher-courses/page": "app/profile/(teacher)/teacher-courses/page.js",
+  "/profile/(student)/student-courses/page": "app/profile/(student)/student-courses/page.js",
+  "/profile/(student)/my-certificates/page": "app/profile/(student)/my-certificates/page.js",
+  "/profile/(common)/settings/page": "app/profile/(common)/settings/page.js",
+  "/profile/(teacher)/teacher-courses/[id]/page": "app/profile/(teacher)/teacher-courses/[id]/page.js",
+  "/profile/(teacher)/teacher-courses/lesson/[id]/homeworks/page": "app/profile/(teacher)/teacher-courses/lesson/[id]/homeworks/page.js"
 }

@@ -1,0 +1,295 @@
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/components/buttons/ButtonGroup.module.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.ButtonGroup_group__FENUw {
+    display: flex
+}
+.ButtonGroup_group__FENUw > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.ButtonGroup_group__space-between__QxBPP {
+    width: 100%;
+    justify-content: space-between
+}
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/components/buttons/base/BaseButton.module.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.BaseButton_base__JqLLr {
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms
+}
+.BaseButton_base__JqLLr:active {
+    --tw-scale-x: .95;
+    --tw-scale-y: .95;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/components/buttons/accent/AccentButton.module.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.AccentButton_accent__u4h2W {
+    border-radius: 4px;
+    --tw-bg-opacity: 1;
+    background-color: rgb(3 7 18 / var(--tw-bg-opacity));
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 22px;
+    padding-right: 22px;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    animation-duration: 150ms
+}
+.AccentButton_accent__u4h2W:hover {
+    --tw-border-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
+    background-color: rgb(3 7 18 / 0.6)
+}
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/components/buttons/default/DefaultButton.module.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.DefaultButton_default__Ugu6J {
+    display: flex;
+    justify-content: center;
+    border-radius: 4px;
+    background-color: rgb(156 163 175 / 0.5);
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 22px;
+    padding-right: 22px;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    animation-duration: 150ms
+}
+.DefaultButton_default__Ugu6J:hover {
+    --tw-border-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
+    background-color: rgb(156 163 175 / 0.3)
+}
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/components/buttons/ghost/GhostButton.module.scss ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.GhostButton_ghost__woBI_ {
+    border-radius: 4px;
+    background-color: transparent;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 22px;
+    padding-right: 22px;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    animation-duration: 150ms
+}
+.GhostButton_ghost__woBI_:hover {
+    --tw-border-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
+    background-color: rgb(156 163 175 / 0.3)
+}
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/components/buttons/icon/IconButton.module.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.IconButton_icon___f5Dl {
+    border-radius: 4px;
+    background-color: transparent;
+    padding: 5px;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    animation-duration: 150ms
+}
+.IconButton_icon___f5Dl:hover {
+    --tw-border-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
+    background-color: rgb(156 163 175 / 0.3)
+}
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/components/links/base/BaseLink.module.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.BaseLink_base__OnIdx {
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    text-align: center;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms
+}
+.BaseLink_base__OnIdx:active {
+    --tw-scale-x: .95;
+    --tw-scale-y: .95;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/app/profile/Profile.module.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.Profile_left__z7BNJ {
+  max-width: 240px;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+@media not all and (min-width: 768px) {
+  .Profile_left__z7BNJ {
+    display: none
+  }
+}
+@media (min-width: 768px) {
+  .Profile_left__z7BNJ {
+    padding-right: 1.25rem
+  }
+}
+@media (max-width: 768px) {
+  .Profile_left--active__NWftr {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 220px;
+    padding-bottom: 1.25rem
+  }
+  .Profile_left--active__NWftr .Profile_avatar__CscuC {
+    height: 100px;
+    width: 100px;
+    font-size: 30px
+  }
+  .Profile_left--active__NWftr .Profile_about__qxqBQ {
+    display: flex;
+    gap: 0.5rem
+  }
+  .Profile_left--active__NWftr .Profile_about__qxqBQ .Profile_info__RtdDt {
+    max-width: 120px
+  }
+  .Profile_left--active__NWftr .Profile_about__qxqBQ .Profile_info__RtdDt * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+  }
+}
+.Profile_left__close__jFi3O {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem
+}
+@media (min-width: 768px) {
+  .Profile_left__close__jFi3O {
+    display: none
+  }
+}
+.Profile_left__z7BNJ .Profile_avatar__CscuC {
+  position: relative;
+  margin-bottom: 0.75rem;
+  display: grid;
+  place-content: center;
+  border-radius: calc(var(--radius) - 2px);
+  background-color: rgb(255 255 255 / 0.4);
+  font-weight: 700
+}
+@media (min-width: 768px) {
+  .Profile_left__z7BNJ .Profile_avatar__CscuC {
+    height: 220px;
+    width: 220px;
+    font-size: 50px
+  }
+}
+.Profile_left__z7BNJ .Profile_avatar__edit-pen____2vU {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0.25rem;
+  right: 0.25rem;
+  opacity: 0;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+.Profile_left__z7BNJ .Profile_avatar__edit-pen____2vU * {
+  stroke: #fff
+}
+.Profile_left__z7BNJ .Profile_avatar__CscuC:hover .Profile_avatar__edit-pen____2vU {
+  pointer-events: auto;
+  opacity: 1
+}
+.Profile_left__z7BNJ .Profile_info__RtdDt {
+  position: relative;
+  margin-bottom: 1.75rem
+}
+.Profile_left__z7BNJ .Profile_info__name__gcmI4 {
+  font-weight: 600
+}
+.Profile_left__z7BNJ .Profile_info__data__1MPDy {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+.Profile_left__z7BNJ .Profile_info__edit-pen__YYPr8 {
+  pointer-events: none;
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  opacity: 0;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+.Profile_left__z7BNJ .Profile_info__edit-pen__YYPr8 * {
+  stroke: rgb(255 255 255 / 0.4)
+}
+.Profile_left__z7BNJ .Profile_info__RtdDt:hover .Profile_info__edit-pen__YYPr8 {
+  pointer-events: auto;
+  opacity: 1
+}
+
+.Profile_right__kJynd {
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-radius: calc(var(--radius) - 2px)
+}
+@media (min-width: 768px) {
+  .Profile_right__open___m_0J {
+    display: none
+  }
+}
+@media not all and (min-width: 768px) {
+  .Profile_right--hidden__17Tg1 {
+    display: none
+  }
+}
+.Profile_right__title__HRif7 {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem
+}
+
+.Profile_buttons__2lddt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem
+}
+.Profile_buttons__2lddt > * {
+  display: inline-block;
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}

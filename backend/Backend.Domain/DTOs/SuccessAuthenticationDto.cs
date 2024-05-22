@@ -1,0 +1,10 @@
+﻿using Backend.Domain.Entities.Base;
+
+namespace Backend.Domain.DTOs;
+
+public class SuccessAuthenticationDto
+{
+    public string AccessToken { get; set; } = null!;
+    public string RefreshToken { get; set; } = null!;
+    public AuthenticationUserDto User { get; set; } = null!;
+}
