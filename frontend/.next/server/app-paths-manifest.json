@@ -1,8 +1,6 @@
 {
+  "/(home)/page": "app/(home)/page.js",
   "/courses/[id]/page": "app/courses/[id]/page.js",
-  "/courses/lesson/[id]/page": "app/courses/lesson/[id]/page.js",
-  "/profile/(teacher)/teacher-courses/page": "app/profile/(teacher)/teacher-courses/page.js",
-  "/profile/(teacher)/teacher-courses/module/[id]/page": "app/profile/(teacher)/teacher-courses/module/[id]/page.js",
-  "/profile/(teacher)/teacher-courses/[id]/page": "app/profile/(teacher)/teacher-courses/[id]/page.js",
-  "/profile/(teacher)/teacher-courses/lesson/[id]/homeworks/page": "app/profile/(teacher)/teacher-courses/lesson/[id]/homeworks/page.js"
+  "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/courses/page": "app/courses/page.js"
 }
