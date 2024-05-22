@@ -14,8 +14,14 @@ public class DataContext : DbContext
     public DbSet<Module> Modules { get; set; } = null!;
     public DbSet<Lesson> Lessons { get; set; } = null!;
     public DbSet<Homework> Homeworks { get; set; } = null!;
+    public DbSet<HomeworkFile> HomeworkFiles { get; set; } = null!;
     public DbSet<Certificate> Certificates { get; set; } = null!;
 
+    public DataContext(DbContextOptions<DataContext> options) : base(options)
+    {
+        
+    }
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<Notification>()

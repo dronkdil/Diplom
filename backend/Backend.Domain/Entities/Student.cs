@@ -10,4 +10,5 @@ public class Student : User
     
     public ICollection<Course> Courses { get; set; } = null!;
     public ICollection<Certificate> Certificates { get; set; } = null!;
+    public ICollection<Homework> Homeworks { get; set; } = null!;
 }
