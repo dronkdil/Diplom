@@ -11,4 +11,5 @@ public class Course : BaseEntity
     public int TeacherId { get; set; }
     public TeacherAdditionalData TeacherAdditionalData { get; set; } = null!;
     public ICollection<Module> Modules { get; set; } = null!;
+    public ICollection<StudentAdditionalData> Students { get; set; } = null!;
 }

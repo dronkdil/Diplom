@@ -1,6 +1,5 @@
 ﻿using Backend.Core.Gateways;
 using Backend.Domain.Entities;
-using Backend.Domain.Entities.Base;
 using Backend.Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +14,11 @@ public class UserGateway : IUserGateway
         _dataContext = dataContext;
     }
 
+    public async Task<bool> IsExistsByEmailAsync(string email)
+    {
+        return await _dataContext.Users.AnyAsync(o => o.Email == email);
+    }
+
     public async Task<User?> GetByEmailAsync(string email)
     {
         return await _dataContext.Users.Include(o => o.Role).FirstOrDefaultAsync(o => o.Email == email);
@@ -25,11 +29,25 @@ public class UserGateway : IUserGateway
         return await _dataContext.Users.Include(o => o.Role).FirstOrDefaultAsync(o => o.Id == id);
     }
 
-    public async Task<User> AddStudentAsync(User user, StudentAdditionalData data)
+    public async Task<User> AddStudentAsync(User user)
     {
         _dataContext.Users.Add(user);
-        _dataContext.StudentAdditionalData.Add(data);
         await _dataContext.SaveChangesAsync();
         return user;
+    }
+
+    public async Task<bool> AddTeacherAsync(User user)
+    {
+        try
+        {
+            _dataContext.Users.Add(user);
+            await _dataContext.SaveChangesAsync();
+            return true;
+        }
+        catch
+        {
+            // TODO: Add a logger
+            return false;
+        }
     }
 }

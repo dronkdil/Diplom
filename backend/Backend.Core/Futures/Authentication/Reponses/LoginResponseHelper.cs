@@ -3,8 +3,8 @@ using Backend.Domain.Responses.Base;
 
 namespace Backend.Core.Futures.Authentication.Reponses;
 
-public static class RegistrationStaticResponse
+public static class LoginResponseHelper
 {
     public static Response<SuccessAuthenticationDto> Failed() => 
-        Response.Failed<SuccessAuthenticationDto>("Пошта вже занята");
+        Response.Failed<SuccessAuthenticationDto>("Пошта або пароль невірні");
 }

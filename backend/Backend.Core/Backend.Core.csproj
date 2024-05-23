@@ -18,9 +18,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Futures\Courses\Course\" />
-      <Folder Include="Futures\Courses\Lesson\" />
-      <Folder Include="Futures\Courses\Module\" />
+      <Folder Include="Futures\Course\Course\" />
+      <Folder Include="Futures\Course\Lesson\" />
+      <Folder Include="Futures\Course\Module\" />
+      <Folder Include="Futures\Student\" />
     </ItemGroup>
 
 </Project>

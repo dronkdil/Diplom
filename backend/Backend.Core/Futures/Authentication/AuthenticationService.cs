@@ -35,7 +35,7 @@ public class AuthenticationService : IAuthenticationService
         _studentAdditionalDataGateway = studentAdditionalDataGateway;
     }
 
-    public async Task<Response<SuccessAuthenticationDto>> Login(LoginDto dto)
+    public async Task<Response<SuccessAuthenticationDto>> LoginAsync(LoginDto dto)
     {
         var result = await _loginValidator.ValidateAsync(dto);
         if (result.IsValid == false) 
@@ -43,7 +43,7 @@ public class AuthenticationService : IAuthenticationService
 
         var user = await _userGateway.GetByEmailAsync(dto.Email);
         if (user == null || _passwordHasher.Compare(user.PasswordHash, dto.Password) == false)
-            return LoginStaticResponse.Failed();
+            return LoginResponseHelper.Failed();
 
         var tokens = _jwtTokenFactory.CreateTokens(user.Id, user.Role.Name);
 
@@ -55,19 +55,16 @@ public class AuthenticationService : IAuthenticationService
         });
     }
 
-    public async Task<Response<SuccessAuthenticationDto>> Registration(RegistrationStudentDto dto)
+    public async Task<Response<SuccessAuthenticationDto>> RegistrationAsync(RegistrationStudentDto dto)
     {
         var result = await _registrationValidator.ValidateAsync(dto);
         if (result.IsValid == false) 
             return Response.ValidationFailed<SuccessAuthenticationDto>(result.Errors);
 
         if (await _userGateway.GetByEmailAsync(dto.Email) != null)
-            return RegistrationStaticResponse.Failed();
+            return RegistrationResponseHelper.Failed();
 
-        var mappedUser = _mapper.Map<User>(dto);
-        mappedUser.PasswordHash = _passwordHasher.Hash(dto.Password);
-        mappedUser.RoleId = (int)Roles.Student;
-        var user = await _userGateway.AddStudentAsync(mappedUser, _mapper.Map<StudentAdditionalData>(dto));
+        var user = await _userGateway.AddStudentAsync(_mapper.Map<User>(dto));
         var tokens = _jwtTokenFactory.CreateTokens(user.Id, Roles.Student.ToString());
 
         return Response.Success(new SuccessAuthenticationDto
@@ -81,14 +78,14 @@ public class AuthenticationService : IAuthenticationService
         });
     }
 
-    public async Task<Response<SuccessAuthenticationDto>> Refresh(string refreshToken)
+    public async Task<Response<SuccessAuthenticationDto>> RefreshAsync(string refreshToken)
     {
         if (_jwtTokenFactory.Validate(refreshToken, out var userId) == false)
-            return RefreshStaticResponse.Failed();
+            return RefreshResponseHelper.Failed();
 
         var user = await _userGateway.GetByIdAsync(userId);
         if (user == null)
-            return RefreshStaticResponse.Failed();
+            return RefreshResponseHelper.Failed();
         
         var tokens = _jwtTokenFactory.CreateTokens(user.Id, user.Role.Name);
 

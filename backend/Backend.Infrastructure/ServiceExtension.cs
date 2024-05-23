@@ -1,4 +1,5 @@
-﻿using Backend.Core.Gateways;
+﻿using Backend.Core.Futures.Teacher;
+using Backend.Core.Gateways;
 using Backend.Core.Interfaces.JwtTokenFactory;
 using Backend.Core.Interfaces.PasswordHasher;
 using Backend.Domain.Options;
@@ -24,6 +25,7 @@ public static class ServiceExtension
         services.AddTransient<IJwtTokenFactory, JwtTokenFactory>();
         services.AddTransient<IPasswordHasher, PasswordHasher>();
         services.AddTransient<IUserGateway, UserGateway>();
+        services.AddTransient<ITeacherGateway, TeacherGateway>();
         services.AddTransient<IStudentAdditionalDataGateway, StudentAdditionalDataGateway>();
         return services;
     }

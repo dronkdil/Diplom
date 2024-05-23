@@ -4,6 +4,7 @@ using Backend.Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240523074957_add_foreign_key_to_users")]
+    partial class add_foreign_key_to_users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,6 +64,9 @@ namespace Backend.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("StudentAdditionalDataId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TeacherAdditionalDataId")
                         .HasColumnType("int");
 
@@ -72,6 +78,8 @@ namespace Backend.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentAdditionalDataId");
 
                     b.HasIndex("TeacherAdditionalDataId");
 
@@ -287,13 +295,7 @@ namespace Backend.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("TeacherAdditionalData");
                 });
@@ -336,22 +338,9 @@ namespace Backend.Infrastructure.Migrations
 
                     b.HasIndex("StudentAdditionalDataId");
 
+                    b.HasIndex("TeacherAdditionalDataId");
+
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("CourseStudentAdditionalData", b =>
-                {
-                    b.Property<int>("CoursesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CoursesId", "StudentsId");
-
-                    b.HasIndex("StudentsId");
-
-                    b.ToTable("CourseStudentAdditionalData");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Certificate", b =>
@@ -371,6 +360,10 @@ namespace Backend.Infrastructure.Migrations
 
             modelBuilder.Entity("Backend.Domain.Entities.Course", b =>
                 {
+                    b.HasOne("Backend.Domain.Entities.StudentAdditionalData", null)
+                        .WithMany("Courses")
+                        .HasForeignKey("StudentAdditionalDataId");
+
                     b.HasOne("Backend.Domain.Entities.TeacherAdditionalData", "TeacherAdditionalData")
                         .WithMany("Courses")
                         .HasForeignKey("TeacherAdditionalDataId")
@@ -439,17 +432,6 @@ namespace Backend.Infrastructure.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.TeacherAdditionalData", b =>
-                {
-                    b.HasOne("Backend.Domain.Entities.User", "User")
-                        .WithOne("TeacherAdditionalData")
-                        .HasForeignKey("Backend.Domain.Entities.TeacherAdditionalData", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Backend.Domain.Entities.User", b =>
                 {
                     b.HasOne("Backend.Domain.Entities.Role", "Role")
@@ -462,24 +444,15 @@ namespace Backend.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("StudentAdditionalDataId");
 
+                    b.HasOne("Backend.Domain.Entities.TeacherAdditionalData", "TeacherAdditionalData")
+                        .WithMany()
+                        .HasForeignKey("TeacherAdditionalDataId");
+
                     b.Navigation("Role");
 
                     b.Navigation("StudentAdditionalData");
-                });
 
-            modelBuilder.Entity("CourseStudentAdditionalData", b =>
-                {
-                    b.HasOne("Backend.Domain.Entities.Course", null)
-                        .WithMany()
-                        .HasForeignKey("CoursesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Backend.Domain.Entities.StudentAdditionalData", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("TeacherAdditionalData");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Course", b =>
@@ -506,6 +479,8 @@ namespace Backend.Infrastructure.Migrations
                 {
                     b.Navigation("Certificates");
 
+                    b.Navigation("Courses");
+
                     b.Navigation("Homeworks");
                 });
 
@@ -517,9 +492,6 @@ namespace Backend.Infrastructure.Migrations
             modelBuilder.Entity("Backend.Domain.Entities.User", b =>
                 {
                     b.Navigation("Notifications");
-
-                    b.Navigation("TeacherAdditionalData")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

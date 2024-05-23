@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Backend.Core.Futures.Authentication.DTOs;
+using Backend.Core.Futures.Authentication.Mapper.Actions;
 using Backend.Domain.Entities;
-using Backend.Domain.Entities.Base;
+using Backend.Domain.Entities.Enums;
 
 namespace Backend.Core.Futures.Authentication.Mapper.Profiles;
 
@@ -9,7 +10,13 @@ public class RegistrationStudentProfile : Profile
 {
     public RegistrationStudentProfile()
     {
-        CreateMap<RegistrationStudentDto, StudentAdditionalData>();
-        CreateMap<RegistrationStudentDto, User>();
+        CreateMap<RegistrationStudentDto, User>()
+            .AfterMap<PasswordHashAction>()
+            .AfterMap((src, dest) => dest.RoleId = (int)Roles.Student)
+            .AfterMap((src, dest) => dest.StudentAdditionalData = new()
+            {
+                Birthday = src.Birthday,
+                EducationalStatus = src.EducationalStatus
+            });
     }
 }

@@ -22,7 +22,7 @@ public class AuthenticationController : Controller
     [HttpPost("student/registration")]
     public async Task<Response<SuccessAuthenticationDto>> Registration([FromBody] RegistrationStudentDto dto)
     {
-        var response = await _authenticationService.Registration(dto);
+        var response = await _authenticationService.RegistrationAsync(dto);
         
         if (response.Type == ResponseType.Successfully)
             AddRefreshTokenToCookie(response.Value!);
@@ -33,7 +33,7 @@ public class AuthenticationController : Controller
     [HttpPost("login")]
     public async Task<Response<SuccessAuthenticationDto>> Login([FromBody] LoginDto dto)
     {
-         var response = await _authenticationService.Login(dto);
+         var response = await _authenticationService.LoginAsync(dto);
          
          if (response.Type == ResponseType.Successfully)
              AddRefreshTokenToCookie(response.Value!);
@@ -47,7 +47,7 @@ public class AuthenticationController : Controller
         if (Request.Cookies[CookieKeys.RefreshToken] == null)
             return Backend.Domain.Responses.Base.Response.Failed<SuccessAuthenticationDto>("Помилка авторизації: refresh token не знайдено");
 
-        var response = await _authenticationService.Refresh(Request.Cookies[CookieKeys.RefreshToken]!);
+        var response = await _authenticationService.RefreshAsync(Request.Cookies[CookieKeys.RefreshToken]!);
         if (response.Type == ResponseType.Successfully)
             AddRefreshTokenToCookie(response.Value!);
         

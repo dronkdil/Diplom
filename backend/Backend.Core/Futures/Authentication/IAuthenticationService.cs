@@ -5,7 +5,7 @@ namespace Backend.Core.Futures.Authentication;
 
 public interface IAuthenticationService
 {
-    Task<Response<SuccessAuthenticationDto>> Login(LoginDto dto);
-    Task<Response<SuccessAuthenticationDto>> Registration(RegistrationStudentDto dto);
-    Task<Response<SuccessAuthenticationDto>> Refresh(string refreshToken);
+    Task<Response<SuccessAuthenticationDto>> LoginAsync(LoginDto dto);
+    Task<Response<SuccessAuthenticationDto>> RegistrationAsync(RegistrationStudentDto dto);
+    Task<Response<SuccessAuthenticationDto>> RefreshAsync(string refreshToken);
 }

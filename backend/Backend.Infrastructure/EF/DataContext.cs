@@ -1,4 +1,5 @@
-﻿using Backend.Domain.Entities;
+﻿using Backend.Core.Futures.Teacher.DTOs;
+using Backend.Domain.Entities;
 using Backend.Domain.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +38,11 @@ public class DataContext : DbContext
                 Id = (int)o,
                 Name = o.ToString()
             }));
+        
+        builder.Entity<User>()
+            .HasOne(o => o.TeacherAdditionalData)
+            .WithOne(o => o.User)
+            .HasForeignKey<TeacherAdditionalData>(o => o.UserId);
         
         base.OnModelCreating(builder);
     }
