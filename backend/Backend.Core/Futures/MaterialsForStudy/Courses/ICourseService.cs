@@ -9,4 +9,6 @@ public interface ICourseService
     Task<Response> CreateAsync(CreateCourseDto dto);
     Task<Response> RemoveAsync(RemoveCourseDto dto);
     Task<Response<IEnumerable<CourseDto>>> GetAllCourses();
+    Task<Response> UpdateTitleAsync(UpdateTitleDto dto);
+    Task<Response> UpdateDescriptionAsync(UpdateDescriptionDto dto);
 }

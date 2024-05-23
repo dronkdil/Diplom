@@ -1,5 +1,6 @@
 ﻿using Backend.Core.Futures.MaterialsForStudy.Courses;
 using Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Requests;
+using Backend.Domain.Entities.Enums;
 using Backend.Domain.Responses.Base;
 using Backend.Presentation.Constants;
 using Microsoft.AspNetCore.Authorization;
@@ -34,5 +35,19 @@ public class CourseController : Controller
     public async Task<Response> GetAllCourses()
     {
         return await _courseService.GetAllCourses();
+    }
+    
+    [HttpPost("/course/update-title")]
+    [Authorize(AuthorizationPolicies.TeacherAndHigher)]
+    public async Task<Response> UpdateTitle([FromBody] UpdateTitleDto dto)
+    {
+        return await _courseService.UpdateTitleAsync(dto);
+    }
+    
+    [HttpPost("/course/update-description")]
+    [Authorize(AuthorizationPolicies.TeacherAndHigher)]
+    public async Task<Response> GetAllCourses([FromBody] UpdateDescriptionDto dto)
+    {
+        return await _courseService.UpdateDescriptionAsync(dto);
     }
 }

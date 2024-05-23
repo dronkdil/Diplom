@@ -29,6 +29,11 @@ public static class AuthenticationExtension
                 .RequireAuthenticatedUser()
                 .RequireRole(Roles.Administrator.ToString())
                 .Build());
+            
+            options.AddPolicy(AuthorizationPolicies.TeacherAndHigher, new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .RequireRole(Roles.Teacher.ToString(), Roles.Administrator.ToString())
+                .Build());
         });
         services.AddAuthentication(options =>
         {

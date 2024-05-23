@@ -50,4 +50,28 @@ public class CourseService : ICourseService
         var courses = await _courseGateway.GetAllAsync();
         return Response.Success(_mapper.Map<IEnumerable<CourseDto>>(courses));
     }
+
+    public async Task<Response> UpdateTitleAsync(UpdateTitleDto dto)
+    {
+        var isUpdated = await _courseGateway.UpdateAsync(dto.Id, o =>
+        {
+            o.Title = dto.Title;
+        });
+
+        return isUpdated
+            ? Response.Success()
+            : Response.Failed();
+    }
+
+    public async Task<Response> UpdateDescriptionAsync(UpdateDescriptionDto dto)
+    {
+        var isUpdated = await _courseGateway.UpdateAsync(dto.Id, o =>
+        {
+            o.Description = dto.Description;
+        });
+
+        return isUpdated
+            ? Response.Success()
+            : Response.Failed();
+    }
 }

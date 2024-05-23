@@ -19,7 +19,7 @@ public class CourseGateway : ICourseGateway
     {
         try
         {
-            _dataContext.Add(course);
+            _dataContext.Courses.Add(course);
             await _dataContext.SaveChangesAsync();
             return true;
         }
@@ -33,7 +33,7 @@ public class CourseGateway : ICourseGateway
     {
         try
         {
-            _dataContext.Remove(new { Id = id });
+            _dataContext.Courses.Remove(new Course { Id = id });
             await _dataContext.SaveChangesAsync();
             return true;
         }
@@ -49,5 +49,24 @@ public class CourseGateway : ICourseGateway
             .Include(o => o.Modules)
             .ThenInclude(o => o.Lessons)
             .ToListAsync();
+    }
+
+    public async Task<bool> UpdateAsync(int id, Action<Course> configure)
+    {
+        try
+        {
+            var course = await _dataContext.Courses.FirstOrDefaultAsync(o => o.Id == id);
+            if (course == null)
+                return false;
+
+            configure(course);
+            course.Id = id;
+            await _dataContext.SaveChangesAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
