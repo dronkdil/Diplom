@@ -11,6 +11,6 @@ public class Homework : BaseEntity
     public int LessonId { get; set; }
     public Lesson Lesson { get; set; } = null!;
     public int StudentId { get; set; }
-    public StudentAdditionalData StudentAdditionalData { get; set; } = null!;
+    public Student Student { get; set; } = null!;
     public ICollection<HomeworkFile> HomeworkFiles { get; set; } = null!;
 }

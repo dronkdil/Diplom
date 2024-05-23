@@ -33,14 +33,14 @@ namespace Backend.Infrastructure.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentAdditionalDataId")
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("StudentAdditionalDataId");
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Certificates");
                 });
@@ -61,9 +61,6 @@ namespace Backend.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TeacherAdditionalDataId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
@@ -73,7 +70,7 @@ namespace Backend.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherAdditionalDataId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Courses");
                 });
@@ -98,9 +95,6 @@ namespace Backend.Infrastructure.Migrations
                     b.Property<int>("LessonId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentAdditionalDataId")
-                        .HasColumnType("int");
-
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
@@ -108,7 +102,7 @@ namespace Backend.Infrastructure.Migrations
 
                     b.HasIndex("LessonId");
 
-                    b.HasIndex("StudentAdditionalDataId");
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Homeworks");
                 });
@@ -259,45 +253,6 @@ namespace Backend.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.StudentAdditionalData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EducationalStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StudentAdditionalData");
-                });
-
-            modelBuilder.Entity("Backend.Domain.Entities.TeacherAdditionalData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("TeacherAdditionalData");
-                });
-
             modelBuilder.Entity("Backend.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -305,6 +260,10 @@ namespace Backend.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -324,22 +283,28 @@ namespace Backend.Infrastructure.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentAdditionalDataId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeacherAdditionalDataId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("StudentAdditionalDataId");
-
                     b.ToTable("Users");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+
+                    b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "admin@admin",
+                            FirstName = "Admin",
+                            PasswordHash = "admin_hashed",
+                            RoleId = 3
+                        });
                 });
 
-            modelBuilder.Entity("CourseStudentAdditionalData", b =>
+            modelBuilder.Entity("CourseStudent", b =>
                 {
                     b.Property<int>("CoursesId")
                         .HasColumnType("int");
@@ -351,7 +316,28 @@ namespace Backend.Infrastructure.Migrations
 
                     b.HasIndex("StudentsId");
 
-                    b.ToTable("CourseStudentAdditionalData");
+                    b.ToTable("CourseStudent");
+                });
+
+            modelBuilder.Entity("Backend.Domain.Entities.Student", b =>
+                {
+                    b.HasBaseType("Backend.Domain.Entities.User");
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EducationalStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Student");
+                });
+
+            modelBuilder.Entity("Backend.Domain.Entities.Teacher", b =>
+                {
+                    b.HasBaseType("Backend.Domain.Entities.User");
+
+                    b.HasDiscriminator().HasValue("Teacher");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Certificate", b =>
@@ -362,22 +348,22 @@ namespace Backend.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Domain.Entities.StudentAdditionalData", null)
+                    b.HasOne("Backend.Domain.Entities.Student", null)
                         .WithMany("Certificates")
-                        .HasForeignKey("StudentAdditionalDataId");
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("Course");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Course", b =>
                 {
-                    b.HasOne("Backend.Domain.Entities.TeacherAdditionalData", "TeacherAdditionalData")
+                    b.HasOne("Backend.Domain.Entities.Teacher", "Teacher")
                         .WithMany("Courses")
-                        .HasForeignKey("TeacherAdditionalDataId")
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TeacherAdditionalData");
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Homework", b =>
@@ -388,15 +374,15 @@ namespace Backend.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Domain.Entities.StudentAdditionalData", "StudentAdditionalData")
+                    b.HasOne("Backend.Domain.Entities.Student", "Student")
                         .WithMany("Homeworks")
-                        .HasForeignKey("StudentAdditionalDataId")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Lesson");
 
-                    b.Navigation("StudentAdditionalData");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.HomeworkFile", b =>
@@ -439,17 +425,6 @@ namespace Backend.Infrastructure.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.TeacherAdditionalData", b =>
-                {
-                    b.HasOne("Backend.Domain.Entities.User", "User")
-                        .WithOne("TeacherAdditionalData")
-                        .HasForeignKey("Backend.Domain.Entities.TeacherAdditionalData", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Backend.Domain.Entities.User", b =>
                 {
                     b.HasOne("Backend.Domain.Entities.Role", "Role")
@@ -458,16 +433,10 @@ namespace Backend.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Domain.Entities.StudentAdditionalData", "StudentAdditionalData")
-                        .WithMany()
-                        .HasForeignKey("StudentAdditionalDataId");
-
                     b.Navigation("Role");
-
-                    b.Navigation("StudentAdditionalData");
                 });
 
-            modelBuilder.Entity("CourseStudentAdditionalData", b =>
+            modelBuilder.Entity("CourseStudent", b =>
                 {
                     b.HasOne("Backend.Domain.Entities.Course", null)
                         .WithMany()
@@ -475,7 +444,7 @@ namespace Backend.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Domain.Entities.StudentAdditionalData", null)
+                    b.HasOne("Backend.Domain.Entities.Student", null)
                         .WithMany()
                         .HasForeignKey("StudentsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -502,24 +471,21 @@ namespace Backend.Infrastructure.Migrations
                     b.Navigation("Lessons");
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.StudentAdditionalData", b =>
+            modelBuilder.Entity("Backend.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Notifications");
+                });
+
+            modelBuilder.Entity("Backend.Domain.Entities.Student", b =>
                 {
                     b.Navigation("Certificates");
 
                     b.Navigation("Homeworks");
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.TeacherAdditionalData", b =>
+            modelBuilder.Entity("Backend.Domain.Entities.Teacher", b =>
                 {
                     b.Navigation("Courses");
-                });
-
-            modelBuilder.Entity("Backend.Domain.Entities.User", b =>
-                {
-                    b.Navigation("Notifications");
-
-                    b.Navigation("TeacherAdditionalData")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

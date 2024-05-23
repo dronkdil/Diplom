@@ -11,9 +11,5 @@ public class User : BaseEntity
 
     public int RoleId { get; set; }
     public Role Role { get; set; } = null!;
-    public int? StudentAdditionalDataId { get; set; }
-    public StudentAdditionalData StudentAdditionalData { get; set; } = null!;
-    public int? TeacherAdditionalDataId { get; set; }
-    public TeacherAdditionalData TeacherAdditionalData { get; set; } = null!;
     public ICollection<Notification> Notifications { get; set; } = null!;
 }

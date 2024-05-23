@@ -263,7 +263,7 @@ namespace Backend.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_TeacherId",
                 table: "Courses",
-                column: "TeacherId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HomeworkFiles_HomeworkId",
@@ -298,7 +298,7 @@ namespace Backend.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_TeacherId",
                 table: "Notifications",
-                column: "TeacherId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_RoleId",

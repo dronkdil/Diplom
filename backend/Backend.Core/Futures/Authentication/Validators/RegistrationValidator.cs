@@ -1,35 +1,31 @@
 ﻿using Backend.Core.Futures.Authentication.DTOs;
+using Backend.Core.Gateways;
+using Backend.Domain.Constants;
 using FluentValidation;
 
 namespace Backend.Core.Futures.Authentication.Validators;
 
 public class RegistrationValidator : AbstractValidator<RegistrationStudentDto>
 {
-    public RegistrationValidator()
+    public RegistrationValidator(IUserGateway userGateway)
     {
         RuleFor(o => o.Email)
             .EmailAddress()
             .WithMessage("Пошта не коректна")
-            .MustAsync(async (entity, value, c) =>
-            {
-                // return (await dataContext.SupplierSettings.AnyAsync(o => o.PublicName.ToLower() == value.ToLower(), cancellationToken: c)) == false;
-                return true;
-            })
+            .MustAsync(async (entity, value, c) => await userGateway.IsExistsByEmailAsync(value) == false)
             .WithMessage("Така пошта вже використовується");
 
         RuleFor(o => o.Password)
-            .MinimumLength(6)
-            .WithMessage("Пароль має мати мінімум 6 символів");
+            .MinimumLength(AuthenticationConstants.MinPasswordLength)
+            .WithMessage($"Пароль має мати мінімум {AuthenticationConstants.MinPasswordLength} символів");
 
         RuleFor(o => o.Birthday)
-            .Must((entity, value, context) => value < DateTime.Now.AddYears(-10))
-            .WithMessage("Вам має бути більше 10 років");
-        
+            .Must((entity, value, context) => value < DateTime.Now.AddYears(-AuthenticationConstants.MinYears))
+            .WithMessage($"Вам має бути більше {AuthenticationConstants.MinYears} років");
+
         RuleFor(o => o.EducationalStatus)
             .MinimumLength(1)
-            .WithMessage("Ваш освітній статус є обов'язковим полем")
-            .MaximumLength(100)
-            .WithMessage("Максимум 100 символів");
+            .WithMessage("Ваш освітній статус є обов'язковим полем");
         
         RuleFor(o => o.FirstName)
             .MinimumLength(1)

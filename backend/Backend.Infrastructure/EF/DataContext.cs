@@ -1,6 +1,7 @@
-﻿using Backend.Core.Futures.Teacher.DTOs;
+﻿using Backend.Core.Futures.Teachers.DTOs;
 using Backend.Domain.Entities;
 using Backend.Domain.Entities.Enums;
+using Backend.Infrastructure.Implementations.PasswordHasher;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Infrastructure.EF;
@@ -8,10 +9,10 @@ namespace Backend.Infrastructure.EF;
 public class DataContext : DbContext
 {
     public DbSet<User> Users { get; set; } = null!;
-    public DbSet<StudentAdditionalData> StudentAdditionalData { get; set; } = null!;
-    public DbSet<TeacherAdditionalData> TeacherAdditionalData { get; set; } = null!;
-    public DbSet<Notification> Notifications { get; set; } = null!;
+    public DbSet<Student> Students { get; set; } = null!;
+    public DbSet<Teacher> Teachers { get; set; } = null!;
     public DbSet<Role> Roles { get; set; } = null!;
+    public DbSet<Notification> Notifications { get; set; } = null!;
     public DbSet<Course> Courses { get; set; } = null!;
     public DbSet<Module> Modules { get; set; } = null!;
     public DbSet<Lesson> Lessons { get; set; } = null!;
@@ -38,11 +39,16 @@ public class DataContext : DbContext
                 Id = (int)o,
                 Name = o.ToString()
             }));
-        
+
         builder.Entity<User>()
-            .HasOne(o => o.TeacherAdditionalData)
-            .WithOne(o => o.User)
-            .HasForeignKey<TeacherAdditionalData>(o => o.UserId);
+            .HasData(new User
+            {
+                Id = 1,
+                FirstName = "Admin",
+                Email = "admin@admin",
+                PasswordHash = new PasswordHasher().Hash("admin"),
+                RoleId = (int)Domain.Entities.Enums.Roles.Administrator
+            });
         
         base.OnModelCreating(builder);
     }

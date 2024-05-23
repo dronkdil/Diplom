@@ -1,4 +1,5 @@
 ﻿using Backend.Core.Futures.Authentication.DTOs;
+using Backend.Domain.Constants;
 using FluentValidation;
 
 namespace Backend.Core.Futures.Authentication.Validators;
@@ -12,7 +13,7 @@ public class LoginValidator : AbstractValidator<LoginDto>
             .WithMessage("Почта не коректна");
 
         RuleFor(o => o.Password)
-            .MinimumLength(6)
-            .WithMessage("Пароль має мати мінімум 6 символів");
+            .MinimumLength(AuthenticationConstants.MinPasswordLength)
+            .WithMessage($"Пароль має мати мінімум {AuthenticationConstants.MinPasswordLength} символів");
     }
 }

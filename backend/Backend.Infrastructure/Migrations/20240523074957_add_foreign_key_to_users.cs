@@ -36,7 +36,7 @@ namespace Backend.Infrastructure.Migrations
                 name: "FK_Users_StudentAdditionalData_StudentAdditionalDataId",
                 table: "Users",
                 column: "StudentAdditionalDataId",
-                principalTable: "StudentAdditionalData",
+                principalTable: "Student",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(

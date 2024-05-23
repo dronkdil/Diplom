@@ -10,13 +10,8 @@ public class RegistrationStudentProfile : Profile
 {
     public RegistrationStudentProfile()
     {
-        CreateMap<RegistrationStudentDto, User>()
+        CreateMap<RegistrationStudentDto, Student>()
             .AfterMap<PasswordHashAction>()
-            .AfterMap((src, dest) => dest.RoleId = (int)Roles.Student)
-            .AfterMap((src, dest) => dest.StudentAdditionalData = new()
-            {
-                Birthday = src.Birthday,
-                EducationalStatus = src.EducationalStatus
-            });
+            .AfterMap((src, dest) => dest.RoleId = (int)Roles.Student);
     }
 }

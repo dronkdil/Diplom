@@ -18,13 +18,13 @@ public class AuthenticationService : IAuthenticationService
     private readonly IValidator<RegistrationStudentDto> _registrationValidator;
     
     private readonly IUserGateway _userGateway;
-    private readonly IStudentAdditionalDataGateway _studentAdditionalDataGateway;
+    private readonly IStudentGateway _studentGateway;
     
     private readonly IJwtTokenFactory _jwtTokenFactory;
     private readonly IPasswordHasher _passwordHasher;
     private readonly IMapper _mapper;
 
-    public AuthenticationService(IValidator<LoginDto> loginValidator, IValidator<RegistrationStudentDto> registrationValidator, IJwtTokenFactory jwtTokenFactory, IPasswordHasher passwordHasher, IMapper mapper, IUserGateway userGateway, IStudentAdditionalDataGateway studentAdditionalDataGateway)
+    public AuthenticationService(IValidator<LoginDto> loginValidator, IValidator<RegistrationStudentDto> registrationValidator, IJwtTokenFactory jwtTokenFactory, IPasswordHasher passwordHasher, IMapper mapper, IUserGateway userGateway, IStudentGateway studentGateway)
     {
         _loginValidator = loginValidator;
         _registrationValidator = registrationValidator;
@@ -32,7 +32,7 @@ public class AuthenticationService : IAuthenticationService
         _passwordHasher = passwordHasher;
         _mapper = mapper;
         _userGateway = userGateway;
-        _studentAdditionalDataGateway = studentAdditionalDataGateway;
+        _studentGateway = studentGateway;
     }
 
     public async Task<Response<SuccessAuthenticationDto>> LoginAsync(LoginDto dto)
@@ -64,7 +64,7 @@ public class AuthenticationService : IAuthenticationService
         if (await _userGateway.GetByEmailAsync(dto.Email) != null)
             return RegistrationResponseHelper.Failed();
 
-        var user = await _userGateway.AddStudentAsync(_mapper.Map<User>(dto));
+        var user = await _studentGateway.AddAsync(_mapper.Map<Student>(dto));
         var tokens = _jwtTokenFactory.CreateTokens(user.Id, Roles.Student.ToString());
 
         return Response.Success(new SuccessAuthenticationDto

@@ -9,7 +9,7 @@ public class Course : BaseEntity
     public string ImageUrl { get; set; } = null!;
 
     public int TeacherId { get; set; }
-    public TeacherAdditionalData TeacherAdditionalData { get; set; } = null!;
+    public Teacher Teacher { get; set; } = null!;
     public ICollection<Module> Modules { get; set; } = null!;
-    public ICollection<StudentAdditionalData> Students { get; set; } = null!;
+    public ICollection<Student> Students { get; set; } = null!;
 }

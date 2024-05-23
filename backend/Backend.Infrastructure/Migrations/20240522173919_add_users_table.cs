@@ -122,10 +122,10 @@ namespace Backend.Infrastructure.Migrations
 
             migrationBuilder.RenameTable(
                 name: "Students",
-                newName: "StudentAdditionalData");
+                newName: "Student");
 
             migrationBuilder.RenameColumn(
-                name: "TeacherId",
+                name: "UserId",
                 table: "Notifications",
                 newName: "UserId");
 
@@ -175,7 +175,7 @@ namespace Backend.Infrastructure.Migrations
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_StudentAdditionalData",
-                table: "StudentAdditionalData",
+                table: "Student",
                 column: "Id");
 
             migrationBuilder.CreateTable(
@@ -230,14 +230,14 @@ namespace Backend.Infrastructure.Migrations
                 name: "FK_Certificates_StudentAdditionalData_StudentAdditionalDataId",
                 table: "Certificates",
                 column: "StudentAdditionalDataId",
-                principalTable: "StudentAdditionalData",
+                principalTable: "Student",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Courses_StudentAdditionalData_StudentAdditionalDataId",
                 table: "Courses",
                 column: "StudentAdditionalDataId",
-                principalTable: "StudentAdditionalData",
+                principalTable: "Student",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
@@ -252,7 +252,7 @@ namespace Backend.Infrastructure.Migrations
                 name: "FK_Homeworks_StudentAdditionalData_StudentAdditionalDataId",
                 table: "Homeworks",
                 column: "StudentAdditionalDataId",
-                principalTable: "StudentAdditionalData",
+                principalTable: "Student",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
@@ -304,7 +304,7 @@ namespace Backend.Infrastructure.Migrations
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_StudentAdditionalData",
-                table: "StudentAdditionalData");
+                table: "Student");
 
             migrationBuilder.DeleteData(
                 table: "Roles",
@@ -334,13 +334,13 @@ namespace Backend.Infrastructure.Migrations
                 newName: "Teachers");
 
             migrationBuilder.RenameTable(
-                name: "StudentAdditionalData",
+                name: "Student",
                 newName: "Students");
 
             migrationBuilder.RenameColumn(
                 name: "UserId",
                 table: "Notifications",
-                newName: "TeacherId");
+                newName: "UserId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_Notifications_UserId",
@@ -466,7 +466,7 @@ namespace Backend.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_TeacherId",
                 table: "Courses",
-                column: "TeacherId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teachers_RoleId",
@@ -495,7 +495,7 @@ namespace Backend.Infrastructure.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Courses_Teachers_TeacherId",
                 table: "Courses",
-                column: "TeacherId",
+                column: "UserId",
                 principalTable: "Teachers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -518,7 +518,7 @@ namespace Backend.Infrastructure.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Notifications_Teachers_TeacherId",
                 table: "Notifications",
-                column: "TeacherId",
+                column: "UserId",
                 principalTable: "Teachers",
                 principalColumn: "Id");
 

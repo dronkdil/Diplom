@@ -56,7 +56,7 @@ namespace Backend.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_CourseStudentAdditionalData_StudentAdditionalData_StudentsId",
                         column: x => x.StudentsId,
-                        principalTable: "StudentAdditionalData",
+                        principalTable: "Student",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -119,7 +119,7 @@ namespace Backend.Infrastructure.Migrations
                 name: "FK_Courses_StudentAdditionalData_StudentAdditionalDataId",
                 table: "Courses",
                 column: "StudentAdditionalDataId",
-                principalTable: "StudentAdditionalData",
+                principalTable: "Student",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(

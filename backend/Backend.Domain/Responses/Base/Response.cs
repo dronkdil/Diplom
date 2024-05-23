@@ -17,11 +17,27 @@ public class Response
         Type = ResponseType.Successfully,
         Value = value,
     };
+    
+    public static Response Success() => new()
+    {
+        Type = ResponseType.Successfully,
+    };
 
     public static Response<T> ValidationFailed<T>(IEnumerable<ValidationFailure> errors) => new()
     {
         Type = ResponseType.ValidationFailed,
         Value = default,
+        Errors = errors.Select(o => new ResponseError
+        {
+            PropertyName = o.PropertyName,
+            ErrorMessage = o.ErrorMessage,
+            ActualValue = o.AttemptedValue
+        })
+    };
+    
+    public static Response ValidationFailed(IEnumerable<ValidationFailure> errors) => new()
+    {
+        Type = ResponseType.ValidationFailed,
         Errors = errors.Select(o => new ResponseError
         {
             PropertyName = o.PropertyName,
@@ -39,5 +55,17 @@ public class Response
             ErrorMessage = error,
             ActualValue = "",
         }}
+    };
+
+    public static Response<T> Failed<T>() => new()
+    {
+        Type = ResponseType.Failed,
+        Errors = Array.Empty<ResponseError>()
+    };
+    
+    public static Response Failed() => new()
+    {
+        Type = ResponseType.Failed,
+        Errors = Array.Empty<ResponseError>()
     };
 }

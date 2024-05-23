@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
 using Backend.Core.Futures.Authentication;
 using Backend.Core.Futures.Authentication.Validators;
-using Backend.Core.Futures.Teacher;
+using Backend.Core.Futures.MaterialsForStudy.Courses;
+using Backend.Core.Futures.Teachers;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,6 +19,7 @@ public static class ServiceExtension
         services.AddValidatorsFromAssemblyContaining<LoginValidator>();
         services.AddTransient<IAuthenticationService, AuthenticationService>();
         services.AddTransient<ITeacherService, TeacherService>();
+        services.AddTransient<ICourseService, CourseService>();
         return services;
     }
 }
