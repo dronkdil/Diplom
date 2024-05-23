@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Backend.Domain.DTOs;
+using Backend.Core.Futures.Authentication.DTOs;
 using Backend.Domain.Entities;
 
 namespace Backend.Core.Futures.Authentication.Mapper.Profiles;

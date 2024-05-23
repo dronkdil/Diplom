@@ -1,4 +1,4 @@
-﻿namespace Backend.Domain.DTOs;
+﻿namespace Backend.Core.Futures.Authentication.DTOs;
 
 public class LoginDto
 {

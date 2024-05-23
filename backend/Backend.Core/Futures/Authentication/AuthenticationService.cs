@@ -1,9 +1,10 @@
 ﻿using System.Net.Http.Headers;
 using AutoMapper;
+using Backend.Core.Futures.Authentication.DTOs;
+using Backend.Core.Futures.Authentication.Reponses;
 using Backend.Core.Gateways;
 using Backend.Core.Interfaces.JwtTokenFactory;
 using Backend.Core.Interfaces.PasswordHasher;
-using Backend.Domain.DTOs;
 using Backend.Domain.Entities;
 using Backend.Domain.Entities.Enums;
 using Backend.Domain.Responses.Base;
@@ -42,7 +43,7 @@ public class AuthenticationService : IAuthenticationService
 
         var user = await _userGateway.GetByEmailAsync(dto.Email);
         if (user == null || _passwordHasher.Compare(user.PasswordHash, dto.Password) == false)
-            return Response.Failed<SuccessAuthenticationDto>("Пошта або пароль невірні");
+            return LoginStaticResponse.Failed();
 
         var tokens = _jwtTokenFactory.CreateTokens(user.Id, user.Role.Name);
 
@@ -61,7 +62,7 @@ public class AuthenticationService : IAuthenticationService
             return Response.ValidationFailed<SuccessAuthenticationDto>(result.Errors);
 
         if (await _userGateway.GetByEmailAsync(dto.Email) != null)
-            return Response.Failed<SuccessAuthenticationDto>("Пошта вже занята");
+            return RegistrationStaticResponse.Failed();
 
         var mappedUser = _mapper.Map<User>(dto);
         mappedUser.PasswordHash = _passwordHasher.Hash(dto.Password);
@@ -83,11 +84,11 @@ public class AuthenticationService : IAuthenticationService
     public async Task<Response<SuccessAuthenticationDto>> Refresh(string refreshToken)
     {
         if (_jwtTokenFactory.Validate(refreshToken, out var userId) == false)
-            return Response.Failed<SuccessAuthenticationDto>("Токен некоректний");
+            return RefreshStaticResponse.Failed();
 
         var user = await _userGateway.GetByIdAsync(userId);
         if (user == null)
-            return Response.Failed<SuccessAuthenticationDto>("Токен некоректний");
+            return RefreshStaticResponse.Failed();
         
         var tokens = _jwtTokenFactory.CreateTokens(user.Id, user.Role.Name);
 

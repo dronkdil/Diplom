@@ -17,4 +17,10 @@
       <ProjectReference Include="..\Backend.Domain\Backend.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Futures\Courses\Course\" />
+      <Folder Include="Futures\Courses\Lesson\" />
+      <Folder Include="Futures\Courses\Module\" />
+    </ItemGroup>
+
 </Project>

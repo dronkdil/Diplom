@@ -1,5 +1,5 @@
 ﻿using Backend.Core.Futures.Authentication;
-using Backend.Domain.DTOs;
+using Backend.Core.Futures.Authentication.DTOs;
 using Backend.Domain.Options;
 using Backend.Domain.Responses.Base;
 using Backend.Presentation.Constants;

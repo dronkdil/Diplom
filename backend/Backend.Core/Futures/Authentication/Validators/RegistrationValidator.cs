@@ -1,4 +1,4 @@
-﻿using Backend.Domain.DTOs;
+﻿using Backend.Core.Futures.Authentication.DTOs;
 using FluentValidation;
 
 namespace Backend.Core.Futures.Authentication.Validators;
