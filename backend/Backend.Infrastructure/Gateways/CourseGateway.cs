@@ -88,4 +88,13 @@ public class CourseGateway : ICourseGateway
             .Include(o => o.Students)
             .AnyAsync(o => o.Id == courseId && o.Students.Any(o1 => o1.Id == userId));
     }
+
+    public async Task<Course?> GetByIdWithTeacherAndModulesAsync(int courseId)
+    {
+        return await _dataContext.Courses
+            .Include(o => o.Teacher)
+            .Include(o => o.Modules)
+            .ThenInclude(o => o.Lessons)
+            .FirstOrDefaultAsync(o => o.Id == courseId);
+    }
 }

@@ -2,6 +2,7 @@
 using Backend.Core.Futures.Authentication;
 using Backend.Core.Futures.Authentication.Validators;
 using Backend.Core.Futures.MaterialsForStudy.Courses;
+using Backend.Core.Futures.MaterialsForStudy.Modules;
 using Backend.Core.Futures.Users.Common.UpdateInformation;
 using Backend.Core.Futures.Users.Students;
 using Backend.Core.Futures.Users.Students.UpdateInformation;
@@ -26,6 +27,7 @@ public static class ServiceExtension
         services.AddTransient<IUpdateUserDataService, UpdateUserDataService>();
         services.AddTransient<IUpdateStudentDataService, UpdateStudentDataService>();
         services.AddTransient<IStudentService, StudentService>();
+        services.AddTransient<IModuleService, ModuleService>();
         return services;
     }
 }

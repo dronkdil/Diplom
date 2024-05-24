@@ -41,10 +41,10 @@ public class CourseService : ICourseService
         return Response.Result(isRemoved);
     }
 
-    public async Task<Response<IEnumerable<CourseDto>>> GetAllCourses()
+    public async Task<Response<IEnumerable<ShortCourseDto>>> GetAllCourses()
     {
         var courses = await _courseGateway.GetAllAsync();
-        return Response.Success(_mapper.Map<IEnumerable<CourseDto>>(courses));
+        return Response.Success(_mapper.Map<IEnumerable<ShortCourseDto>>(courses));
     }
 
     public async Task<Response> UpdateTitleAsync(UpdateTitleDto dto)
@@ -65,5 +65,14 @@ public class CourseService : ICourseService
         });
 
         return Response.Result(isUpdated);
+    }
+
+    public async Task<Response<CoursePageDto>> GetCoursePageDataAsync(int courseId)
+    {
+        var course = await _courseGateway.GetByIdWithTeacherAndModulesAsync(courseId);
+        if (course == null)
+            Response.Failed();
+        
+        return Response.Success(_mapper.Map<CoursePageDto>(course));
     }
 }

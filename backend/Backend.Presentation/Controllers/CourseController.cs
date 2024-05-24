@@ -1,5 +1,6 @@
 ﻿using Backend.Core.Futures.MaterialsForStudy.Courses;
 using Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Requests;
+using Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Responses;
 using Backend.Domain.Entities.Enums;
 using Backend.Domain.Responses.Base;
 using Backend.Presentation.Constants;
@@ -31,7 +32,7 @@ public class CourseController : Controller
         return await _courseService.RemoveAsync(dto);
     }
     
-    [HttpPost("/course/all")]
+    [HttpGet("/course/all")]
     public async Task<Response> GetAllCourses()
     {
         return await _courseService.GetAllCourses();
@@ -49,5 +50,11 @@ public class CourseController : Controller
     public async Task<Response> GetAllCourses([FromBody] UpdateDescriptionDto dto)
     {
         return await _courseService.UpdateDescriptionAsync(dto);
+    }
+    
+    [HttpGet("/course/get-page-data")]
+    public async Task<Response<CoursePageDto>> GetPageData(int courseId)
+    {
+        return await _courseService.GetCoursePageDataAsync(courseId);
     }
 }

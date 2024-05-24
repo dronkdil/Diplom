@@ -11,4 +11,5 @@ public interface ICourseGateway
     Task<Course?> GetCourseByIdAsync(int id);
     Task<bool> HaveFreeSlotsAsync(int id);
     Task<bool> HaveStudentAsync(int userId, int courseId);
+    Task<Course?> GetByIdWithTeacherAndModulesAsync(int courseId);
 }

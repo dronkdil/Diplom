@@ -1,4 +1,4 @@
-﻿namespace Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Responses;
+﻿namespace Backend.Core.Futures.MaterialsForStudy.Modules.DTOs.Responses;
 
 public class ModuleDto
 {

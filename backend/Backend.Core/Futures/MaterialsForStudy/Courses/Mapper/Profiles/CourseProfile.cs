@@ -8,8 +8,10 @@ public class CourseProfile : Profile
 {
     public CourseProfile()
     {
-        CreateMap<Course, CourseDto>();
+        CreateMap<Course, ShortCourseDto>();
+        CreateMap<Course, CoursePageDto>();
         CreateMap<Module, ModuleDto>();
         CreateMap<Lesson, ShortLessonDto>();
+        CreateMap<Teacher, TeacherDto>();
     }
 }
