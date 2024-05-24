@@ -28,4 +28,22 @@ public class CommonUserGateway : IUserGateway
     {
         return await _dataContext.Users.Include(o => o.Role).FirstOrDefaultAsync(o => o.Id == id);
     }
+
+    public async Task<bool> UpdateAsync(int id, Action<User> configure)
+    {
+        try
+        {
+            var user = await _dataContext.Users.FirstOrDefaultAsync(o => o.Id == id);
+            if (user == null)
+                return false;
+
+            configure(user);
+            await _dataContext.SaveChangesAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

@@ -23,6 +23,12 @@ public class Response
         Type = ResponseType.Successfully,
     };
 
+    public static Response Result(bool successfully, string? errorMessage = null) => successfully
+        ? Success()
+        : errorMessage != null 
+            ? Failed(errorMessage)
+            : Failed();
+
     public static Response<T> ValidationFailed<T>(IEnumerable<ValidationFailure> errors) => new()
     {
         Type = ResponseType.ValidationFailed,
@@ -47,6 +53,17 @@ public class Response
     };
 
     public static Response<T> Failed<T>(string error) => new()
+    {
+        Type = ResponseType.Failed,
+        Errors = new[] {new ResponseError
+        {
+            PropertyName = "All",
+            ErrorMessage = error,
+            ActualValue = "",
+        }}
+    };
+    
+    public static Response Failed(string error) => new()
     {
         Type = ResponseType.Failed,
         Errors = new[] {new ResponseError

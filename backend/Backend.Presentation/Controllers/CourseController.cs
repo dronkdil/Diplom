@@ -25,7 +25,7 @@ public class CourseController : Controller
     }
     
     [HttpPost("/course/remove")]
-    [Authorize(AuthorizationPolicies.Administrator)]
+    [Authorize(AuthorizationPolicies.TeacherAndHigher)]
     public async Task<Response> RemoveCourse([FromBody] RemoveCourseDto dto)
     {
         return await _courseService.RemoveAsync(dto);

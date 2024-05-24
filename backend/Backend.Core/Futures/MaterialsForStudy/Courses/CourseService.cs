@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Requests;
 using Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Responses;
-using Backend.Core.Futures.Teachers.DTOs;
+using Backend.Core.Futures.Users.Teachers.DTOs;
 using Backend.Core.Gateways;
 using Backend.Domain.Entities;
 using Backend.Domain.Responses.Base;
@@ -32,17 +32,13 @@ public class CourseService : ICourseService
             ImageUrl = ""
         });
         var isAdded = await _courseGateway.AddAsync(course);
-        return isAdded
-            ? Response.Success()
-            : Response.Failed();
+        return Response.Result(isAdded);
     }
 
     public async Task<Response> RemoveAsync(RemoveCourseDto dto)
     {
         var isRemoved = await _courseGateway.RemoveAsync(dto.Id);
-        return isRemoved
-            ? Response.Success()
-            : Response.Failed();
+        return Response.Result(isRemoved);
     }
 
     public async Task<Response<IEnumerable<CourseDto>>> GetAllCourses()
@@ -58,9 +54,7 @@ public class CourseService : ICourseService
             o.Title = dto.Title;
         });
 
-        return isUpdated
-            ? Response.Success()
-            : Response.Failed();
+        return Response.Result(isUpdated);
     }
 
     public async Task<Response> UpdateDescriptionAsync(UpdateDescriptionDto dto)
@@ -70,8 +64,6 @@ public class CourseService : ICourseService
             o.Description = dto.Description;
         });
 
-        return isUpdated
-            ? Response.Success()
-            : Response.Failed();
+        return Response.Result(isUpdated);
     }
 }

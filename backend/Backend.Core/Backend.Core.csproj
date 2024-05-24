@@ -20,7 +20,7 @@
     <ItemGroup>
       <Folder Include="Futures\MaterialsForStudy\Lessons\" />
       <Folder Include="Futures\MaterialsForStudy\Modules\" />
-      <Folder Include="Futures\Student\" />
+      <Folder Include="Futures\Users\Common\" />
     </ItemGroup>
 
 </Project>

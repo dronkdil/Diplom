@@ -1,4 +1,4 @@
-﻿using Backend.Core.Futures.Teachers.DTOs;
+﻿using Backend.Core.Futures.Users.Teachers.DTOs;
 using Backend.Domain.Entities;
 using Backend.Domain.Entities.Enums;
 using Backend.Infrastructure.Implementations.PasswordHasher;

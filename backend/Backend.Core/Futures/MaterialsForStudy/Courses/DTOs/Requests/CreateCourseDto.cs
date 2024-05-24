@@ -8,4 +8,5 @@ public class CreateCourseDto
     public string Description { get; set; } = null!;
     public CourseLevels Level { get; set; }
     public int TeacherId { get; set; }
+    public int LimitOfStudents { get; set; }
 }

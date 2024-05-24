@@ -61,6 +61,9 @@ namespace Backend.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("LimitOfStudents")
+                        .HasColumnType("int");
+
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 

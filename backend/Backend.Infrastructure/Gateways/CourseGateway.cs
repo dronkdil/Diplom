@@ -69,4 +69,23 @@ public class CourseGateway : ICourseGateway
             return false;
         }
     }
+
+    public async Task<Course?> GetCourseByIdAsync(int id)
+    {
+        return await _dataContext.Courses.FirstOrDefaultAsync(o => o.Id == id);
+    }
+
+    public async Task<bool> HaveFreeSlotsAsync(int id)
+    {
+        return await _dataContext.Courses
+            .Include(o => o.Students)
+            .AnyAsync(o => o.Id == id && o.Students.Count < o.LimitOfStudents);
+    }
+
+    public async Task<bool> HaveStudentAsync(int userId, int courseId)
+    {
+        return await _dataContext.Courses
+            .Include(o => o.Students)
+            .AnyAsync(o => o.Id == courseId && o.Students.Any(o1 => o1.Id == userId));
+    }
 }

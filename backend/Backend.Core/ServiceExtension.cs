@@ -2,7 +2,10 @@
 using Backend.Core.Futures.Authentication;
 using Backend.Core.Futures.Authentication.Validators;
 using Backend.Core.Futures.MaterialsForStudy.Courses;
-using Backend.Core.Futures.Teachers;
+using Backend.Core.Futures.Users.Common.UpdateInformation;
+using Backend.Core.Futures.Users.Students;
+using Backend.Core.Futures.Users.Students.UpdateInformation;
+using Backend.Core.Futures.Users.Teachers;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +23,9 @@ public static class ServiceExtension
         services.AddTransient<IAuthenticationService, AuthenticationService>();
         services.AddTransient<ITeacherService, TeacherService>();
         services.AddTransient<ICourseService, CourseService>();
+        services.AddTransient<IUpdateUserDataService, UpdateUserDataService>();
+        services.AddTransient<IUpdateStudentDataService, UpdateStudentDataService>();
+        services.AddTransient<IStudentService, StudentService>();
         return services;
     }
 }

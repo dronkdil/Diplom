@@ -1,4 +1,4 @@
-﻿using Backend.Core.Futures.Teachers;
+﻿using Backend.Core.Futures.Users.Teachers;
 using Backend.Core.Gateways;
 using Backend.Core.Interfaces.JwtTokenFactory;
 using Backend.Core.Interfaces.PasswordHasher;

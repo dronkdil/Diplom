@@ -1,5 +1,5 @@
-﻿using Backend.Core.Futures.Teachers;
-using Backend.Core.Futures.Teachers.DTOs;
+﻿using Backend.Core.Futures.Users.Teachers;
+using Backend.Core.Futures.Users.Teachers.DTOs;
 using Backend.Domain.Responses.Base;
 using Backend.Presentation.Constants;
 using Backend.Presentation.Extensions;
@@ -39,6 +39,7 @@ public class TeacherController : Controller
     }
     
     [HttpGet("/teacher/all")]
+    [Authorize(AuthorizationPolicies.Administrator)]
     public async Task<Response<IEnumerable<TeacherInformationDto>>> GetAll()
     {
         return await _teacherService.GetAllTeachersAsync();

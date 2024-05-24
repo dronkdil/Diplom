@@ -1,12 +1,16 @@
 using System.Text.Json.Serialization;
 using Backend.Core;
+using Backend.Core.UserContext;
 using Backend.Infrastructure;
+using Backend.Presentation.Contexts;
 using Backend.Presentation.Filters;
 using Backend.Presentation.ServiceExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddTransient<ConfigurationManager>(_ => builder.Configuration);
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<IUserContext, UserContext>();
 builder.Services.AddCore();
 builder.Services.AddInfrastructure();
 builder.Services.AddConfiguredAuthentication();
