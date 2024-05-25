@@ -41,6 +41,7 @@ export const useTypedMutation = <TData>({
 		},
 		onSuccess: (response) => {
 			onSuccess && onSuccess(response)
+			setErrors({})
 		}
 	})
 

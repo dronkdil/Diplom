@@ -18,7 +18,11 @@
     }
 
     .module__items {
-        @apply mt-3 flex flex-col gap-2;
+        @apply flex flex-col gap-2;
+
+        .module__description {
+            @apply mb-3 text-white/70;
+        }
 
         .lesson {
             @apply gap-3;

@@ -1,13 +1,12 @@
+import $api from '@/api/api'
+
 export const TeacherEndpoints = {
 	create: '/teacher/create',
-	remove: '/students/join-course',
-	getCourses: '/students/join-course',
-	getAll: '/students/join-course'
+	remove: '/teacher/remove',
+	getCourses: '/teacher/courses',
+	getAll: '/teacher/all'
 }
 
 export const TeacherService = {
-	login: () => {},
-	registration: () => {},
-	refresh: () => {},
-	logout: () => {}
+	getCourses: async () => await $api.get(TeacherEndpoints.getCourses)
 }

@@ -7,11 +7,12 @@ import styles from "./Module.module.scss"
 
 export type ModuleProps = {
     title: string
+    description: string
     children: any
     id: number
 }
 
-const Module = ({title, children, id}: ModuleProps) => {
+const Module = ({title, children, id, description}: ModuleProps) => {
   return (
     <Disclosure as={"div"} className={styles.module}>
       {({open}) => <>
@@ -22,6 +23,7 @@ const Module = ({title, children, id}: ModuleProps) => {
             <IconButton><TrashIcon /></IconButton>
         </DisclosureButton>
         <DisclosurePanel className={styles.module__items}>
+            <p className={styles.module__description}>{description}</p>
             {children}
         </DisclosurePanel>
       </>}

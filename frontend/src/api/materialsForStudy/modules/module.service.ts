@@ -1,3 +1,6 @@
+import $api from '@/api/api'
+import { CreateModuleType } from './type/create-module.type'
+
 export const ModuleEndpoints = {
 	create: '/module/create',
 	remove: '/module/remove',
@@ -6,8 +9,6 @@ export const ModuleEndpoints = {
 }
 
 export const ModuleService = {
-	login: () => {},
-	registration: () => {},
-	refresh: () => {},
-	logout: () => {}
+	create: async (data: CreateModuleType) =>
+		await $api.post(ModuleEndpoints.create, data)
 }
