@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Globalization;
+using AutoMapper;
 using Backend.Core.Futures.Authentication.DTOs;
 using Backend.Core.Futures.Authentication.Mapper.Actions;
 using Backend.Domain.Entities;
@@ -12,6 +13,7 @@ public class RegistrationStudentProfile : Profile
     {
         CreateMap<RegistrationStudentDto, Student>()
             .AfterMap<PasswordHashAction>()
-            .AfterMap((src, dest) => dest.RoleId = (int)Roles.Student);
+            .AfterMap((src, dest) => dest.RoleId = (int)Roles.Student)
+            .AfterMap((src, dest) => dest.Birthday = DateTime.ParseExact(src.Birthday, "dd.MM.yyyy", CultureInfo.CurrentCulture));
     }
 }

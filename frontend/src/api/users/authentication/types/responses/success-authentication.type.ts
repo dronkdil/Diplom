@@ -7,5 +7,6 @@ export type SuccessAuthenticationType = {
 		lastName: string
 		email: string
 		role: string
+		displayName: string
 	}
 }

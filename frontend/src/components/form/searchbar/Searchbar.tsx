@@ -1,4 +1,5 @@
 'use client'
+import { cn } from "@/lib/utils"
 import { SearchIcon } from "lucide-react"
 import { useState } from "react"
 import { IconButton } from "../../buttons"
@@ -15,10 +16,10 @@ const Searchbar = ({onClick}: SearchbarProps) => {
   return (
     <DefaultInput
         icon={<IconButton onClick={() => onClick && onClick(value)}>
-          <SearchIcon className="stroke-black" />
+          <SearchIcon />
         </IconButton>} 
         placeholder="Пошук" 
-        wrapperClassName={styles.searchbar}
+        wrapperClassName={cn(styles.searchbar)}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={(e) => {

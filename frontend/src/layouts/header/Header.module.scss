@@ -1,5 +1,5 @@
 .header {
-    @apply hidden md:flex;
+    @apply hidden sm:flex;
 
     &__auth {
         @apply ml-auto cursor-pointer flex gap-1;

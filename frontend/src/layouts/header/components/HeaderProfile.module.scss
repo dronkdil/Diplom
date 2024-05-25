@@ -1,0 +1,43 @@
+.profile {
+    @apply text-white flex gap-2 ml-auto transition pr-2 rounded-sm cursor-pointer;
+
+    .profile__image {
+        @apply w-[50px] h-[50px] bg-white/30 text-white font-bold flex justify-center items-center rounded-sm;
+    }
+
+    .profile__info {
+        @apply max-w-[130px] flex flex-col justify-center items-start;
+
+        .profile__name {
+            @apply truncate;
+        }   
+        .profile__email {
+            @apply text-sm text-white/50 truncate;
+        }
+    }
+
+    &:hover,
+    &--active {
+        @apply bg-white/10;
+    }
+
+    &:active {
+        @apply scale-95;
+    }
+}
+
+.menu {
+    @apply ml-auto relative z-10;
+
+    .menu__items {
+        @apply absolute bg-white/10 w-full rounded-md p-1 text-white top-full mt-1 duration-75 backdrop-blur;
+
+        .menu__link {
+            @apply transition w-full block rounded-sm px-2 py-1 data-[focus]:bg-white/20 text-start;
+
+            &:hover {
+                @apply bg-white/20;
+            }
+        }
+    }
+}

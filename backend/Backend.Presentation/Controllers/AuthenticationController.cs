@@ -55,9 +55,10 @@ public class AuthenticationController : Controller
     }
 
     [HttpPost("/logout")]
-    public void Logout()
+    public Response Logout()
     {
         Response.Cookies.Delete(CookieKeys.RefreshToken);
+        return Domain.Responses.Base.Response.Success();
     }
     
     private void AddRefreshTokenToCookie(SuccessAuthenticationDto dto)

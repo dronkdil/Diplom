@@ -28,7 +28,7 @@ export const authenticationSlice = createSlice({
 				authenticated: true
 			}
 		},
-		logout: (state) => {
+		logoutOnClient: (state) => {
 			state.value = {
 				...initialState,
 				authenticated: false

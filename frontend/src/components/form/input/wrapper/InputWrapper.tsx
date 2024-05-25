@@ -1,5 +1,6 @@
 'use client'
 import { ResponseError } from '@/api/response.type'
+import { cn } from '@/lib/utils'
 import styles from './InputWrapper.module.scss'
 
 export type InputWrapperProps = {
@@ -13,7 +14,7 @@ export type InputWrapperProps = {
 const InputWrapper = ({wrapperClassName, icon, children, onFocus, error}: InputWrapperProps) => {
   return (
     <div className={styles.wrapper}>
-      <div className={`${styles.wrapper__input} ${wrapperClassName}`} onClick={() => onFocus()}>
+      <div className={cn(styles.wrapper__input, wrapperClassName)} onClick={() => onFocus()}>
         <div className={styles.wrapper__icon}>{icon}</div>
         {children}
       </div>

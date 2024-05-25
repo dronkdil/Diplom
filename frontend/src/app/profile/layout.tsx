@@ -1,10 +1,16 @@
 "use client"
+import { AuthenticationService } from "@/api/users/authentication/authentication.service"
 import { DefaultButton, IconButton } from "@/components/buttons"
+import OnlyAuthenticatedUser from "@/components/guards/OnlyAuthenticatedUser"
 import { DefaultLink } from "@/components/links"
+import { useReduxActions } from "@/hooks/useReduxActions"
+import { useTypedMutation } from "@/hooks/useTypedMutation"
+import { ProfileMenuItems } from "@/lib/profile-menu-items.constants"
 import { getProfileTitle } from "@/lib/redux/slices/ProfileTitleSlice"
+import { getUserData } from "@/lib/redux/slices/UserSlice"
 import { Routes } from "@/lib/routes.constants"
 import { MenuIcon, PenIcon, XIcon } from "lucide-react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import styles from "./Profile.module.scss"
@@ -16,58 +22,69 @@ export type ProfileLayoutProps = {
 const ProfileLayout = ({children}: ProfileLayoutProps) => {
   const title = useSelector(getProfileTitle)
   const [isMenuOpened, setIsMenuOpened] = useState(false)
+  const user = useSelector(getUserData)
 
   const pathname = usePathname()
   useEffect(() => {
     setIsMenuOpened(false)
   }, [pathname])
 
+  const {logoutOnClient} = useReduxActions()
+  const router = useRouter()
+
+  const {mutateAsync: logout} = useTypedMutation({
+      name: "logout",
+      request: () => AuthenticationService.logout(),
+      onSuccess: () => {
+          router.push(Routes.Courses)
+          logoutOnClient()
+      }
+  })
+
   return (
-    <div className="flex justify-center mt-3 md:mt-20">
-      <div className={`${styles.left} ${isMenuOpened && styles["left--active"]}`}>
-        <IconButton 
-          className={styles.left__close}
-          onClick={() => setIsMenuOpened(false)}
-        >
-          <XIcon />
-        </IconButton>
-        <div className={styles.about}>
-          <div className={styles.avatar}>
-              DS
-              <IconButton className={styles["avatar__edit-pen"]}><PenIcon /></IconButton>
-          </div>
-          <div className={styles.info}>
-              <div className={styles.info__name}>Denis Shevchuk</div>
-              <div className={styles.info__data}>Вища освіта</div>
-              <div className={styles.info__data}>17.01.2023</div>
-              <div className={styles.info__data}>18 років</div>
-              <div className={styles.info__data}>destr20202@gmail.com</div>
-              <IconButton className={styles["info__edit-pen"]}><PenIcon /></IconButton>
-          </div>
-        </div>
-        <div className={styles.buttons}>
-            <DefaultLink href={Routes.Profile.TeacherCourses}>Мої курси (для вчителя)</DefaultLink>
-            <DefaultLink href={Routes.Profile.StudentCourses}>Мої курси</DefaultLink>
-            <DefaultLink href={Routes.Profile.Certificates}>Мої сертифікати</DefaultLink>
-            <DefaultLink href={Routes.Profile.Notification}>Повідомлення</DefaultLink>
-            <DefaultLink href={Routes.Profile.MyData}>Власні дані</DefaultLink>
-            <DefaultLink href={Routes.Profile.Settings}>Налаштування</DefaultLink>
-            <DefaultButton>Вийти</DefaultButton>
-        </div>
-      </div>
-      <div className={`${styles.right} ${isMenuOpened && styles["right--hidden"]}`}>
-        <h2 className={styles.right__title}>
+    <OnlyAuthenticatedUser>
+      <div className="flex justify-center mt-3 md:mt-20">
+        <div className={`${styles.left} ${isMenuOpened && styles["left--active"]}`}>
           <IconButton 
-            className={styles.right__open}
-            onClick={() => setIsMenuOpened(true)}
+            className={styles.left__close}
+            onClick={() => setIsMenuOpened(false)}
           >
-            <MenuIcon />
+			<XIcon />
           </IconButton>
-          {title}
-        </h2>
-        {children}
+          <div className={styles.about}>
+            <div className={styles.avatar}>
+                {`${user.firstName[0] + user.lastName[0]}`.toUpperCase()}
+                <IconButton className={styles["avatar__edit-pen"]}><PenIcon /></IconButton>
+            </div>
+            <div className={styles.info}>
+                <div className={styles.info__name}>{user.displayName}</div>
+                <div className={styles.info__data}>Вища освіта</div>
+                <div className={styles.info__data}>17.01.2023</div>
+                <div className={styles.info__data}>18 років</div>
+                <div className={styles.info__data}>destr20202@gmail.com</div>
+                <IconButton className={styles["info__edit-pen"]}><PenIcon /></IconButton>
+            </div>
+          </div>
+          <div className={styles.buttons}>
+              {ProfileMenuItems.map((o, i) => (user.role == o.role || o.role == undefined) && 
+                <DefaultLink key={i} href={o.href}>{o.text}</DefaultLink>)}
+              <DefaultButton onClick={() => logout()}>Вийти</DefaultButton>
+          </div>
+        </div>
+        <div className={`${styles.right} ${isMenuOpened && styles["right--hidden"]}`}>
+          <h2 className={styles.right__title}>
+            <IconButton 
+              className={styles.right__open}
+              onClick={() => setIsMenuOpened(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+            {title}
+          </h2>
+          {children}
+        </div>
       </div>
-    </div>
+    </OnlyAuthenticatedUser>
   )
 }
 

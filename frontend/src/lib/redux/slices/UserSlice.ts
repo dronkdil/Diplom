@@ -7,6 +7,7 @@ export type UserDataType = {
 	lastName: string
 	email: string
 	role: string
+	displayName: string
 }
 
 const initialState: UserDataType = {
@@ -14,7 +15,8 @@ const initialState: UserDataType = {
 	firstName: '',
 	lastName: '',
 	email: '',
-	role: ''
+	role: '',
+	displayName: ''
 }
 
 export const shortUserDataSlice = createSlice({

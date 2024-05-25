@@ -35,7 +35,7 @@ public class Response
         Value = default,
         Errors = errors.Select(o => new ResponseError
         {
-            PropertyName = o.PropertyName,
+            PropertyName = char.ToLower(o.PropertyName[0]) + o.PropertyName[1..],
             ErrorMessage = o.ErrorMessage,
             ActualValue = o.AttemptedValue
         })
@@ -46,7 +46,7 @@ public class Response
         Type = ResponseType.ValidationFailed,
         Errors = errors.Select(o => new ResponseError
         {
-            PropertyName = o.PropertyName,
+            PropertyName = char.ToLower(o.PropertyName[0]) + o.PropertyName[1..],
             ErrorMessage = o.ErrorMessage,
             ActualValue = o.AttemptedValue
         })
@@ -57,7 +57,7 @@ public class Response
         Type = ResponseType.Failed,
         Errors = new[] {new ResponseError
         {
-            PropertyName = "All",
+            PropertyName = "all",
             ErrorMessage = error,
             ActualValue = "",
         }}
@@ -68,7 +68,7 @@ public class Response
         Type = ResponseType.Failed,
         Errors = new[] {new ResponseError
         {
-            PropertyName = "All",
+            PropertyName = "all",
             ErrorMessage = error,
             ActualValue = "",
         }}

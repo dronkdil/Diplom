@@ -1,4 +1,5 @@
-﻿using Backend.Core.Futures.Authentication.DTOs;
+﻿using System.Globalization;
+using Backend.Core.Futures.Authentication.DTOs;
 using Backend.Core.Gateways;
 using Backend.Domain.Constants;
 using FluentValidation;
@@ -20,7 +21,7 @@ public class RegistrationValidator : AbstractValidator<RegistrationStudentDto>
             .WithMessage($"Пароль має мати мінімум {AuthenticationConstants.MinPasswordLength} символів");
 
         RuleFor(o => o.Birthday)
-            .Must((entity, value, context) => value < DateTime.Now.AddYears(-AuthenticationConstants.MinYears))
+            .Must((entity, value, context) => DateTime.ParseExact(value, "dd.MM.yyyy", CultureInfo.CurrentCulture) < DateTime.Now.AddYears(-AuthenticationConstants.MinYears))
             .WithMessage($"Вам має бути більше {AuthenticationConstants.MinYears} років");
 
         RuleFor(o => o.EducationalStatus)

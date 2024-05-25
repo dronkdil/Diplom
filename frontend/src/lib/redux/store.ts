@@ -1,20 +1,51 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers } from 'redux'
+import {
+	FLUSH,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+	REHYDRATE,
+	persistReducer,
+	persistStore
+} from 'redux-persist'
+import storage from 'redux-persist/es/storage'
 import { authenticationSlice } from './slices/AuthenticationSlice'
 import { profileTitleSlice } from './slices/ProfileTitleSlice'
 import { shortUserDataSlice } from './slices/UserSlice'
-// ...
 
-export const store = configureStore({
-	reducer: {
-		profileTitle: profileTitleSlice.reducer,
-		authentication: authenticationSlice.reducer,
-		userData: shortUserDataSlice.reducer
-	}
+const persistConfig = {
+	key: 'root',
+	storage
+}
+
+const rootReducer = combineReducers({
+	profileTitle: profileTitleSlice.reducer,
+	authentication: persistReducer(
+		{ key: 'auth', storage },
+		authenticationSlice.reducer
+	),
+	userData: persistReducer(
+		{ key: 'user-data', storage },
+		shortUserDataSlice.reducer
+	)
 })
 
-// Get the type of our store variable
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = configureStore({
+	reducer: persistedReducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+			}
+		})
+})
+
+export const persistor = persistStore(store)
+
 export type AppStore = typeof store
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<AppStore['getState']>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = AppStore['dispatch']

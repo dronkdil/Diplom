@@ -1,12 +1,10 @@
 .searchbar {
-    @apply py-[3px] bg-white text-black flex-row-reverse w-full max-w-[300px];
-
+    @apply flex-row-reverse w-full max-w-[300px];
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    
     input {
-        @apply text-black w-full;
-
-        &::placeholder {
-            @apply text-black;
-        }
+        @apply w-full;
     }
 
     &:hover {

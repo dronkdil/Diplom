@@ -24,7 +24,7 @@
     }
 
     &__close {
-        @apply md:hidden fixed top-3 right-3;
+        @apply md:hidden max-md:fixed top-3 right-3;
     }
 
     .avatar {

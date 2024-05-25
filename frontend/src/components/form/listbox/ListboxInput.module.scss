@@ -1,19 +1,11 @@
 .listbox {
     @apply relative w-full cursor-pointer;
-}
-
-.combobox-input {
-    @apply outline-none bg-transparent text-white;
-
-    &::placeholder {
-        @apply text-white/50;
-    }
-}
-
-.combobox-options {
-    @apply empty:hidden bg-[#8364c2] p-1 rounded-md w-60;
-
-    &__item {
-        @apply data-[focus]:bg-white/20 px-2 py-1 text-white rounded cursor-pointer;
+   
+    .listbox__options {
+        @apply absolute bg-white/10 backdrop-blur-3xl p-1 rounded-md w-full text-sm z-10 mt-1;
+    
+        .listbox__item {
+            @apply data-[focus]:bg-white/20 px-2 py-1 text-white rounded cursor-pointer;
+        }
     }
 }

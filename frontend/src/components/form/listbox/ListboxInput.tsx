@@ -1,5 +1,5 @@
 "use client"
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react"
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from "@headlessui/react"
 import { useState } from "react"
 import InputWrapper from "../input/wrapper/InputWrapper"
 import styles from "./ListboxInput.module.scss"
@@ -10,7 +10,7 @@ export type ListboxInputProps = {
     placeholder?: string
 }
 
-const ListboxInput = ({values, icon, placeholder, ...props}: ListboxInputProps) => {
+const ListboxInput = ({values, icon, placeholder}: ListboxInputProps) => {
     const [value, setValue] = useState(null)
 
     return (
@@ -22,16 +22,25 @@ const ListboxInput = ({values, icon, placeholder, ...props}: ListboxInputProps) 
         >
             <ListboxButton className="w-full">
                 <InputWrapper icon={icon} onFocus={() => {}} wrapperClassName="w-full">
-                    {value ? <span className="text-white">{value}</span> : <span    className="text-white/50">{placeholder}</span>}
+                    {value ? <span className="text-white">{value}</span> : <span className="text-white/50">{placeholder}</span>}
                 </InputWrapper>
             </ListboxButton>
-            <ListboxOptions  anchor="bottom start" className={styles['combobox-options']}>
-                {values.map((o, i) => (
-                    <ListboxOption key={i} value={o} className={styles['combobox-options__item']}>
-                        {o}
-                    </ListboxOption>
-                ))}
-            </ListboxOptions>
+            <Transition
+                enter="duration-100 ease-out"
+                enterFrom="scale-95 opacity-0"
+                enterTo="scale-100 opacity-100"
+                leave="duration-100 ease-out"
+                leaveFrom="scale-100 opacity-100"
+                leaveTo="scale-80 opacity-0"
+            >
+                <ListboxOptions className={styles.listbox__options}>
+                    {values.map((o, i) => (
+                        <ListboxOption key={i} value={o} className={styles.listbox__item}>
+                            {o}
+                        </ListboxOption>
+                    ))}
+                </ListboxOptions>
+            </Transition>
         </Listbox>
     )
 
