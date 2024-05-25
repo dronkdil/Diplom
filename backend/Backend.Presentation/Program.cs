@@ -32,5 +32,10 @@ app.UseAuthorization();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.MapControllers();
-app.Run();
+app.UseCors(policyBuilder => policyBuilder
+    .WithOrigins("http://localhost:3000")
+    .AllowCredentials()
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+);
 app.Run();

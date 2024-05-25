@@ -1,11 +1,19 @@
 .wrapper {
-    @apply text-white/50 space-x-2 inline-flex border-2 border-white/50 rounded-[6px] py-[8px] px-[10px] cursor-text transition;
+    @apply flex flex-col;
 
-    &__icon {
-        @apply text-sm;
+    .wrapper__input {
+        @apply text-white/50 space-x-2 inline-flex border-2 border-white/50 rounded-[6px] py-[8px] px-[10px] cursor-text transition;
+
+        .wrapper__icon {
+            @apply text-sm;
+        }
+
+        &:hover {
+            @apply border-white bg-white/10;
+        }
     }
 
-    &:hover {
-        @apply border-white bg-white/10;
+    .wrapper__error {
+        @apply text-white/50 mt-1 text-sm;
     }
 }

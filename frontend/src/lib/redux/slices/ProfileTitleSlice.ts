@@ -1,11 +1,11 @@
 import type { RootState } from '@/lib/redux/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-type State = {
+type PayloadType = {
 	value: string
 }
 
-const initialState: State = {
+const initialState: PayloadType = {
 	value: ''
 }
 
@@ -20,4 +20,3 @@ export const profileTitleSlice = createSlice({
 })
 
 export const getProfileTitle = (state: RootState) => state.profileTitle.value
-export const profileTitleReducer = profileTitleSlice.reducer

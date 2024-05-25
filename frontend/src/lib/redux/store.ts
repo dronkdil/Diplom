@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { profileTitleReducer } from './slices/ProfileTitleSlice'
+import { authenticationSlice } from './slices/AuthenticationSlice'
+import { profileTitleSlice } from './slices/ProfileTitleSlice'
+import { shortUserDataSlice } from './slices/UserSlice'
 // ...
 
 export const store = configureStore({
 	reducer: {
-		profileTitle: profileTitleReducer
+		profileTitle: profileTitleSlice.reducer,
+		authentication: authenticationSlice.reducer,
+		userData: shortUserDataSlice.reducer
 	}
 })
 

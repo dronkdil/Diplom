@@ -1,37 +1,57 @@
 'use client'
+import { AuthenticationService } from "@/api/users/authentication/authentication.service"
+import { LoginType } from "@/api/users/authentication/types/requests/login.type"
+import { SuccessAuthenticationType } from "@/api/users/authentication/types/responses/success-authentication.type"
+import { AccentButton } from "@/components/buttons"
 import { SwitchCheckbox } from "@/components/form"
 import { DefaultInput, PasswordInput } from "@/components/form/input"
-import AccentLink from "@/components/links/accent/AccentLink"
+import { useReduxActions } from "@/hooks/useReduxActions"
+import { useTypedMutation } from "@/hooks/useTypedMutation"
 import { Routes } from "@/lib/routes.constants"
 import { Field, Label } from "@headlessui/react"
 import { LockIcon, Repeat2Icon, User2Icon } from "lucide-react"
 import Link from "next/link"
+import { useForm } from "react-hook-form"
 import styles from "./../Auth.module.scss"
 
 const LoginPage = () => {
-  return (
-    <div className="flex-auto grid place-content-center">
-		<form action="" className="flex flex-col gap-3">
-			<Field>
-				<DefaultInput icon={<User2Icon />} placeholder="Логін" />
-			</Field>
-			<Field>
-				<PasswordInput icon={<LockIcon />} placeholder="Пароль" />
-			</Field>
-			<Field>
-				<PasswordInput icon={<Repeat2Icon />} placeholder="Повторіть пароль" />
-			</Field>
-			<Field className={styles["switch-field"]}>
-				<Label>Запам’ятати мене</Label>
-				<SwitchCheckbox />
-			</Field>
-			<AccentLink href={Routes.Profile.StudentCourses}>Увійти</AccentLink>
-			<Link href={Routes.Registration} className="text-white hover:underline">
-                Немає облікового запису? <br /> <span className="text-white/50">Зареєструватись</span>
-            </Link>
-		</form>
-    </div>
-  )
+	const {authenticate, saveUserData} = useReduxActions()
+	const {register, getValues} = useForm()
+
+	const {isPending, errors, mutateAsync: login} = useTypedMutation<SuccessAuthenticationType>({
+		name: 'login',
+		request: () => AuthenticationService.login(getValues() as LoginType),
+		onSuccess: (o) => {
+			authenticate(o.data.value)
+			saveUserData(o.data.value.user)
+		}
+	})
+
+	console.log("rere")
+
+	return (
+		<div className="flex-auto grid place-content-center">
+			<div className="flex flex-col gap-3">
+				<Field>
+					<DefaultInput {...register("email")} icon={<User2Icon />} placeholder="Пошта" error={errors.Email} />
+				</Field>
+				<Field>
+					<PasswordInput {...register("password")} icon={<LockIcon />} placeholder="Пароль" error={errors.Password} />
+				</Field>
+				<Field>
+					<PasswordInput {...register("confirmPassword")} icon={<Repeat2Icon />} placeholder="Повторіть пароль" error={errors.ConfirmPassword} />
+				</Field>
+				<Field className={styles["switch-field"]}>
+					<Label>Запам’ятати мене</Label>
+					<SwitchCheckbox />
+				</Field>
+				<AccentButton isLoading={isPending} onClick={() => login()}>Увійти</AccentButton>
+				<Link href={Routes.Registration} className="text-white hover:underline">
+					Немає облікового запису? <br /> <span className="text-white/50">Зареєструватись</span>
+				</Link>
+			</div>
+		</div>
+	)
 }
 
 export default LoginPage

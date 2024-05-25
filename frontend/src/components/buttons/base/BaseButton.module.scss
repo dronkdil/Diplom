@@ -1,5 +1,5 @@
 .base {
-    @apply scale-100 transition;
+    @apply scale-100 transition flex justify-center;
 
     &:active {
         @apply scale-95;

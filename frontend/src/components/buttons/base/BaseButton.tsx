@@ -1,3 +1,4 @@
+import { LoaderCircleIcon } from 'lucide-react'
 import { ButtonHTMLAttributes } from 'react'
 import styles from './BaseButton.module.scss'
 
@@ -6,10 +7,13 @@ export interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
     children: any
 }
 
-const BaseButton = ({children, className, ...props}: BaseButtonProps) => {
+const BaseButton = ({children, className, isLoading, ...props}: BaseButtonProps) => {
   return (
     <button {...props} className={`${styles.base} ${className}`}>
-      {children}
+      {isLoading 
+        ? <LoaderCircleIcon className="animate-spin" />
+        : children
+      }
     </button>
   )
 }

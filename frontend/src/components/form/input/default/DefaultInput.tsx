@@ -1,23 +1,20 @@
 'use client'
-import { InputHTMLAttributes, createRef } from "react"
-import InputWrapper from "../wrapper/InputWrapper"
+import { InputHTMLAttributes, forwardRef, useRef } from "react"
+import { mergeRefs } from "react-merge-refs"
+import InputWrapper, { InputWrapperProps } from "../wrapper/InputWrapper"
 import styles from './DefaultInput.module.scss'
 
 export type DefaultInputProps = 
   InputHTMLAttributes<HTMLInputElement> & 
-  {
-  icon: React.ReactElement
-  wrapperClassName?: string
-}
+  Omit<InputWrapperProps, "onFocus" | "children">
 
-const DefaultInput = ({wrapperClassName, icon,  ...props}: DefaultInputProps) => {
-  const ref = createRef<HTMLInputElement>()
-
+const DefaultInput = forwardRef<HTMLInputElement, DefaultInputProps>(({wrapperClassName, icon, error, ...props}: DefaultInputProps, ref) => {
+  const inputRef = useRef<HTMLInputElement>()
   return (
-    <InputWrapper wrapperClassName={wrapperClassName} icon={icon} onFocus={() => ref.current?.focus()}>
-      <input ref={ref} className={styles.default__input} {...props} />
+    <InputWrapper wrapperClassName={wrapperClassName} icon={icon} error={error} onFocus={() => inputRef?.current?.focus()}>
+      <input ref={mergeRefs([inputRef, ref])} className={styles.default__input} {...props} />
     </InputWrapper>
   )
-}
+})
 
 export default DefaultInput
