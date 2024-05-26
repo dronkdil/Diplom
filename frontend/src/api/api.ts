@@ -25,6 +25,8 @@ $api.interceptors.response.use(
 		const status = error.response?.status
 		const url = originalRequest.url
 
+		console.log(url, error)
+
 		if (
 			url !== AuthenticationEndpoints.refresh &&
 			(status === 401 || status === 403)

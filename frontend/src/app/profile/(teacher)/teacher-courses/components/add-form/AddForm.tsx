@@ -1,3 +1,4 @@
+import { ModuleType } from "@/api/materialsForStudy/course/types/course-page-info.type"
 import { ModuleService } from "@/api/materialsForStudy/modules/module.service"
 import { CreateModuleType } from "@/api/materialsForStudy/modules/type/create-module.type"
 import { AccentButton } from "@/components/buttons"
@@ -10,19 +11,25 @@ import { useForm } from "react-hook-form"
 import styles from "./AddForm.module.scss"
 
 type AddFormProps = {
+  modules: ModuleType[]
   addModule: (module: CreateModuleType) => void
 }
 
-const AddForm = ({addModule}: AddFormProps) => {
+const AddForm = ({modules, addModule}: AddFormProps) => {
   const {id} = useParams()
 
-  const {register: registerModule, getValues: getModuleValues, reset: resetModule} = useForm()
+  const {register: registerModule, getValues: getModuleValues, reset: resetModuleForm} = useForm({
+    defaultValues: {
+      title: "",
+      description: ""
+    } as CreateModuleType
+  })
   const {isPending: moduleCreating, mutateAsync: createModule, errors} = useTypedMutation({
     name: "create-module",
     request: () => ModuleService.create({ ...getModuleValues() as CreateModuleType, courseId: Number(id) }),
     onSuccess: () => {
       addModule({ ...getModuleValues() as CreateModuleType, courseId: Number(id) })
-      resetModule()
+      resetModuleForm()
     }
   })
 
@@ -39,7 +46,7 @@ const AddForm = ({addModule}: AddFormProps) => {
           <DefaultInput icon={<TypeIcon />} placeholder="Назва" />
           <DefaultInput icon={<AlignLeftIcon />} placeholder="Короткий опис" />
           <FileInput icon={<FileIcon />} placeholder="Відео" accept="video/mp4,video/x-m4v,video/*" />
-          <ListboxInput values={["Назва модуля", "Модуль 2", "Модуль 3"]} icon={<ComponentIcon />} placeholder="Модуль" />
+          <ListboxInput values={modules.map(o => o.title)} icon={<ComponentIcon />} placeholder="Модуль" />
           <AccentButton>Додати</AccentButton>
       </div>
     </div>

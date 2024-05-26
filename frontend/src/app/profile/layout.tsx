@@ -14,6 +14,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import styles from "./Profile.module.scss"
+import StudentData from "./components/student-data/StudentData"
 
 export type ProfileLayoutProps = {
     children: any
@@ -58,10 +59,8 @@ const ProfileLayout = ({children}: ProfileLayoutProps) => {
             </div>
             <div className={styles.info}>
                 <div className={styles.info__name}>{user.displayName}</div>
-                <div className={styles.info__data}>Вища освіта</div>
-                <div className={styles.info__data}>17.01.2023</div>
-                <div className={styles.info__data}>18 років</div>
-                <div className={styles.info__data}>destr20202@gmail.com</div>
+                <div className={styles.info__data}>{user.email}</div>
+                {user.role == "Student" && <StudentData />}
                 <IconButton className={styles["info__edit-pen"]}><PenIcon /></IconButton>
             </div>
           </div>

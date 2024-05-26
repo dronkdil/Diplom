@@ -48,12 +48,16 @@
     .info {
         @apply mb-7 relative;
 
-        &__name {
+        .info__name {
             @apply font-semibold;
         }
 
-        &__data {
+        .info__data {
             @apply text-sm;
+        }
+
+        .info__skeleton {
+            @apply h-4 w-24 my-1;
         }
 
         &__edit-pen {

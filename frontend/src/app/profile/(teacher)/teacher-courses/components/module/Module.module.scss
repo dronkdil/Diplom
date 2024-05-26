@@ -4,6 +4,10 @@
     .module__header {
         @apply w-full text-start flex gap-2 items-center;
 
+        .module__button {
+            @apply w-full text-start flex items-center;
+        }
+
         .module__progress {
             @apply text-white/50;
         }

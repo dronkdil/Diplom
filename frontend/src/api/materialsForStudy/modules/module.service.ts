@@ -10,5 +10,6 @@ export const ModuleEndpoints = {
 
 export const ModuleService = {
 	create: async (data: CreateModuleType) =>
-		await $api.post(ModuleEndpoints.create, data)
+		await $api.post(ModuleEndpoints.create, data),
+	remove: async (id: number) => await $api.post(ModuleEndpoints.remove, { id })
 }

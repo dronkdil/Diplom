@@ -7,7 +7,7 @@ export type CourseTypeInfoType = {
 	modules: ModuleType[]
 }
 
-type TeacherType = {
+export type TeacherType = {
 	id: number
 	imageUrl: string
 	firstName: string
@@ -15,7 +15,7 @@ type TeacherType = {
 	email: string
 }
 
-type ModuleType = {
+export type ModuleType = {
 	id: number
 	title: string
 	description: string

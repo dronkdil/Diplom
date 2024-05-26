@@ -12,7 +12,7 @@ const TeacherCoursesPage = () => {
   const {setProfileTitle} = useReduxActions()
   useEffect(() => { setProfileTitle("Мої курси") }, [])
 
-  const {data: courses} = useTypedQuery<TeacherCourseType[]>({
+  const {data: courses, isPending} = useTypedQuery<TeacherCourseType[]>({
     name: 'get-teacher-courses',
     request: () => TeacherService.getCourses()
   })
@@ -20,13 +20,21 @@ const TeacherCoursesPage = () => {
   return (
     <>
       <div className={styles.courses}>
-        {courses ? courses.data.value.map((o, i) => <TeacherCourse 
-          key={i}
-          imageSrc={CourseExampleImage.src}
-          title={o.title}
-          id={o.id}
-          studentsCount={o.studentCount}
-        />) : <span>Ви ще не маєте курсів</span>}
+        {isPending 
+          ? <>
+              <div className={styles.courses__skeleton}></div>
+              <div className={styles.courses__skeleton}></div>
+              <div className={styles.courses__skeleton}></div>
+            </>
+          : courses 
+            ? courses.data.value.map((o, i) => <TeacherCourse 
+                key={i}
+                imageSrc={CourseExampleImage.src}
+                title={o.title}
+                id={o.id}
+                studentsCount={o.studentCount}
+              />) 
+            : <span>Ви ще не маєте курсів</span>}
       </div>
     </>
   )
