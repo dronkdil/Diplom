@@ -6,6 +6,8 @@ namespace Backend.Core.Futures.Users.Students;
 
 public interface IStudentService
 {
-    Task<Response<IEnumerable<StudentInfoDto>>> GetAllAsync();
+    Task<Response<IEnumerable<StudentDataDto>>> GetAllAsync();
     Task<Response> JoinCourseAsync(JoinCourseDto dto);
+    Task<Response<StudentDataDto>> GetMyDataAsync();
+    Task<Response<IEnumerable<StudentCourseDto>>> GetCoursesAsync();
 }

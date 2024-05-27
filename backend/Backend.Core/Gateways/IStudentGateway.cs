@@ -8,4 +8,5 @@ public interface IStudentGateway
     Task<bool> UpdateAsync(int id, Action<Student> configure);
     Task<IEnumerable<Student>> GetAllAsync();
     Task<bool> JoinCourse(int studentId, int courseId);
+    Task<Student?> GetByIdAsync(int studentId);
 }

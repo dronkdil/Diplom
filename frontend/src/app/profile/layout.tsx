@@ -3,6 +3,7 @@ import { AuthenticationService } from "@/api/users/authentication/authentication
 import { DefaultButton, IconButton } from "@/components/buttons"
 import OnlyAuthenticatedUser from "@/components/guards/OnlyAuthenticatedUser"
 import { DefaultLink } from "@/components/links"
+import IconLink from "@/components/links/icon/IconLink"
 import { useReduxActions } from "@/hooks/useReduxActions"
 import { useTypedMutation } from "@/hooks/useTypedMutation"
 import { ProfileMenuItems } from "@/lib/profile-menu-items.constants"
@@ -30,7 +31,7 @@ const ProfileLayout = ({children}: ProfileLayoutProps) => {
     setIsMenuOpened(false)
   }, [pathname])
 
-  const {logoutOnClient} = useReduxActions()
+  const {logoutOnClient, clearUserData} = useReduxActions()
   const router = useRouter()
 
   const {mutateAsync: logout} = useTypedMutation({
@@ -39,6 +40,7 @@ const ProfileLayout = ({children}: ProfileLayoutProps) => {
       onSuccess: () => {
           router.push(Routes.Courses)
           logoutOnClient()
+          clearUserData()
       }
   })
 
@@ -50,18 +52,18 @@ const ProfileLayout = ({children}: ProfileLayoutProps) => {
             className={styles.left__close}
             onClick={() => setIsMenuOpened(false)}
           >
-			<XIcon />
+			      <XIcon />
           </IconButton>
           <div className={styles.about}>
             <div className={styles.avatar}>
-                {`${user.firstName[0] + user.lastName[0]}`.toUpperCase()}
-                <IconButton className={styles["avatar__edit-pen"]}><PenIcon /></IconButton>
+                {`${user.firstName[0] + (user.lastName?.[0] ?? '')}`.toUpperCase()}
+                <IconLink href={Routes.CommonUser.MyData} className={styles["avatar__edit-pen"]}><PenIcon /></IconLink>
             </div>
             <div className={styles.info}>
                 <div className={styles.info__name}>{user.displayName}</div>
                 <div className={styles.info__data}>{user.email}</div>
                 {user.role == "Student" && <StudentData />}
-                <IconButton className={styles["info__edit-pen"]}><PenIcon /></IconButton>
+                <IconLink href={Routes.CommonUser.MyData} className={styles["info__edit-pen"]}><PenIcon /></IconLink>
             </div>
           </div>
           <div className={styles.buttons}>

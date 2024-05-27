@@ -59,4 +59,9 @@ public class StudentGateway : IStudentGateway
         await _dataContext.SaveChangesAsync();
         return true;
     }
+
+    public async Task<Student?> GetByIdAsync(int studentId)
+    {
+        return await _dataContext.Students.FirstOrDefaultAsync(o => o.Id == studentId);
+    }
 }

@@ -10,29 +10,20 @@ export type UserDataType = {
 	displayName: string
 }
 
-const initialState: UserDataType = {
-	id: 0,
-	firstName: '',
-	lastName: '',
-	email: '',
-	role: '',
-	displayName: ''
-}
-
 export const shortUserDataSlice = createSlice({
 	name: 'short-user-data',
 	initialState: {
-		value: initialState
-	},
+		value: undefined
+	} as { value?: UserDataType },
 	reducers: {
 		saveUserData: (state, { payload }: PayloadAction<UserDataType>) => {
 			state.value = payload
 		},
 		clearUserData: (state) => {
-			state.value = initialState
+			state.value = undefined
 		}
 	}
 })
 
 export const getUserData = (state: RootState): UserDataType =>
-	state.userData.value
+	state.userData.value!

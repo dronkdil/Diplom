@@ -3,9 +3,11 @@ import $api from '@/api/api'
 export const StudentEndpoints = {
 	getAll: '/student/all',
 	joinCourse: '/student/join-course',
-	getMyData: '/student/get-my-data'
+	getMyData: '/student/get-my-data',
+	getCourses: '/student/courses'
 }
 
 export const StudentService = {
-	getMyData: async () => await $api.get(StudentEndpoints.getMyData)
+	getMyData: async () => await $api.get(StudentEndpoints.getMyData),
+	getCourses: async () => await $api.get(StudentEndpoints.getCourses)
 }

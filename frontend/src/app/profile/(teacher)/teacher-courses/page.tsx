@@ -1,6 +1,7 @@
 "use client"
 import { TeacherService } from "@/api/users/teacher/teacher.service"
 import { TeacherCourseType } from "@/api/users/teacher/types/teacher-course.type"
+import Skeleton from "@/components/skeleton/Skeleton"
 import { useReduxActions } from "@/hooks/useReduxActions"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import CourseExampleImage from "@public/images/CourseExample.png"
@@ -22,9 +23,9 @@ const TeacherCoursesPage = () => {
       <div className={styles.courses}>
         {isPending 
           ? <>
-              <div className={styles.courses__skeleton}></div>
-              <div className={styles.courses__skeleton}></div>
-              <div className={styles.courses__skeleton}></div>
+              <Skeleton className={styles.courses__skeleton}></Skeleton>
+              <Skeleton className={styles.courses__skeleton}></Skeleton>
+              <Skeleton className={styles.courses__skeleton}></Skeleton>
             </>
           : courses 
             ? courses.data.value.map((o, i) => <TeacherCourse 

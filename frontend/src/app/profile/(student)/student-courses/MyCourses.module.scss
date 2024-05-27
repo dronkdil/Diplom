@@ -1,3 +1,15 @@
 .courses {
     @apply flex flex-wrap gap-2;
+
+    .courses__skeleton {
+        @apply w-[130px] h-[170px] mx-2;
+    }
+
+    .courses__empty {
+        @apply w-full max-w-[300px] flex flex-col items-start gap-3;
+
+        .empty__message {
+            @apply text-white/50;
+        }
+    }
 }

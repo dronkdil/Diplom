@@ -10,5 +10,7 @@ export const CourseEndpoints = {
 }
 
 export const CourseService = {
-	getCourse: async (id: number) => await $api.get(CourseEndpoints.getCourse(id))
+	getCourse: async (id: number) =>
+		await $api.get(CourseEndpoints.getCourse(id)),
+	getAllCourses: async () => await $api.get(CourseEndpoints.getAll)
 }

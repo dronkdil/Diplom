@@ -8,6 +8,8 @@ public class StudentInfoProfile : Profile
 {
     public StudentInfoProfile()
     {
-        CreateMap<Student, StudentInfoDto>();
+        CreateMap<Student, StudentDataDto>()
+            .AfterMap((src, dest) => dest.Birthday = src.Birthday.ToString("dd.MM.yyyy"))
+            .AfterMap((src, dest) => dest.LastName ??= "");
     }
 }

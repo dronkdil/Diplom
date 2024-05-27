@@ -1,7 +1,5 @@
-﻿using Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Requests;
-using Backend.Core.Futures.MaterialsForStudy.Modules;
+﻿using Backend.Core.Futures.MaterialsForStudy.Modules;
 using Backend.Core.Futures.MaterialsForStudy.Modules.DTOs.Requests;
-using Backend.Core.Futures.MaterialsForStudy.Modules.DTOs.Responses;
 using Backend.Domain.Responses.Base;
 using Backend.Presentation.Constants;
 using Microsoft.AspNetCore.Authorization;

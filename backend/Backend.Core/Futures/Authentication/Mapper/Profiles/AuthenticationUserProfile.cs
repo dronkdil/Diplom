@@ -10,6 +10,7 @@ public class AuthenticationUserProfile : Profile
     {
         CreateMap<User, AuthenticationUserDto>()
             .ForMember(dest => dest.Role, opt => opt.Ignore())
-            .AfterMap((src, dest) => dest.Role ??= src.Role.Name);
+            .AfterMap((src, dest) => dest.Role ??= src.Role.Name)
+            .AfterMap((src, dest) => dest.LastName ??= "");
     }
 }

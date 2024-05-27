@@ -23,10 +23,10 @@ public class StudentService : IStudentService
         _userContext = userContext;
     }
 
-    public async Task<Response<IEnumerable<StudentInfoDto>>> GetAllAsync()
+    public async Task<Response<IEnumerable<StudentDataDto>>> GetAllAsync()
     {
         var students = await _studentGateway.GetAllAsync();
-        return Response.Success(_mapper.Map<IEnumerable<StudentInfoDto>>(students));
+        return Response.Success(_mapper.Map<IEnumerable<StudentDataDto>>(students));
     }
 
     public async Task<Response> JoinCourseAsync(JoinCourseDto dto)
@@ -39,5 +39,19 @@ public class StudentService : IStudentService
 
         var isJoined = await _studentGateway.JoinCourse(_userContext.UserId, dto.CourseId);
         return Response.Result(isJoined);
+    }
+
+    public async Task<Response<StudentDataDto>> GetMyDataAsync()
+    {
+        var student = await _studentGateway.GetByIdAsync(_userContext.UserId);
+        return student == null 
+            ? GetStudentByIdResponseHelper.Failed() 
+            : Response.Success(_mapper.Map<StudentDataDto>(student));
+    }
+
+    public async Task<Response<IEnumerable<StudentCourseDto>>> GetCoursesAsync()
+    {
+        var courses = await _courseGateway.GetStudentCoursesWithModulesAndLessonsAsync(_userContext.UserId);
+        return Response.Success(_mapper.Map<IEnumerable<StudentCourseDto>>(courses));
     }
 }

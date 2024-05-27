@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Backend.Infrastructure.Migrations
+namespace Backend.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240524125557_add_limit_of_students_to_course")]
-    partial class add_limit_of_students_to_course
+    [Migration("20240527074303_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

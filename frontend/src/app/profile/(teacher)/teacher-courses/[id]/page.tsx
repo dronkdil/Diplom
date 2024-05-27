@@ -20,13 +20,12 @@ const TeacherCoursePage = () => {
         request: () => CourseService.getCourse(Number(id))
     })
 
-    if (coursePage && coursePage.data.type != "Successfully") {
-        console.log(coursePage.data)
-        return <span>Помилка</span>
-    }
-
     const {setProfileTitle} = useReduxActions()
-    useEffect(() => { setProfileTitle(`Курс: ${coursePage?.data.value.title ?? '...'}`) }, [coursePage])
+    useEffect(() => { setProfileTitle(`Курс: ${coursePage?.data.value?.title ?? '...'}`) }, [coursePage])
+
+    if (coursePage && coursePage.data.value == null) {
+        return <span className={styles.error}>Помилка: такого курсу не існує</span>
+    }
 
     return (
         <div className={styles.modules}>
@@ -36,7 +35,7 @@ const TeacherCoursePage = () => {
                 <Skeleton className={styles.modules__skeleton}></Skeleton>
             </>}
 
-            {coursePage?.data.value.modules.map(o => <Module 
+            {coursePage?.data.value?.modules.map(o => <Module 
                 description={o.description} 
                 title={o.title} 
                 id={o.id}
@@ -45,7 +44,7 @@ const TeacherCoursePage = () => {
                 <span className="text-center text-white/50 -mt-2 mb-1">Немає уроків</span>
             </Module>)}
 
-            <AddForm modules={coursePage?.data.value.modules ?? []} addModule={o => refetch()} />
+            <AddForm modules={coursePage?.data.value?.modules ?? []} addModule={o => refetch()} />
         </div>
     )
 }

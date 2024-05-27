@@ -27,15 +27,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddConfiguredSwagger();
 
 var app = builder.Build();
-app.UseAuthentication();
-app.UseAuthorization();
-app.UseSwagger();
-app.UseSwaggerUI();
-app.MapControllers();
 app.UseCors(policyBuilder => policyBuilder
     .WithOrigins("http://localhost:3000")
     .AllowCredentials()
     .AllowAnyHeader()
     .AllowAnyMethod()
 );
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseSwagger();
+app.UseSwaggerUI();
+app.MapControllers();
 app.Run();

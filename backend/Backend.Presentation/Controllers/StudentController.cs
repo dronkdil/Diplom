@@ -1,4 +1,5 @@
-﻿using Backend.Core.Futures.Users.Students;
+﻿using System.Collections;
+using Backend.Core.Futures.Users.Students;
 using Backend.Core.Futures.Users.Students.DTOs.Requests;
 using Backend.Core.Futures.Users.Students.DTOs.Responses;
 using Backend.Domain.Responses.Base;
@@ -18,7 +19,7 @@ public class StudentController : Controller
     }
     
     [HttpGet("/student/all")]
-    public async Task<Response<IEnumerable<StudentInfoDto>>> GetAll()
+    public async Task<Response<IEnumerable<StudentDataDto>>> GetAll()
     {
         return await _studentService.GetAllAsync();
     }
@@ -28,5 +29,19 @@ public class StudentController : Controller
     public async Task<Response> JoinCourse([FromBody] JoinCourseDto dto)
     {
         return await _studentService.JoinCourseAsync(dto);
+    }
+    
+    [HttpGet("/student/get-my-data")]
+    [Authorize(AuthorizationPolicies.Student)]
+    public async Task<Response<StudentDataDto>> GetMyData()
+    {
+        return await _studentService.GetMyDataAsync();
+    }
+    
+    [HttpGet("/student/courses")]
+    [Authorize(AuthorizationPolicies.Student)]
+    public async Task<Response<IEnumerable<StudentCourseDto>>> GetStudentCourses()
+    {
+        return await _studentService.GetCoursesAsync();
     }
 }
