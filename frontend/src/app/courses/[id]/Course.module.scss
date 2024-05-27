@@ -12,6 +12,10 @@
     .course__modules {  
         @apply w-full flex flex-col gap-2;
 
+        .modules__skeleton {
+            @apply w-full h-[50px];
+        }
+
         .course__modules-header {
             @apply flex justify-between items-center text-white/70;
         }
@@ -27,11 +31,21 @@
                 }
             }
     
-            .module__items {
-                @apply mt-3 flex flex-col gap-2;
-
+            .module__content {
                 .lesson {
                     @apply gap-3;
+                }
+
+                .module__description {
+                    
+                }
+
+                .module__lessons {
+                    @apply mt-3 flex flex-col gap-3;
+                }
+
+                .module__empty {
+                    @apply text-white/50 text-center w-full block;
                 }
             }
         }

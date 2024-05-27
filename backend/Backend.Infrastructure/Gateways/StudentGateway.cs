@@ -60,6 +60,22 @@ public class StudentGateway : IStudentGateway
         return true;
     }
 
+    public async Task<bool> LeaveCourse(int studentId, int courseId)
+    {
+        var student = await _dataContext.Students
+            .Include(o => o.Courses)
+            .FirstOrDefaultAsync(o => o.Id == studentId);
+        var course = await _dataContext.Courses
+            .FirstOrDefaultAsync(o => o.Id == courseId);
+        
+        if (student == null || course == null)
+            return false;
+        
+        student.Courses.Remove(course);
+        await _dataContext.SaveChangesAsync();
+        return true; 
+    }
+
     public async Task<Student?> GetByIdAsync(int studentId)
     {
         return await _dataContext.Students.FirstOrDefaultAsync(o => o.Id == studentId);

@@ -13,7 +13,7 @@ public class CreateCourseValidator : AbstractValidator<CreateCourseDto>
             .WithMessage("Назва обов'язкова");
         
         RuleFor(o => o.LimitOfStudents)
-            .GreaterThan(CourseValidationConstants.MinLimitOfStudents)
+            .GreaterThanOrEqualTo(CourseValidationConstants.MinLimitOfStudents)
             .WithMessage($"Мінімальне значення: {CourseValidationConstants.MinLimitOfStudents}");
     }
 }

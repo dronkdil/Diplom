@@ -31,6 +31,13 @@ public class StudentController : Controller
         return await _studentService.JoinCourseAsync(dto);
     }
     
+    [HttpPost("/student/leave-course")]
+    [Authorize(AuthorizationPolicies.Student)]
+    public async Task<Response> LeaveCourse([FromBody] LeaveCourseDto dto)
+    {
+        return await _studentService.LeaveCourseAsync(dto);
+    }
+    
     [HttpGet("/student/get-my-data")]
     [Authorize(AuthorizationPolicies.Student)]
     public async Task<Response<StudentDataDto>> GetMyData()
@@ -43,5 +50,12 @@ public class StudentController : Controller
     public async Task<Response<IEnumerable<StudentCourseDto>>> GetStudentCourses()
     {
         return await _studentService.GetCoursesAsync();
+    }
+    
+    [HttpGet("/student/already-joined-course")]
+    [Authorize(AuthorizationPolicies.Student)]
+    public async Task<Response<bool>> AlreadyJoinedCourse(int courseId)
+    {
+        return await _studentService.AlreadyJoinedCourseAsync(courseId);
     }
 }

@@ -10,4 +10,6 @@ public interface IStudentService
     Task<Response> JoinCourseAsync(JoinCourseDto dto);
     Task<Response<StudentDataDto>> GetMyDataAsync();
     Task<Response<IEnumerable<StudentCourseDto>>> GetCoursesAsync();
+    Task<Response<bool>> AlreadyJoinedCourseAsync(int courseId);
+    Task<Response> LeaveCourseAsync(LeaveCourseDto dto);
 }

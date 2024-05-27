@@ -54,4 +54,18 @@ public class StudentService : IStudentService
         var courses = await _courseGateway.GetStudentCoursesWithModulesAndLessonsAsync(_userContext.UserId);
         return Response.Success(_mapper.Map<IEnumerable<StudentCourseDto>>(courses));
     }
+
+    public async Task<Response<bool>> AlreadyJoinedCourseAsync(int courseId)
+    {
+        return Response.Success(await _courseGateway.HaveStudentAsync(_userContext.UserId, courseId));
+    }
+
+    public async Task<Response> LeaveCourseAsync(LeaveCourseDto dto)
+    {
+        if (await _courseGateway.HaveStudentAsync(_userContext.UserId, dto.CourseId) == false)
+            return LeaveCourseResponseHelper.NotJoinedCourse();
+
+        var isLeaved = await _studentGateway.LeaveCourse(_userContext.UserId, dto.CourseId);
+        return LeaveCourseResponseHelper.Result(isLeaved);
+    }
 }
