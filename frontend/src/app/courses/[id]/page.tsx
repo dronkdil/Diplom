@@ -16,41 +16,45 @@ const CoursePage = () => {
     const { id } = useParams()
     const user = useSelector(getUserData)
 
-    const {data: coursePage, isPending: coursePagePending, refetch} = useTypedQuery<CourseTypeInfoType>({
+    const {data: course, isPending: coursePending, isFailedResponse} = useTypedQuery<CourseTypeInfoType>({
         name: `get-course-page-info-${id}`,
         request: () => CourseService.getCourse(Number(id))
     })
 
-    if (coursePage && coursePage.data.value == null) {
+    if (isFailedResponse) {
         return <span className={styles.error}>Помилка: такого курсу не існує</span>
     }
 
     return (
         <div className={styles.course}>
             <div className={styles.course__info}>
-                {coursePagePending && <>
+                {coursePending && <>
                     <Skeleton className="w-[150px] h-[150px]" />
                     <Skeleton className="w-[200px] h-[20px]" />
-                    <Skeleton className="w-full max-w-[300px] h-[100px]" />
+                    <Skeleton className="w-full max-w-[270px] h-[100px]" />
                 </>}
 
-                {coursePage?.data.value && <>
-                    <Image src={CourseExampleImage.src} alt={coursePage?.data.value.title ?? ''} width={150} height={150} />
-                    <h3>{coursePage?.data.value.title}</h3>
-                    <p className={styles.course__description}>{coursePage?.data.value.description}</p>
+                {course && <>
+                    <Image src={CourseExampleImage.src} alt={course?.title ?? ''} width={150} height={150} />
+                    <h3>{course?.title}</h3>
+                    <p className={styles.course__description}>{course?.description}</p>
                 </>}
             </div>
             <div className={styles.course__modules}>
 
                 <CourseHeader courseId={Number(id)} />
 
-                {coursePagePending && <>
+                {coursePending && <>
                     <Skeleton className={styles.modules__skeleton}></Skeleton>
                     <Skeleton className={styles.modules__skeleton}></Skeleton>
                     <Skeleton className={styles.modules__skeleton}></Skeleton>
                 </>}
 
-                {coursePage?.data.value?.modules.map((o, i) =>  <Disclosure 
+                {course?.modules.length == 0 && <>
+                    <span className={styles.modules__empty}>Наразі модулі відсутні</span>
+                </>}
+
+                {course?.modules.map((o, i) =>  <Disclosure 
                     as={"div"}
                     className={styles.course__module}
                     key={i}

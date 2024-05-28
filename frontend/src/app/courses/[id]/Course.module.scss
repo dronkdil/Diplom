@@ -13,7 +13,11 @@
         @apply w-full flex flex-col gap-2;
 
         .modules__skeleton {
-            @apply w-full h-[50px];
+            @apply w-full h-[40px];
+        }
+
+        .modules__empty {
+            @apply text-white;
         }
 
         .course__modules-header {

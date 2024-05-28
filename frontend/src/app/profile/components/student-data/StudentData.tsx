@@ -18,8 +18,8 @@ const StudentData = () => {
 
   return (
     <>
-      <div className={styles.info__data}>{studentData?.data.value.educationalStatus}</div>
-      <div className={styles.info__data}>{studentData?.data.value.birthday}</div>
+      <div className={styles.info__data}>{studentData?.educationalStatus}</div>
+      <div className={styles.info__data}>{studentData?.birthday}</div>
     </>
   )
 }

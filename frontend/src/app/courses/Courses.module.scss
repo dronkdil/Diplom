@@ -24,6 +24,14 @@
 
         .row__content {
             @apply flex gap-5;
+
+            .row__empty-message {
+                @apply text-white;
+            }
+
+            .row__skeleton {
+                @apply w-[140px] h-[174px] mx-[5px];
+            }
         }
 
         .row__link {

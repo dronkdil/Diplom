@@ -1,7 +1,7 @@
 "use client"
-import Setting from "@/app/profile/components/setting/Setting"
 import { SwitchCheckbox } from "@/components/form"
 import { DefaultInput } from "@/components/form/input"
+import Setting from "@/components/setting/Setting"
 import { SquarePenIcon } from "lucide-react"
 import { useState } from "react"
 

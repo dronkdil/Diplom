@@ -15,17 +15,16 @@ const MyCoursesPage = () => {
   const {setProfileTitle} = useReduxActions()
   useEffect(() => { setProfileTitle("Мої курси") }, [])
   
-  const {data: studentCourses, isPending} = useTypedQuery<StudentCourseType[]>({
+  const {data: studentCourses, isPending, isFailedResponse} = useTypedQuery<StudentCourseType[]>({
     name: 'get-student-courses',
-    request: () => StudentService.getCourses()
+    request: () => StudentService.getCourses(),
+    successConditional: (response) => response?.data.value.length != 0
   })
-
-  const haventCourses = !isPending && studentCourses?.data.value.length == 0
 
   return (
     <>
       <div className={styles.courses}>
-        {haventCourses && <div className={styles.courses__empty}>
+        {isFailedResponse && <div className={styles.courses__empty}>
           <span className={styles.empty__message}>Ви не приєднались до курсів, зробіть це прямо зараз!</span>
           <AccentLink href={Routes.Courses} className={styles.empty__button}>До курсів</AccentLink>
         </div>}
@@ -36,7 +35,8 @@ const MyCoursesPage = () => {
           <Skeleton className={styles.courses__skeleton}></Skeleton>
         </>}
 
-        {studentCourses?.data.value.map(o => <Course 
+        {studentCourses?.map(o => <Course 
+          key={o.id}
           imageSrc={CourseExampleImage.src}
           title={o.title}
           level={"Початковий"} 

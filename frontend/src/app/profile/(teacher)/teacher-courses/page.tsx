@@ -13,29 +13,33 @@ const TeacherCoursesPage = () => {
   const {setProfileTitle} = useReduxActions()
   useEffect(() => { setProfileTitle("Мої курси") }, [])
 
-  const {data: courses, isPending} = useTypedQuery<TeacherCourseType[]>({
+  const {data: courses, isPending, isFailedResponse} = useTypedQuery<TeacherCourseType[]>({
     name: 'get-teacher-courses',
-    request: () => TeacherService.getCourses()
+    request: () => TeacherService.getCourses(),
+    successConditional: (response) => response?.data.value?.length != 0
   })
   
   return (
     <>
       <div className={styles.courses}>
-        {isPending 
-          ? <>
-              <Skeleton className={styles.courses__skeleton}></Skeleton>
-              <Skeleton className={styles.courses__skeleton}></Skeleton>
-              <Skeleton className={styles.courses__skeleton}></Skeleton>
-            </>
-          : courses 
-            ? courses.data.value.map((o, i) => <TeacherCourse 
-                key={i}
-                imageSrc={CourseExampleImage.src}
-                title={o.title}
-                id={o.id}
-                studentsCount={o.studentCount}
-              />) 
-            : <span>Ви ще не маєте курсів</span>}
+
+        {isPending && <>
+          <Skeleton className={styles.courses__skeleton}></Skeleton>
+          <Skeleton className={styles.courses__skeleton}></Skeleton>
+          <Skeleton className={styles.courses__skeleton}></Skeleton>
+        </>}
+
+        {isFailedResponse && <>
+          <span>Ви ще не маєте своїх курсів</span>
+        </>}
+
+        {courses?.map((o, i) => <TeacherCourse 
+          key={i}
+          imageSrc={CourseExampleImage.src}
+          title={o.title}
+          id={o.id}
+          studentsCount={o.studentCount}
+        />)}
       </div>
     </>
   )

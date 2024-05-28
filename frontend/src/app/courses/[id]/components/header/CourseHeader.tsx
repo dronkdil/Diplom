@@ -4,6 +4,7 @@ import AccentLink from "@/components/links/accent/AccentLink"
 import Skeleton from "@/components/skeleton/Skeleton"
 import { useTypedMutation } from "@/hooks/useTypedMutation"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
+import { getAuthenticated } from "@/lib/redux/slices/AuthenticationSlice"
 import { getUserData } from "@/lib/redux/slices/UserSlice"
 import { Routes } from "@/lib/routes.constants"
 import { useSelector } from "react-redux"
@@ -15,8 +16,9 @@ export type CourseHeaderType = {
 
 const CourseHeader = ({courseId}: CourseHeaderType) => {
     const user = useSelector(getUserData)
+    const isAuthenticated = useSelector(getAuthenticated)
     
-    const {data: isAlreadyJoinedCourse, isPending: alreadyJoinedCoursePending, refetch: alreadyJoinedCourseRefetch} = useTypedQuery<boolean>({
+    const {data: isJoinedCourse, isPending: joinedCoursePending, refetch: joinedCourseRefetch, setData: setJoinedCourse} = useTypedQuery<boolean>({
         name: `already-joined-course-${courseId}`,
         request: () => StudentService.alreadyJoinedCourse(Number(courseId)),
         conditional: () => user != undefined && user.role == "Student"
@@ -26,7 +28,8 @@ const CourseHeader = ({courseId}: CourseHeaderType) => {
         name: `joined-to-course-${courseId}`,
         request: () => StudentService.joinCourse(Number(courseId)),
         onSuccess: () => {
-            alreadyJoinedCourseRefetch()
+            setJoinedCourse(true)
+            joinedCourseRefetch()
         }
     })
 
@@ -34,11 +37,12 @@ const CourseHeader = ({courseId}: CourseHeaderType) => {
         name: `leave-to-course-${courseId}`,
         request: () => StudentService.leaveCourse(Number(courseId)),
         onSuccess: () => {
-            alreadyJoinedCourseRefetch()
+            setJoinedCourse(false)
+            joinedCourseRefetch()
         }
     })
 
-    if (user != undefined && user.role != "Student")
+    if (!isAuthenticated || user?.role != "Student")
         return <></>
 
     return (
@@ -46,16 +50,16 @@ const CourseHeader = ({courseId}: CourseHeaderType) => {
             <div className={styles["course__modules-header"]}>
                 <span>Безкоштовний курс</span>
 
-                {user && <>
-                    {alreadyJoinedCoursePending 
+                {isAuthenticated && <>
+                    {joinedCoursePending 
                         ? <Skeleton className="w-[150px] h-[40px]" />
-                        : isAlreadyJoinedCourse?.data.value 
+                        : isJoinedCourse 
                             ? <DefaultButton isLoading={leaveCoursePending} onClick={() => leaveCourse()}>Покинути курс</DefaultButton>
                             : <AccentButton isLoading={joinCoursePending} onClick={() => joinCourse()}>Доєднатись до курсу</AccentButton>
                     }
                 </>}
 
-                {!user && <>
+                {!isAuthenticated && <>
                     <AccentLink href={Routes.Login}>Доєднатись до курсу</AccentLink>
                 </>}
             </div>

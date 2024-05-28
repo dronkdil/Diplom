@@ -56,18 +56,18 @@ const ProfileLayout = ({children}: ProfileLayoutProps) => {
           </IconButton>
           <div className={styles.about}>
             <div className={styles.avatar}>
-                {`${user.firstName[0] + (user.lastName?.[0] ?? '')}`.toUpperCase()}
+                {`${user?.firstName[0] + (user?.lastName?.[0] ?? '')}`.toUpperCase()}
                 <IconLink href={Routes.CommonUser.MyData} className={styles["avatar__edit-pen"]}><PenIcon /></IconLink>
             </div>
             <div className={styles.info}>
-                <div className={styles.info__name}>{user.displayName}</div>
-                <div className={styles.info__data}>{user.email}</div>
-                {user.role == "Student" && <StudentData />}
+                <div className={styles.info__name}>{user?.displayName}</div>
+                <div className={styles.info__data}>{user?.email}</div>
+                {user?.role == "Student" && <StudentData />}
                 <IconLink href={Routes.CommonUser.MyData} className={styles["info__edit-pen"]}><PenIcon /></IconLink>
             </div>
           </div>
           <div className={styles.buttons}>
-              {ProfileMenuItems.map((o, i) => (user.role == o.role || o.role == undefined) && 
+              {ProfileMenuItems.map((o, i) => (user?.role == o.role || o.role == undefined) && 
                 <DefaultLink key={i} href={o.href}>{o.text}</DefaultLink>)}
               <DefaultButton onClick={() => logout()}>Вийти</DefaultButton>
           </div>

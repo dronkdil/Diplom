@@ -11,7 +11,7 @@ const OnlyAuthenticatedUser = ({children, role}: OnlyAuthenticatedUserProps) => 
     const isAuthenticated = useSelector(getAuthenticated)
     const user = useSelector(getUserData)
 
-    if (!isAuthenticated || !user)
+    if (!isAuthenticated)
         return <div className="flex-auto flex justify-center items-center text-white relative pb-[40px]">
             401 | Ви не авторизовані
         </div>

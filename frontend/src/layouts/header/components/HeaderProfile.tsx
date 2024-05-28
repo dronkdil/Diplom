@@ -22,7 +22,7 @@ const HeaderProfile = () => {
         onSuccess: () => {
             router.push(Routes.Courses)
             logoutOnClient()
-            clearUserData()
+            // clearUserData()
         }
     })
 
@@ -32,7 +32,7 @@ const HeaderProfile = () => {
                 {({active}) => <div className={`${styles.profile} ${active && styles["profile--active"]}`}>
                     <div className={styles.profile__image}>{`${user.firstName[0] + (user.lastName?.[0] ?? '')}`.toUpperCase()}</div>
                     <div className={styles.profile__info}>
-                        <div className={styles.profile__name}>{`${user.firstName} ${user.lastName ?? ''}`}</div>
+                        <div className={styles.profile__name}>{user.displayName}</div>
                         <div className={styles.profile__email}>{user.email}</div>
                     </div>
                 </div>}
