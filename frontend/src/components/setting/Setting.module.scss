@@ -1,19 +1,17 @@
 .setting {
-    @apply bg-gray-700 p-5 rounded-md text-white relative flex;
+    @apply bg-gray-700 p-5 rounded-md text-white relative flex truncate max-sm:flex-col gap-3 max-w-full justify-between;
 
-    &__title {
-
+    .setting__content {
+        .setting__actual-data {
+            @apply text-white/50 text-wrap break-all line-clamp-1;
+        }
+    
+        .setting__inputs {
+            @apply mt-2 grid gap-2;
+        }
     }
 
-    &__actual-data {
-        @apply text-white/50;
-    }
-
-    &__inputs {
-        @apply mt-2 grid gap-2;
-    }
-
-    &__buttons {
+    .setting__buttons {
         @apply flex gap-2 items-start ml-auto;
     }
 }

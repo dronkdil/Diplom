@@ -1,5 +1,6 @@
 ﻿using Backend.Core.Futures.Users.Common.UpdateInformation;
-using Backend.Core.Futures.Users.Common.UpdateInformation.DTOs;
+using Backend.Core.Futures.Users.Common.UpdateInformation.DTOs.Requests;
+using Backend.Core.Futures.Users.Common.UpdateInformation.DTOs.Responses;
 using Backend.Core.Futures.Users.Students.UpdateInformation;
 using Backend.Core.Futures.Users.Students.UpdateInformation.DTOs;
 using Backend.Domain.Responses.Base;
@@ -22,16 +23,23 @@ public class SettingsController : Controller
 
     [HttpPost("/settings/update-first-last-names")]
     [Authorize]
-    public async Task<Response> UpdateFirstLastNames([FromBody] UpdateFirstLastNamesDto dto)
+    public async Task<Response<ActualUserDto>> UpdateFirstLastNames([FromBody] UpdateFirstLastNamesDto dto)
     {
         return await _updateUserDataService.UpdateFirstLastNamesAsync(dto);
     }
     
     [HttpPost("/settings/update-password")]
     [Authorize]
-    public async Task<Response> UpdatePassword([FromBody] UpdatePasswordDto dto)
+    public async Task<Response<ActualUserDto>> UpdatePassword([FromBody] UpdatePasswordDto dto)
     {
         return await _updateUserDataService.UpdatePasswordAsync(dto);
+    }
+    
+    [HttpPost("/settings/update-avatar-by-url")]
+    [Authorize]
+    public async Task<Response<ActualUserDto>> UpdateAvatarByUrl([FromBody] UpdateAvatarByUrlDto dto)
+    {
+        return await _updateUserDataService.UpdateAvatarByUrlAsync(dto);
     }
     
     [HttpPost("/settings/update-birthday")]
@@ -40,7 +48,7 @@ public class SettingsController : Controller
     {
         return await _updateStudentDataService.UpdateBirthdayAsync(dto);
     }
-    
+
     [HttpPost("/settings/update-educational-status")]
     [Authorize(AuthorizationPolicies.Student)]
     public async Task<Response> UpdateEducationalStatus([FromBody] UpdateEducationalStatusDto dto)

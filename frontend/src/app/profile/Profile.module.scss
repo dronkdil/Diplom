@@ -4,11 +4,7 @@
     @media (max-width: 768px) {
         &--active {
             @apply block w-[220px] pb-5 mx-auto;
-    
-            .avatar {
-                @apply w-[100px] h-[100px] text-[30px];
-            }
-    
+
             .about {
                 @apply flex gap-2;
     
@@ -27,26 +23,12 @@
         @apply md:hidden max-md:fixed top-3 right-3;
     }
 
-    .avatar {
-        @apply md:w-[220px] md:h-[220px] rounded-md bg-white/40 mb-3 grid place-content-center font-bold md:text-[50px] relative;
-
-        &__edit-pen {
-            @apply pointer-events-none opacity-0 transition absolute bottom-1 right-1;
-
-            * {
-                @apply stroke-white;
-            }
-        }
-
-        &:hover {
-            .avatar__edit-pen {
-                @apply pointer-events-auto opacity-100;
-            }    
-        }
+    .about {
+        @apply md:flex md:flex-col md:gap-3 mb-7;
     }
 
     .info {
-        @apply mb-7 relative;
+        @apply relative;
 
         .info__name {
             @apply font-semibold;

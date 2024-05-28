@@ -1,3 +1,4 @@
+import { ActualUserType } from '@/api/users/settings/type/user.type'
 import type { RootState } from '@/lib/redux/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
@@ -8,6 +9,7 @@ export type UserDataType = {
 	email: string
 	role: string
 	displayName: string
+	avatarUrl?: string
 }
 
 const initialStateValue = {
@@ -15,7 +17,8 @@ const initialStateValue = {
 	firstName: '',
 	lastName: undefined,
 	role: '',
-	email: ''
+	email: '',
+	avatarUrl: undefined
 } as UserDataType
 
 export const shortUserDataSlice = createSlice({
@@ -29,6 +32,12 @@ export const shortUserDataSlice = createSlice({
 		},
 		clearUserData: (state) => {
 			state.value = initialStateValue
+		},
+		updateUserData: (state, { payload }: PayloadAction<ActualUserType>) => {
+			state.value = {
+				...state.value,
+				...payload
+			}
 		}
 	}
 })

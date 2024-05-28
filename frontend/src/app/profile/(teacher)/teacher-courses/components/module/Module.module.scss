@@ -1,8 +1,8 @@
 .module {
-    @apply bg-white/10 px-4 py-2 text-white rounded-md w-full text-start mb-2;
+    @apply bg-white/10 px-2 py-2 text-white rounded-md w-full text-start mb-2;
 
     .module__header {
-        @apply w-full text-start flex gap-2 items-center;
+        @apply w-full text-start flex gap-2 items-center px-2;
 
         .module__button {
             @apply w-full text-start flex items-center;
@@ -25,7 +25,7 @@
         @apply flex flex-col gap-2;
 
         .module__description {
-            @apply mb-3 text-white/70;
+            @apply mb-3 text-white/70 pl-2;
         }
 
         .lesson {

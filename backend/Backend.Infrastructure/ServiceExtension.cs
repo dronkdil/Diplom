@@ -29,6 +29,7 @@ public static class ServiceExtension
         services.AddTransient<IStudentGateway, StudentGateway>();
         services.AddTransient<ICourseGateway, CourseGateway>();
         services.AddTransient<IModuleGateway, ModuleGateway>();
+        services.AddTransient<ILessonGateway, LessonGateway>();
         return services;
     }
 }

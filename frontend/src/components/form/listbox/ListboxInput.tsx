@@ -1,28 +1,39 @@
 "use client"
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from "@headlessui/react"
-import { useState } from "react"
+import { forwardRef, useState } from "react"
 import InputWrapper from "../input/wrapper/InputWrapper"
 import styles from "./ListboxInput.module.scss"
 
 export type ListboxInputProps = {
-    values: any[]
+    values: ListboxInputItem[]
     icon: React.ReactElement
     placeholder?: string
+    onChange?: (id: number) => void
 }
 
-const ListboxInput = ({values, icon, placeholder}: ListboxInputProps) => {
-    const [value, setValue] = useState(null)
+export type ListboxInputItem = {
+    id: number
+    text: string
+}
+
+const ListboxInput = forwardRef<HTMLElement, ListboxInputProps>(({values, icon, placeholder, onChange}: ListboxInputProps, ref) => {
+    const [value, setValue] = useState<ListboxInputItem | null>(null)
 
     return (
-        <Listbox  
-            value={value} 
-            onChange={setValue}
+        <Listbox
+            value={value?.id} 
+            onChange={o => {
+                const listItem = o as unknown as ListboxInputItem
+                setValue(listItem)
+                onChange && onChange(listItem.id)
+            }}
             className={styles.listbox}
             as={"div"}
+            ref={ref}
         >
             <ListboxButton className="w-full">
                 <InputWrapper icon={icon} onFocus={() => {}} wrapperClassName="w-full">
-                    {value ? <span className="text-white">{value}</span> : <span className="text-white/50">{placeholder}</span>}
+                    {value ? <span className="text-white">{value.text}</span> : <span className="text-white/50">{placeholder}</span>}
                 </InputWrapper>
             </ListboxButton>
             <Transition
@@ -36,7 +47,7 @@ const ListboxInput = ({values, icon, placeholder}: ListboxInputProps) => {
                 <ListboxOptions className={styles.listbox__options}>
                     {values.map((o, i) => (
                         <ListboxOption key={i} value={o} className={styles.listbox__item}>
-                            {o}
+                            {o.text}
                         </ListboxOption>
                     ))}
                 </ListboxOptions>
@@ -44,6 +55,6 @@ const ListboxInput = ({values, icon, placeholder}: ListboxInputProps) => {
         </Listbox>
     )
 
-}
+})
 
 export default ListboxInput

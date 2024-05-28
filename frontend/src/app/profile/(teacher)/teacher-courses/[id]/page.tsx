@@ -7,6 +7,7 @@ import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { useParams } from "next/navigation"
 import { useEffect } from "react"
 import AddForm from "../components/add-form/AddForm"
+import LessonButton from "../components/lesson/LessonButton"
 import Module from "../components/module/Module"
 import styles from "./TeacherCourse.module.scss"
 
@@ -40,10 +41,11 @@ const TeacherCoursePage = () => {
                 id={o.id}
                 onDeleted={() => refetch()}
             >
-                <span className="text-center text-white/50 -mt-2 mb-1">Немає уроків</span>
+                {o.lessons.map(o1 => <LessonButton id={o1.id} title={o1.title} onDeleted={() => refetch()}/>)}
+                {(!o.lessons || o.lessons.length == 0) && <span className="text-center text-white/50 -mt-2 mb-1">Немає уроків</span>}
             </Module>)}
 
-            <AddForm modules={course?.modules ?? []} addModule={o => refetch()} />
+            <AddForm modules={course?.modules ?? []} addModule={() => refetch()} addLesson={() => refetch()} />
         </div>
     )
 }

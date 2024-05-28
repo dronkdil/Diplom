@@ -8,18 +8,20 @@ import styles from "./Setting.module.scss"
 
 export type SettingProps = {
     title: string
-    actualData: string
+    actualData: any
     children: (register: (fieldName: string) => any) => any
     request?: (values: FieldValues) => Promise<any>
+	onSuccess?: (data: any) => void
 }
 
-const Setting = ({title, actualData, children, request}: SettingProps) => {
+const Setting = ({title, actualData, children, request, onSuccess}: SettingProps) => {
 	const {mutateAsync, isPending, errors} = useTypedMutation({
 		name: `setting-[${title}]`,
 		request: () => request!(getValues()),
 		conditional: () => !!request,
-		onSuccess: () => {
+		onSuccess: (response) => {
 			setChanging(false)
+			onSuccess && onSuccess(response.data.value)
 		}
 	})
 	
@@ -33,16 +35,16 @@ const Setting = ({title, actualData, children, request}: SettingProps) => {
 
 	const newRegister = useCallback((fieldName: string) => {
 		return {...register(fieldName), error: errors[fieldName]}
-	}, [])
+	}, [errors])
 
 	return <div className={styles.setting}>
-		<div>
+		<div className={styles.setting__content}>
 			<h6 className={styles.setting__title}>{title}</h6>
 			{changing 
 				? <div className={styles.setting__inputs}>
 					{children(newRegister)}
 				</div>
-				: <span className={styles["setting__actual-data"]}>{actualData}</span>
+				: <div className={styles["setting__actual-data"]}>{actualData}</div>
 			}
 		</div>
 		<div className={styles.setting__buttons}>

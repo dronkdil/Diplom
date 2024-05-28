@@ -42,7 +42,7 @@ const CourseHeader = ({courseId}: CourseHeaderType) => {
         }
     })
 
-    if (!isAuthenticated || user?.role != "Student")
+    if (isAuthenticated && user?.role != "Student")
         return <></>
 
     return (

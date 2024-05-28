@@ -29,7 +29,7 @@ const Module = ({title, children, id, description, onDeleted}: ModuleProps) => {
     <Disclosure as={"div"} className={styles.module}>
       {({open}) => <>
         <div className={styles.module__header}>
-          <DisclosureButton className={styles.module__button}>
+          <DisclosureButton as='div' className={styles.module__button}>
             <span className={styles.module__title}>{title}</span>
             <IconButton className={`${styles["module__down-icon"]} ${open && styles["module__down-icon--active"]}`}><ChevronDownIcon /></IconButton>
           </DisclosureButton>

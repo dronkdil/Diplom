@@ -1,6 +1,6 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 
-namespace Backend.Core.Futures.Users.Common.UpdateInformation.DTOs;
+namespace Backend.Core.Futures.Users.Common.UpdateInformation.DTOs.Requests;
 
 public class UpdateFirstLastNamesDto
 {

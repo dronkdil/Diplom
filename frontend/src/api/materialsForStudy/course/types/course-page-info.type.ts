@@ -20,5 +20,10 @@ export type ModuleType = {
 	title: string
 	description: string
 	completedLessons: number
-	lessons: []
+	lessons: LessonType[]
+}
+
+export type LessonType = {
+	id: number
+	title: string
 }

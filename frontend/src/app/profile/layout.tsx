@@ -1,5 +1,6 @@
 "use client"
 import { AuthenticationService } from "@/api/users/authentication/authentication.service"
+import Avatar from "@/components/avatar/Avatar"
 import { DefaultButton, IconButton } from "@/components/buttons"
 import OnlyAuthenticatedUser from "@/components/guards/OnlyAuthenticatedUser"
 import { DefaultLink } from "@/components/links"
@@ -55,10 +56,7 @@ const ProfileLayout = ({children}: ProfileLayoutProps) => {
 			      <XIcon />
           </IconButton>
           <div className={styles.about}>
-            <div className={styles.avatar}>
-                {`${user?.firstName[0] + (user?.lastName?.[0] ?? '')}`.toUpperCase()}
-                <IconLink href={Routes.CommonUser.MyData} className={styles["avatar__edit-pen"]}><PenIcon /></IconLink>
-            </div>
+            <Avatar />
             <div className={styles.info}>
                 <div className={styles.info__name}>{user?.displayName}</div>
                 <div className={styles.info__data}>{user?.email}</div>

@@ -10,14 +10,15 @@ export type FileInput =
   icon: React.ReactElement
   wrapperClassName?: string
   onChange?: (fileNames: FileList | never[]) => void
+  error?: ResponseError
 }
 
-const FileInput = ({wrapperClassName, icon, placeholder, onChange,  ...props}: FileInput) => {
+const FileInput = ({wrapperClassName, icon, placeholder, onChange, error, ...props}: FileInput) => {
   const ref = createRef<HTMLInputElement>()
   const [fileCount, setFileCount] = useState(0)
 
   return (
-    <InputWrapper wrapperClassName={`${styles['input-wrapper']} ${wrapperClassName}`} icon={icon} onFocus={() => ref.current?.click()}>
+    <InputWrapper wrapperClassName={`${styles['input-wrapper']} ${wrapperClassName}`} icon={icon} onFocus={() => ref.current?.click()} error={error}>
         <Field>
             <Label className={styles["input-label"]}>{fileCount === 0 ? placeholder : `(${fileCount}) файлів`}</Label>
             <input ref={ref} className={styles.input} type="file" {...props} onChange={(e) => {
