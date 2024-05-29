@@ -1,24 +1,83 @@
 "use client"
+import { LessonService } from "@/api/materialsForStudy/lesson/lesson.service"
+import { LessonForPageType } from "@/api/materialsForStudy/lesson/type/lesson-for-page.type"
+import { UpdateDescriptionType } from "@/api/materialsForStudy/lesson/type/update-description.type"
+import { UpdateHomeworkType } from "@/api/materialsForStudy/lesson/type/update-homework.type"
+import { UpdateTitleType } from "@/api/materialsForStudy/lesson/type/update-title.type"
+import { UpdateVideoByUrlType } from "@/api/materialsForStudy/lesson/type/update-video-by-url.type"
 import { SwitchCheckbox } from "@/components/form"
 import { DefaultInput } from "@/components/form/input"
 import Setting from "@/components/setting/Setting"
-import { SquarePenIcon } from "lucide-react"
-import { useState } from "react"
+import { useReduxActions } from "@/hooks/useReduxActions"
+import { useTypedQuery } from "@/hooks/useTypedQuery"
+import { SquarePenIcon, VideoIcon } from "lucide-react"
+import { useParams } from "next/navigation"
+import { useEffect, useState } from "react"
+import { Controller } from "react-hook-form"
 
 const LessonPage = () => {
     const [haveHomework, setHaveHomework] = useState(false)
+    const {id} = useParams()
+    
+    const {data, setData} = useTypedQuery<LessonForPageType>({
+      name: `get-lesson-for-settings-${id}`,
+      request: () => LessonService.getForPage(Number(id)),
+    })
+
+    const {setProfileTitle} = useReduxActions()
+    useEffect(() => { setProfileTitle("Урок: " + (data?.title ?? '...')) }, [data])
 
     return (
         <>
-            <Setting title={"Назва"} actualData={"Урок 1"}>
-                <DefaultInput icon={<SquarePenIcon />} defaultValue={"Урок 1"} />
+            <Setting 
+                title={"Відео"} 
+                actualData={data?.videoUrl}
+                request={(values) => LessonService.updateVideoByUrl({lessonId: Number(id), ...values} as UpdateVideoByUrlType)}
+                onSuccess={(data) => setData(data)}
+            >
+                {(register) => <>
+                    <DefaultInput icon={<VideoIcon />} defaultValue={data?.videoUrl} placeholder="Силка на відео" {...register("videoUrl")} />
+                </>}
             </Setting>
-            <Setting title={"Опис"} actualData={"Пусто"}>
-                <DefaultInput icon={<SquarePenIcon />} placeholder="Опис уроку" />
+            <Setting 
+                title={"Назва"} 
+                actualData={data?.title} 
+                request={(values) => LessonService.updateTitle({lessonId: Number(id), ...values} as UpdateTitleType)}
+                onSuccess={(data) => setData(data)}
+            >
+                {(register) => <>
+                    <DefaultInput icon={<SquarePenIcon />} defaultValue={data?.title} placeholder="Назва" {...register("title")} />
+                </>}
             </Setting>
-            <Setting title={"Домашня робота"} actualData={"Присутня"}>
-                <SwitchCheckbox onLabel="вкл." offLabel="викл." onChange={setHaveHomework} />
-                {haveHomework && <DefaultInput icon={<SquarePenIcon />} placeholder="Опис домашньої роботи" />}
+            <Setting 
+                title={"Опис"}
+                actualData={data?.description}
+                request={(values) => LessonService.updateDescription({lessonId: Number(id), ...values} as UpdateDescriptionType)}
+                onSuccess={(data) => setData(data)}
+            >
+                {(register) => <>
+                    <DefaultInput icon={<SquarePenIcon />} defaultValue={data?.description} placeholder="Опис" {...register("description")} />
+                </>}
+            </Setting>
+            <Setting 
+                title={"Домашня робота"} 
+                actualData={data?.homeworkStatus ? 'Присутня' : 'Відсутня'}
+                request={(values) => LessonService.updateHomework({lessonId: Number(id), ...values} as UpdateHomeworkType)}
+                onSuccess={(data) => setData(data)}
+            >
+                {(register, control) => <>
+                    <Controller
+                        control={control}
+                        name={"status"}
+                        render={({field: {onChange}}) => <SwitchCheckbox 
+                            onLabel="вкл." 
+                            offLabel="викл."
+                            onChange={onChange}
+                            defaultValue={data?.homeworkStatus} />}
+                    />
+                    <DefaultInput icon={<SquarePenIcon />} defaultValue={data?.homeworkDescription} placeholder="Опис домашньої роботи" {...register("description")} />
+                    {/* {haveHomework && <DefaultInput icon={<SquarePenIcon />} placeholder="Опис домашньої роботи" {...register("description")} />} */}
+                </>}
             </Setting>
         </>
     )

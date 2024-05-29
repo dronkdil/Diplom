@@ -9,7 +9,10 @@ import styles from "./Setting.module.scss"
 export type SettingProps = {
     title: string
     actualData: any
-    children: (register: (fieldName: string) => any) => any
+    children: (
+		register: (fieldName: string) => any, 
+		control: any
+	) => any
     request?: (values: FieldValues) => Promise<any>
 	onSuccess?: (data: any) => void
 }
@@ -31,7 +34,7 @@ const Setting = ({title, actualData, children, request, onSuccess}: SettingProps
 		setChanging(o => !o)
 	}, [])
 
-	const {register, getValues} = useForm()
+	const {register, getValues, control} = useForm()
 
 	const newRegister = useCallback((fieldName: string) => {
 		return {...register(fieldName), error: errors[fieldName]}
@@ -42,7 +45,7 @@ const Setting = ({title, actualData, children, request, onSuccess}: SettingProps
 			<h6 className={styles.setting__title}>{title}</h6>
 			{changing 
 				? <div className={styles.setting__inputs}>
-					{children(newRegister)}
+					{children(newRegister, control)}
 				</div>
 				: <div className={styles["setting__actual-data"]}>{actualData}</div>
 			}
