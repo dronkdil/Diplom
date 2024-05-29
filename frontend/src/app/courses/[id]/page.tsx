@@ -9,6 +9,7 @@ import CourseExampleImage from "@public/images/CourseExample.png"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useSelector } from "react-redux"
+import LessonButton from "../components/lesson/LessonButton"
 import styles from "./Course.module.scss"
 import CourseHeader from "./components/header/CourseHeader"
 
@@ -65,13 +66,14 @@ const CoursePage = () => {
                     <DisclosurePanel className={styles.module__content}>
                         <p className={styles.module__description}>{o.description}</p>
                         <div className={styles.module__lessons}>
-                             {/* {o.lessons.map((o1, i) => <LessonButton 
-                                title={`Урок ${i+1}`}
-                                id={o1.title}
-                                isCompleted={}
-                            />)} */}
+                            {o.lessons.map((o1, i) => <LessonButton 
+                                key={i}
+                                title={o1.title}
+                                id={o1.id}
+                                isCompleted={false}
+                            />)}
                         </div>
-                        <span className={styles.module__empty}>Немає уроків</span>
+                        {(!o.lessons || o.lessons.length == 0) && <span className={styles.module__empty}>Немає уроків</span>}
                     </DisclosurePanel>
                 </Disclosure>)}
             </div>

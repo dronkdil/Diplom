@@ -13,7 +13,7 @@ export type ListboxInputProps = {
 
 export type ListboxInputItem = {
     id: number
-    text: string
+    text: any
 }
 
 const ListboxInput = forwardRef<HTMLElement, ListboxInputProps>(({values, icon, placeholder, onChange}: ListboxInputProps, ref) => {

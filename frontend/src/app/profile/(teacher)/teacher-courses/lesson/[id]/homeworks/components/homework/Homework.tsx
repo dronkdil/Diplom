@@ -30,7 +30,7 @@ const Homework = () => {
                     </div>)}
                 </div>
                 <div className={styles.homework__form}>
-                    <ListboxInput values={["відсутня", 1, 2, 3, 4, 5]} icon={<CandlestickChartIcon />} placeholder='Оцінка' />
+                    <ListboxInput values={["відсутня", 1, 2, 3, 4, 5].map(o => ({id:0, text:o}))} icon={<CandlestickChartIcon />} placeholder='Оцінка' />
                     <DefaultInput icon={<AlignLeftIcon />} placeholder='Коментар' />
                     <AccentButton>Підтвердити</AccentButton>
                 </div>
