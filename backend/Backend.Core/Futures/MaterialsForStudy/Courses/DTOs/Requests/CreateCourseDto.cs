@@ -4,6 +4,7 @@ namespace Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Requests;
 
 public class CreateCourseDto
 {
+    public string ImageUrl { get; set; } = null!;
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
     public CourseLevels Level { get; set; }

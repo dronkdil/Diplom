@@ -10,6 +10,7 @@ public class CourseProfile : Profile
 {
     public CourseProfile()
     {
+        CreateMap<Course, ActualCourseDto>();
         CreateMap<Course, ShortCourseDto>();
         CreateMap<Course, CoursePageDto>();
         CreateMap<Module, ModuleDto>();

@@ -1,5 +1,6 @@
 export type CourseTypeInfoType = {
 	id: number
+	imageUrl: string
 	title: string
 	description: string
 	limitOfStudents: number

@@ -40,14 +40,21 @@ public class CourseController : Controller
     
     [HttpPost("/course/update-title")]
     [Authorize(AuthorizationPolicies.TeacherAndHigher)]
-    public async Task<Response> UpdateTitle([FromBody] UpdateTitleDto dto)
+    public async Task<Response<ActualCourseDto>> UpdateTitle([FromBody] UpdateTitleDto dto)
     {
         return await _courseService.UpdateTitleAsync(dto);
     }
     
+    [HttpPost("/course/update-image-by-url")]
+    [Authorize(AuthorizationPolicies.TeacherAndHigher)]
+    public async Task<Response<ActualCourseDto>> UpdateImageByUrl([FromBody] UpdateImageByUrlDto dto)
+    {
+        return await _courseService.UpdateImageByUrlAsync(dto);
+    }
+    
     [HttpPost("/course/update-description")]
     [Authorize(AuthorizationPolicies.TeacherAndHigher)]
-    public async Task<Response> GetAllCourses([FromBody] UpdateDescriptionDto dto)
+    public async Task<Response<ActualCourseDto>> UpdateDescription([FromBody] UpdateDescriptionDto dto)
     {
         return await _courseService.UpdateDescriptionAsync(dto);
     }

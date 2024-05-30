@@ -2,11 +2,13 @@
 using Backend.Core.Gateways;
 using Backend.Core.Interfaces.JwtTokenFactory;
 using Backend.Core.Interfaces.PasswordHasher;
+using Backend.Core.Interfaces.UrlTypeValidator;
 using Backend.Domain.Options;
 using Backend.Infrastructure.EF;
 using Backend.Infrastructure.Gateways;
 using Backend.Infrastructure.Implementations.JwtTokenFactory;
 using Backend.Infrastructure.Implementations.PasswordHasher;
+using Backend.Infrastructure.Implementations.UrlTypeValidator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,7 @@ public static class ServiceExtension
         services.AddTransient<ICourseGateway, CourseGateway>();
         services.AddTransient<IModuleGateway, ModuleGateway>();
         services.AddTransient<ILessonGateway, LessonGateway>();
+        services.AddTransient<IUrlTypeCorrectValidator, UrlTypeCorrectValidator>();
         return services;
     }
 }

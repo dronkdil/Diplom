@@ -6,7 +6,6 @@ import Skeleton from "@/components/skeleton/Skeleton"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { getAuthenticated } from "@/lib/redux/slices/AuthenticationSlice"
 import { getUserData } from "@/lib/redux/slices/UserSlice"
-import CourseExampleImage from "@public/images/CourseExample.png"
 import { useSelector } from "react-redux"
 import styles from "./Courses.module.scss"
 import Course from "./components/course/Course"
@@ -44,7 +43,7 @@ const CoursesPage = () => {
 
           {courses?.map((o, i) => <Course 
               key={i}
-              imageSrc={CourseExampleImage.src}
+              imageSrc={o.imageUrl}
               title={o.title}
               level={"Початковий"}
               id={o.id}

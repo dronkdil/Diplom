@@ -1,3 +1,7 @@
+.settings {
+    @apply flex flex-col gap-2 mb-3;
+}
+
 .modules {
     .modules__skeleton {
         @apply w-full h-[50px] mt-0 mb-2;

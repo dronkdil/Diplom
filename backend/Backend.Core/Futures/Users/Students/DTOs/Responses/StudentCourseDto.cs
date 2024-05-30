@@ -3,6 +3,7 @@
 public class StudentCourseDto
 {
     public int Id { get; set; }
+    public string ImageUrl { get; set; } = null!;
     public string Title { get; set; } = null!;
     public string Level { get; set; } = null!;
     public int Progress { get; set; }

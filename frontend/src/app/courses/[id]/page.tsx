@@ -5,8 +5,6 @@ import Skeleton from "@/components/skeleton/Skeleton"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { getUserData } from "@/lib/redux/slices/UserSlice"
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react"
-import CourseExampleImage from "@public/images/CourseExample.png"
-import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useSelector } from "react-redux"
 import LessonButton from "../components/lesson/LessonButton"
@@ -36,7 +34,7 @@ const CoursePage = () => {
                 </>}
 
                 {course && <>
-                    <Image src={CourseExampleImage.src} alt={course?.title ?? ''} width={150} height={150} />
+                    <img src={course?.imageUrl} alt={course?.title ?? ''} className={styles.course__image} />
                     <h3>{course?.title}</h3>
                     <p className={styles.course__description}>{course?.description}</p>
                 </>}

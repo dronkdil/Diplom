@@ -6,7 +6,6 @@ import Skeleton from "@/components/skeleton/Skeleton"
 import { useReduxActions } from "@/hooks/useReduxActions"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { Routes } from "@/lib/routes.constants"
-import CourseExampleImage from "@public/images/CourseExample.png"
 import { useEffect } from "react"
 import styles from "./MyCourses.module.scss"
 import Course from "./course/Course"
@@ -37,7 +36,7 @@ const MyCoursesPage = () => {
 
         {studentCourses?.map(o => <Course 
           key={o.id}
-          imageSrc={CourseExampleImage.src}
+          imageSrc={o.imageUrl}
           title={o.title}
           level={"Початковий"} 
           id={o.id}

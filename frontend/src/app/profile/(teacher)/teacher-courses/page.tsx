@@ -4,7 +4,6 @@ import { TeacherCourseType } from "@/api/users/teacher/types/teacher-course.type
 import Skeleton from "@/components/skeleton/Skeleton"
 import { useReduxActions } from "@/hooks/useReduxActions"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
-import CourseExampleImage from "@public/images/CourseExample.png"
 import { useEffect } from "react"
 import styles from "./MyCourses.module.scss"
 import TeacherCourse from "./components/course/Course"
@@ -35,7 +34,7 @@ const TeacherCoursesPage = () => {
 
         {courses?.map((o, i) => <TeacherCourse 
           key={i}
-          imageSrc={CourseExampleImage.src}
+          imageSrc={o.imageUrl}
           title={o.title}
           id={o.id}
           studentsCount={o.studentCount}

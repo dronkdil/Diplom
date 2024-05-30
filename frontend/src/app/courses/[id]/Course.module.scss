@@ -5,6 +5,10 @@
         @apply w-full max-w-[300px] flex flex-col items-center gap-3;
     }   
 
+    .course__image {
+        @apply rounded-md;
+    }
+
     .course__description {
         @apply text-white/65;
     }

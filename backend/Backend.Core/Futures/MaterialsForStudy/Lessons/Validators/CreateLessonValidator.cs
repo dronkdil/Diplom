@@ -1,13 +1,12 @@
-﻿using System.Globalization;
-using System.Net;
-using Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Requests;
+﻿using Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Requests;
+using Backend.Core.Interfaces.UrlTypeValidator;
 using FluentValidation;
 
 namespace Backend.Core.Futures.MaterialsForStudy.Lessons.Validators;
 
 public class CreateLessonValidator : AbstractValidator<CreateLessonDto>
 {
-    public CreateLessonValidator()
+    public CreateLessonValidator(IUrlTypeCorrectValidator validator)
     {
         RuleFor(o => o.Title)
             .NotEmpty()
@@ -20,23 +19,7 @@ public class CreateLessonValidator : AbstractValidator<CreateLessonDto>
         RuleFor(o => o.VideoUrl)
             .NotEmpty()
             .WithMessage("Відео обов'язкове")
-            .Must((_, value, _) => IsVideoUrl(value))
+            .Must((entity, value, context) => validator.Valid(value, UrlTypes.Video, required: true))
             .WithMessage("Некоректний формат");
-    }
-    
-    private static bool IsVideoUrl(string url)
-    {
-        try
-        {
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "HEAD";
-            using var response = request.GetResponse();
-            return response.ContentType.ToLower(CultureInfo.InvariantCulture)
-                .StartsWith("video/");
-        }
-        catch
-        {
-            return false;
-        }
     }
 }

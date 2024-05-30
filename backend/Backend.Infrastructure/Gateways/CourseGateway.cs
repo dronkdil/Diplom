@@ -51,23 +51,13 @@ public class CourseGateway : ICourseGateway
             .ToListAsync();
     }
 
-    public async Task<bool> UpdateAsync(int id, Action<Course> configure)
+    public async Task<Course> UpdateAsync(int id, Action<Course> configure)
     {
-        try
-        {
-            var course = await _dataContext.Courses.FirstOrDefaultAsync(o => o.Id == id);
-            if (course == null)
-                return false;
-
-            configure(course);
-            course.Id = id;
-            await _dataContext.SaveChangesAsync();
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
+        var course = await _dataContext.Courses.FirstAsync(o => o.Id == id);
+        configure(course);
+        course.Id = id;
+        await _dataContext.SaveChangesAsync();
+        return course;
     }
 
     public async Task<Course?> GetCourseByIdAsync(int id)
