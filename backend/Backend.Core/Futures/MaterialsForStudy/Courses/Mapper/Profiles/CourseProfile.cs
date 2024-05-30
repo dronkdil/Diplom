@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Responses;
+using Backend.Core.Futures.MaterialsForStudy.Modules.DTOs.Responses;
 using Backend.Domain.Entities;
+using ShortLessonDto = Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Responses.ShortLessonDto;
 
 namespace Backend.Core.Futures.MaterialsForStudy.Courses.Mapper.Profiles;
 

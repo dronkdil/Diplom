@@ -1,4 +1,4 @@
-export type UpdateTitleType = {
+export type UpdateLessonTitleType = {
 	lessonId: number
 	title: string
 }

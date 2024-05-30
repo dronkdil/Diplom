@@ -8,7 +8,8 @@ public interface IModuleService
 {
     Task<Response> CreateAsync(CreateModuleDto dto);
     Task<Response> RemoveAsync(RemoveModuleDto dto);
-    Task<Response> UpdateTitleAsync(UpdateModuleTitleDto dto);
-    Task<Response> UpdateDescriptionAsync(UpdateModuleDescriptionDto dto);
+    Task<Response<ModuleDto>> UpdateTitleAsync(UpdateModuleTitleDto dto);
+    Task<Response<ModuleDto>> UpdateDescriptionAsync(UpdateModuleDescriptionDto dto);
     Task<Response<IEnumerable<ModuleDto>>> GetByCourseAsync(int courseId);
+    Task<Response<ModuleDto>> GetForSettingsAsync(int moduleId);
 }

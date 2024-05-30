@@ -1,4 +1,4 @@
-export type UpdateVideoByUrlType = {
+export type UpdateLessonVideoByUrlType = {
 	lessonId: number
 	videoUrl: string
 }

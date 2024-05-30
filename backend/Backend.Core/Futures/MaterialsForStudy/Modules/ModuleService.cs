@@ -37,27 +37,35 @@ public class ModuleService : IModuleService
         return Response.Success();
     }
 
-    public async Task<Response> UpdateTitleAsync(UpdateModuleTitleDto dto)
+    public async Task<Response<ModuleDto>> UpdateTitleAsync(UpdateModuleTitleDto dto)
     {
-        var isUpdated = await _moduleGateway.UpdateAsync(dto.Id, o =>
+        var actual = await _moduleGateway.UpdateAsync(dto.Id, o =>
         {
             o.Title = dto.Title;
         });
-        return Response.Result(isUpdated);
+        return Response.Success(_mapper.Map<ModuleDto>(actual));
     }
 
-    public async Task<Response> UpdateDescriptionAsync(UpdateModuleDescriptionDto dto)
+    public async Task<Response<ModuleDto>> UpdateDescriptionAsync(UpdateModuleDescriptionDto dto)
     {
-        var isUpdated = await _moduleGateway.UpdateAsync(dto.Id, o =>
+        var actual = await _moduleGateway.UpdateAsync(dto.Id, o =>
         {
             o.Description = dto.Description;
         });
-        return Response.Result(isUpdated);
+        return Response.Success(_mapper.Map<ModuleDto>(actual));
     }
 
     public async Task<Response<IEnumerable<ModuleDto>>> GetByCourseAsync(int courseId)
     {
         var modules = await _moduleGateway.GetByCourseIdWithLessonsAsync(courseId);
         return Response.Success(_mapper.Map<IEnumerable<ModuleDto>>(modules));
+    }
+
+    public async Task<Response<ModuleDto>> GetForSettingsAsync(int moduleId)
+    {
+        var module = await _moduleGateway.GetByIdAsync(moduleId);
+        return module != null
+            ? Response.Success(_mapper.Map<ModuleDto>(module))
+            : Response.Failed<ModuleDto>();
     }
 }

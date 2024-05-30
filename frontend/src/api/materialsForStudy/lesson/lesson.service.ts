@@ -1,9 +1,9 @@
 import $api from '@/api/api'
 import { CreateLessonType } from './type/create-lesson.type'
-import { UpdateDescriptionType } from './type/update-description.type'
-import { UpdateHomeworkType } from './type/update-homework.type'
-import { UpdateTitleType } from './type/update-title.type'
-import { UpdateVideoByUrlType } from './type/update-video-by-url.type'
+import { UpdateLessonDescriptionType } from './type/update-description.type'
+import { UpdateLessonHomeworkType } from './type/update-homework.type'
+import { UpdateLessonTitleType } from './type/update-title.type'
+import { UpdateLessonVideoByUrlType } from './type/update-video-by-url.type'
 
 export const LessonEndpoints = {
 	create: '/lesson/create',
@@ -21,12 +21,12 @@ export const LessonService = {
 	remove: async (id: number) => await $api.post(LessonEndpoints.remove, { id }),
 	getForPage: async (id: number) =>
 		await $api.post(LessonEndpoints.getForPage(id)),
-	updateTitle: async (data: UpdateTitleType) =>
+	updateTitle: async (data: UpdateLessonTitleType) =>
 		await $api.post(LessonEndpoints.updateTitle, data),
-	updateDescription: async (data: UpdateDescriptionType) =>
+	updateDescription: async (data: UpdateLessonDescriptionType) =>
 		await $api.post(LessonEndpoints.updateDescription, data),
-	updateHomework: async (data: UpdateHomeworkType) =>
+	updateHomework: async (data: UpdateLessonHomeworkType) =>
 		await $api.post(LessonEndpoints.updateHomework, data),
-	updateVideoByUrl: async (data: UpdateVideoByUrlType) =>
+	updateVideoByUrl: async (data: UpdateLessonVideoByUrlType) =>
 		await $api.post(LessonEndpoints.updateVideoByUrl, data)
 }

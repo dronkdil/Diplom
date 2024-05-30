@@ -34,14 +34,16 @@ public class ModuleGateway : IModuleGateway
             .ToListAsync();
     }
 
-    public async Task<bool> UpdateAsync(int id, Action<Module> configure)
+    public async Task<Module> UpdateAsync(int id, Action<Module> configure)
     {
-        var module = await _dataContext.Modules.FirstOrDefaultAsync(o => o.Id == id);
-        if (module == null)
-            return false;
-
+        var module = await _dataContext.Modules.FirstAsync(o => o.Id == id);
         configure(module);
         await _dataContext.SaveChangesAsync();
-        return true;
+        return module;
+    }
+
+    public async Task<Module?> GetByIdAsync(int id)
+    {
+        return await _dataContext.Modules.FirstOrDefaultAsync(o => o.Id == id);
     }
 }

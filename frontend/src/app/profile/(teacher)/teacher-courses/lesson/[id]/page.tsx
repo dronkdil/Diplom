@@ -1,10 +1,10 @@
 "use client"
 import { LessonService } from "@/api/materialsForStudy/lesson/lesson.service"
 import { LessonForPageType } from "@/api/materialsForStudy/lesson/type/lesson-for-page.type"
-import { UpdateDescriptionType } from "@/api/materialsForStudy/lesson/type/update-description.type"
-import { UpdateHomeworkType } from "@/api/materialsForStudy/lesson/type/update-homework.type"
-import { UpdateTitleType } from "@/api/materialsForStudy/lesson/type/update-title.type"
-import { UpdateVideoByUrlType } from "@/api/materialsForStudy/lesson/type/update-video-by-url.type"
+import { UpdateLessonDescriptionType } from "@/api/materialsForStudy/lesson/type/update-description.type"
+import { UpdateLessonHomeworkType } from "@/api/materialsForStudy/lesson/type/update-homework.type"
+import { UpdateLessonTitleType } from "@/api/materialsForStudy/lesson/type/update-title.type"
+import { UpdateLessonVideoByUrlType } from "@/api/materialsForStudy/lesson/type/update-video-by-url.type"
 import { SwitchCheckbox } from "@/components/form"
 import { DefaultInput } from "@/components/form/input"
 import Setting from "@/components/setting/Setting"
@@ -12,11 +12,10 @@ import { useReduxActions } from "@/hooks/useReduxActions"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { SquarePenIcon, VideoIcon } from "lucide-react"
 import { useParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Controller } from "react-hook-form"
 
 const LessonPage = () => {
-    const [haveHomework, setHaveHomework] = useState(false)
     const {id} = useParams()
     
     const {data, setData} = useTypedQuery<LessonForPageType>({
@@ -32,7 +31,7 @@ const LessonPage = () => {
             <Setting 
                 title={"Відео"} 
                 actualData={data?.videoUrl}
-                request={(values) => LessonService.updateVideoByUrl({lessonId: Number(id), ...values} as UpdateVideoByUrlType)}
+                request={(values) => LessonService.updateVideoByUrl({lessonId: Number(id), ...values} as UpdateLessonVideoByUrlType)}
                 onSuccess={(data) => setData(data)}
             >
                 {(register) => <>
@@ -42,7 +41,7 @@ const LessonPage = () => {
             <Setting 
                 title={"Назва"} 
                 actualData={data?.title} 
-                request={(values) => LessonService.updateTitle({lessonId: Number(id), ...values} as UpdateTitleType)}
+                request={(values) => LessonService.updateTitle({lessonId: Number(id), ...values} as UpdateLessonTitleType)}
                 onSuccess={(data) => setData(data)}
             >
                 {(register) => <>
@@ -52,7 +51,7 @@ const LessonPage = () => {
             <Setting 
                 title={"Опис"}
                 actualData={data?.description}
-                request={(values) => LessonService.updateDescription({lessonId: Number(id), ...values} as UpdateDescriptionType)}
+                request={(values) => LessonService.updateDescription({lessonId: Number(id), ...values} as UpdateLessonDescriptionType)}
                 onSuccess={(data) => setData(data)}
             >
                 {(register) => <>
@@ -62,7 +61,7 @@ const LessonPage = () => {
             <Setting 
                 title={"Домашня робота"} 
                 actualData={data?.homeworkStatus ? 'Присутня' : 'Відсутня'}
-                request={(values) => LessonService.updateHomework({lessonId: Number(id), ...values} as UpdateHomeworkType)}
+                request={(values) => LessonService.updateHomework({lessonId: Number(id), ...values} as UpdateLessonHomeworkType)}
                 onSuccess={(data) => setData(data)}
             >
                 {(register, control) => <>
@@ -76,7 +75,6 @@ const LessonPage = () => {
                             defaultValue={data?.homeworkStatus} />}
                     />
                     <DefaultInput icon={<SquarePenIcon />} defaultValue={data?.homeworkDescription} placeholder="Опис домашньої роботи" {...register("description")} />
-                    {/* {haveHomework && <DefaultInput icon={<SquarePenIcon />} placeholder="Опис домашньої роботи" {...register("description")} />} */}
                 </>}
             </Setting>
         </>

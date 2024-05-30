@@ -1,5 +1,6 @@
 ﻿using Backend.Core.Futures.MaterialsForStudy.Modules;
 using Backend.Core.Futures.MaterialsForStudy.Modules.DTOs.Requests;
+using Backend.Core.Futures.MaterialsForStudy.Modules.DTOs.Responses;
 using Backend.Domain.Responses.Base;
 using Backend.Presentation.Constants;
 using Microsoft.AspNetCore.Authorization;
@@ -32,15 +33,22 @@ public class ModuleController : Controller
     
     [HttpPost("module/update-title")]
     [Authorize(AuthorizationPolicies.Teacher)]
-    public async Task<Response> UpdateTitle([FromBody] UpdateModuleTitleDto dto)
+    public async Task<Response<ModuleDto>> UpdateTitle([FromBody] UpdateModuleTitleDto dto)
     {
         return await _moduleService.UpdateTitleAsync(dto);
     }
     
     [HttpPost("module/update-description")]
     [Authorize(AuthorizationPolicies.Teacher)]
-    public async Task<Response> UpdateDescription([FromBody] UpdateModuleDescriptionDto dto)
+    public async Task<Response<ModuleDto>> UpdateDescription([FromBody] UpdateModuleDescriptionDto dto)
     {
         return await _moduleService.UpdateDescriptionAsync(dto);
+    }
+    
+    [HttpGet("module/get-for-settings")]
+    [Authorize(AuthorizationPolicies.Teacher)]
+    public async Task<Response<ModuleDto>> GetForSettings(int id)
+    {
+        return await _moduleService.GetForSettingsAsync(id);
     }
 }
