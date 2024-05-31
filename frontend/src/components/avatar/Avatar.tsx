@@ -9,17 +9,24 @@ import styles from "./Avatar.module.scss"
 
 export type AvatarProps = HTMLAttributes<HTMLDivElement> & {
     isSmall?: boolean
+    src?: string
+    firstName?: string
+    lastName?: string
 }
 
-const Avatar = ({isSmall, className, ...rest}: AvatarProps) => {
+const Avatar = ({isSmall, className, src, firstName, lastName, ...rest}: AvatarProps) => {
     const user = useSelector(getUserData)
+
+    const avatar = src ?? user.avatarUrl
+    const fn = firstName ?? user?.firstName
+    const ln = lastName ?? user?.firstName
 
     return (
         <div className={cn(styles.avatar, isSmall ? styles["avatar--small"] : styles["avatar--normal"], className)} {...rest}>
-            {user.avatarUrl 
-                ? <img className={styles.avatar__image} src={user.avatarUrl} alt={user.avatarUrl} />
+            {avatar
+                ? <img className={styles.avatar__image} src={avatar} alt={avatar} />
                 : <div className={styles.avatar__empty}>
-                    {`${user?.firstName[0] + (user?.lastName?.[0] ?? '')}`.toUpperCase()}
+                    {`${fn[0] + (ln?.[0] ?? '')}`.toUpperCase()}
                 </div>}
             {!isSmall && <IconLink href={Routes.CommonUser.MyData} className={styles["avatar__edit-pen"]}><PenIcon /></IconLink>}
         </div>

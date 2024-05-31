@@ -37,7 +37,10 @@ const TeacherCoursePage = () => {
 
     return (
         <>
-            {course && <DefaultLink className="mr-auto" href={Routes.Course(course?.id)}>До курсу</ DefaultLink>}
+            {course && <div className="flex gap-2">
+                <DefaultLink className="" href={Routes.Course(course?.id)}>До курсу</ DefaultLink>
+                <DefaultLink className="" href={Routes.Teacher.CourseStudents(course?.id)}>Студенти</ DefaultLink>
+            </div>}
             <div className={styles.settings}>
                 <Setting 
                     title={"Зображення"} 

@@ -1,4 +1,5 @@
-﻿using Backend.Core.Futures.Users.Students.DTOs.Requests;
+﻿using System.Collections;
+using Backend.Core.Futures.Users.Students.DTOs.Requests;
 using Backend.Core.Futures.Users.Students.DTOs.Responses;
 using Backend.Domain.Responses.Base;
 
@@ -12,4 +13,5 @@ public interface IStudentService
     Task<Response<IEnumerable<StudentCourseDto>>> GetCoursesAsync();
     Task<Response<bool>> AlreadyJoinedCourseAsync(int courseId);
     Task<Response> LeaveCourseAsync(LeaveCourseDto dto);
+    Task<Response<IEnumerable<StudentDataDto>>> GetAllByCourseAsync(int courseId);
 }

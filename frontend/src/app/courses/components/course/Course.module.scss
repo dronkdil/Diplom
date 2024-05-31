@@ -6,11 +6,11 @@
     }
 
     &__image {
-        @apply mb-3 rounded-md;
+        @apply mb-2 rounded-md;
     }
 
     &__title {
-        @apply text-white font-bold text-center line-clamp-2;
+        @apply text-white font-bold text-center line-clamp-2 leading-5 mb-2;
     }
 
     &__level {

@@ -80,4 +80,12 @@ public class StudentGateway : IStudentGateway
     {
         return await _dataContext.Students.FirstOrDefaultAsync(o => o.Id == studentId);
     }
+
+    public async Task<IEnumerable<Student>> GetByCourseIdAsync(int courseId)
+    {
+        var course = await _dataContext.Courses
+            .Include(o => o.Students)
+            .FirstAsync(o => o.Id == courseId);
+        return course.Students;
+    }
 }

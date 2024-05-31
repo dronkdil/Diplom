@@ -1,0 +1,17 @@
+.students {
+    .students__header {
+        @apply flex gap-2 mb-2;
+    }
+
+    .students__empty {
+        @apply text-white;
+    }
+
+    .students__content {
+        @apply grid grid-cols-3 gap-2;
+
+        .students__item {
+            @apply text-white bg-white/10 rounded-md px-3 py-2 flex gap-2;
+        }
+    }
+}

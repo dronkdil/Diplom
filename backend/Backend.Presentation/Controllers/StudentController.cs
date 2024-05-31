@@ -58,4 +58,11 @@ public class StudentController : Controller
     {
         return await _studentService.AlreadyJoinedCourseAsync(courseId);
     }
+    
+    [HttpGet("/student/get-by-course")]
+    [Authorize(AuthorizationPolicies.TeacherAndHigher)]
+    public async Task<Response<IEnumerable<StudentDataDto>>> GetByCourse(int courseId)
+    {
+        return await _studentService.GetAllByCourseAsync(courseId);
+    }
 }

@@ -7,7 +7,9 @@ export const StudentEndpoints = {
 	getMyData: '/student/get-my-data',
 	getCourses: '/student/courses',
 	alreadyJoinedCourse: (courseId: number) =>
-		`/student/already-joined-course?courseId=${courseId}`
+		`/student/already-joined-course?courseId=${courseId}`,
+	getByCourse: (courseId: number) =>
+		`/student/get-by-course?courseId=${courseId}`
 }
 
 export const StudentService = {
@@ -18,5 +20,7 @@ export const StudentService = {
 	joinCourse: async (courseId: number) =>
 		await $api.post(StudentEndpoints.joinCourse, { courseId }),
 	leaveCourse: async (courseId: number) =>
-		await $api.post(StudentEndpoints.leaveCourse, { courseId })
+		await $api.post(StudentEndpoints.leaveCourse, { courseId }),
+	getByCourse: async (courseId: number) =>
+		await $api.get(StudentEndpoints.getByCourse(courseId))
 }

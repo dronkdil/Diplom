@@ -68,4 +68,10 @@ public class StudentService : IStudentService
         var isLeaved = await _studentGateway.LeaveCourse(_userContext.UserId, dto.CourseId);
         return LeaveCourseResponseHelper.Result(isLeaved);
     }
+
+    public async Task<Response<IEnumerable<StudentDataDto>>> GetAllByCourseAsync(int courseId)
+    {
+        var students = await _studentGateway.GetByCourseIdAsync(courseId);
+        return Response.Success(_mapper.Map<IEnumerable<StudentDataDto>>(students));
+    }
 }

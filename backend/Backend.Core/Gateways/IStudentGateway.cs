@@ -10,4 +10,5 @@ public interface IStudentGateway
     Task<bool> JoinCourse(int studentId, int courseId);
     Task<bool> LeaveCourse(int studentId, int courseId);
     Task<Student?> GetByIdAsync(int studentId);
+    Task<IEnumerable<Student>> GetByCourseIdAsync(int courseId);
 }

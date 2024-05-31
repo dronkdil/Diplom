@@ -11,17 +11,17 @@ export const Routes = {
 		MyData: '/profile/my-data',
 		StudentCourses: '/profile/student-courses',
 		TeacherCourses: '/profile/teacher-courses',
-		TeacherCourse: (id: number) => `/profile/teacher-courses/${id}`,
+		TeacherCourse: (id: any) => `/profile/teacher-courses/${id}`,
 		Certificates: '/profile/my-certificates',
-		CertificateById: (id: number) => `/profile/certifications/${id}`,
+		CertificateById: (id: any) => `/profile/certifications/${id}`,
 		Notification: '/profile/notifications',
 		Settings: '/profile/settings'
 	},
 	Login: '/login',
 	Registration: '/registration',
 	Courses: '/courses',
-	Course: (id: number) => `/courses/${id}`,
-	Lesson: (id: number) => `/courses/lesson/${id}`,
+	Course: (id: any) => `/courses/${id}`,
+	Lesson: (id: any) => `/courses/lesson/${id}`,
 	CommonUser: {
 		MyData: '/profile/my-data',
 		Notification: '/profile/notifications',
@@ -30,14 +30,15 @@ export const Routes = {
 	Student: {
 		Courses: '/profile/student-courses',
 		Certificates: '/profile/my-certificates',
-		CertificateById: (id: number) => `/profile/certifications/${id}`
+		CertificateById: (id: any) => `/profile/certifications/${id}`
 	},
 	Teacher: {
 		Courses: '/profile/teacher-courses',
-		Course: (id: number) => `/profile/teacher-courses/${id}`,
-		LessonSettings: (id: number) => `/profile/teacher-courses/lesson/${id}`,
-		LessonHomeworks: (id: number) =>
+		Course: (id: any) => `/profile/teacher-courses/${id}`,
+		LessonSettings: (id: any) => `/profile/teacher-courses/lesson/${id}`,
+		LessonHomeworks: (id: any) =>
 			`/profile/teacher-courses/lesson/${id}/homeworks`,
-		ModuleSettings: (id: number) => `/profile/teacher-courses/module/${id}`
+		ModuleSettings: (id: any) => `/profile/teacher-courses/module/${id}`,
+		CourseStudents: (id: any) => `/profile/teacher-courses/${id}/students`
 	}
 }
