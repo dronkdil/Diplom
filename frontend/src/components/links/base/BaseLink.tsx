@@ -1,12 +1,13 @@
-import { Url } from 'next/dist/shared/lib/router/router'
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import styles from './BaseLink.module.scss'
 
-export type BaseLinkProps = React.RefAttributes<HTMLAnchorElement> & {
-    children: any
-    className?: React.ReactNode
-    href: Url
-}
+export type BaseLinkProps = 
+  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> 
+  & LinkProps 
+  & React.RefAttributes<HTMLAnchorElement>
+  & {
+    children?: React.ReactNode
+  }
 
 const BaseLink = ({children, className, href, ...props}: BaseLinkProps) => {
   return (

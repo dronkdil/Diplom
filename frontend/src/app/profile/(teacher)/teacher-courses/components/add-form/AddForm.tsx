@@ -64,10 +64,26 @@ const AddForm = ({modules, addModule, addLesson}: AddFormProps) => {
       </div>
       <div className={styles.form}>
           <h3>Додати урок</h3>
-          <DefaultInput icon={<TypeIcon />} placeholder="Назва" {...registerLesson("title")} error={lessonErrors.title} />
-          <DefaultInput icon={<AlignLeftIcon />} placeholder="Короткий опис" {...registerLesson("description")} error={lessonErrors.description} />
-          <DefaultInput icon={<FileIcon />} placeholder="Силка на відео" {...registerLesson("videoUrl")} error={lessonErrors.videoUrl} />
-          <ListboxInput values={modules.map(o => ({id: o.id, text: o.title}))} icon={<ComponentIcon />} placeholder="Модуль" onChange={moduleIdField.onChange} />
+          <DefaultInput 
+            icon={<TypeIcon />} 
+            placeholder="Назва" 
+            {...registerLesson("title")} 
+            error={lessonErrors.title} />
+          <DefaultInput 
+            icon={<AlignLeftIcon />} 
+            placeholder="Короткий опис" 
+            {...registerLesson("description")} 
+            error={lessonErrors.description} />
+          <DefaultInput 
+            icon={<FileIcon />} 
+            placeholder="Силка на відео" 
+            {...registerLesson("videoUrl")} 
+            error={lessonErrors.videoUrl} />
+          <ListboxInput 
+            values={modules.map(o => ({id: o.id, text: o.title}))} 
+            icon={<ComponentIcon />} 
+            placeholder="Модуль" 
+            onChange={o => moduleIdField.onChange(o.id)} />
           <AccentButton isLoading={lessonCreating} onClick={() => createLesson()}>Додати</AccentButton>
       </div>
     </div>

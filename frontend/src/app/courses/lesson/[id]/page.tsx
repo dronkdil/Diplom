@@ -1,18 +1,18 @@
 "use client"
 import { LessonService } from "@/api/materialsForStudy/lesson/lesson.service"
 import { LessonForPageType } from "@/api/materialsForStudy/lesson/type/lesson-for-page.type"
-import { AccentButton } from "@/components/buttons"
-import { FileInput } from "@/components/form/input"
+import { DefaultLink } from "@/components/links"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
-import { BookIcon } from "lucide-react"
+import { getUserData } from "@/lib/redux/slices/UserSlice"
 import { useParams } from "next/navigation"
-import { useState } from "react"
+import { useSelector } from "react-redux"
 import LessonButton from "../../components/lesson/LessonButton"
 import styles from "./Lesson.module.scss"
+import Homework from "./components/homework/Homework"
 
 const LessonPage = () => {
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>()
   const {id} = useParams()
+  const user = useSelector(getUserData)
 
   const {data} = useTypedQuery<LessonForPageType>({
     name: `get-lesson-for-page-${id}`,
@@ -23,25 +23,10 @@ const LessonPage = () => {
     <div className={styles.page}>
       <div className={styles.page__content}>
         <video src={data?.videoUrl} controls className={styles.page__video} />
-        {data?.homeworkStatus && <div className={styles.page__homework}>
-            <div>
-                <h4 className={styles.homework__title}>Домашня робота</h4>
-                <p className={styles.homework__description}>{data?.homeworkDescription}</p>
-            </div>
-            <div className={styles.homework__form}>
-                <FileInput 
-                  wrapperClassName={styles.homework__input} 
-                  icon={<BookIcon />} 
-                  placeholder="Завантажити"
-                  multiple
-                  onChange={(files) => {
-                    if (files) setUploadedFiles(Array.from(files))
-                  }}
-                />
-                {uploadedFiles?.map(f => <div className={styles.homework__file}>{f.name}</div>)}
-                <AccentButton className={styles["homework__hand-in"]}>Здати</AccentButton>
-            </div>
-        </div>}
+        <div className={styles.page__undervideo}>
+          <DefaultLink download={data?.title} href={data?.videoUrl ?? ''}>Завантажити відео</DefaultLink>
+        </div>
+        {data?.homeworkStatus && <Homework description={data?.homeworkDescription} />}
       </div>
       <div className={styles.page__lessons}>
         <div className={styles.lessons__side}>

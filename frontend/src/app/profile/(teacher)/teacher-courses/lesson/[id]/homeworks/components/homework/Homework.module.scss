@@ -20,6 +20,10 @@
             @apply text-white/80 mb-4;
         }
 
+        .homework__answer {
+            @apply text-white/50;
+        }
+
         .homework__file {
             @apply flex items-center text-white/70 py-1 gap-2 cursor-pointer transition;
 

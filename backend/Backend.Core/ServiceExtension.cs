@@ -2,6 +2,8 @@
 using Backend.Core.Futures.Authentication;
 using Backend.Core.Futures.Authentication.Validators;
 using Backend.Core.Futures.MaterialsForStudy.Courses;
+using Backend.Core.Futures.MaterialsForStudy.Homeworks;
+using Backend.Core.Futures.MaterialsForStudy.Homeworks.DTOs;
 using Backend.Core.Futures.MaterialsForStudy.Lessons;
 using Backend.Core.Futures.MaterialsForStudy.Modules;
 using Backend.Core.Futures.Users.Common.UpdateInformation;
@@ -30,6 +32,7 @@ public static class ServiceExtension
         services.AddTransient<IStudentService, StudentService>();
         services.AddTransient<IModuleService, ModuleService>();
         services.AddTransient<ILessonService, LessonService>();
+        services.AddTransient<IHomeworkService, HomeworkService>();
         return services;
     }
 }

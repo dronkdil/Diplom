@@ -8,7 +8,7 @@ export type ListboxInputProps = {
     values: ListboxInputItem[]
     icon: React.ReactElement
     placeholder?: string
-    onChange?: (id: number) => void
+    onChange?: (item: ListboxInputItem) => void
 }
 
 export type ListboxInputItem = {
@@ -25,7 +25,7 @@ const ListboxInput = forwardRef<HTMLElement, ListboxInputProps>(({values, icon, 
             onChange={o => {
                 const listItem = o as unknown as ListboxInputItem
                 setValue(listItem)
-                onChange && onChange(listItem.id)
+                onChange && onChange(listItem)
             }}
             className={styles.listbox}
             as={"div"}

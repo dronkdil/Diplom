@@ -8,37 +8,13 @@
             @apply bg-black rounded-md w-full mb-2;
         }
 
-        .page__homework {
-            @apply p-4 bg-white/10 rounded-md flex max-sm:flex-col justify-between items-start gap-3;
-
-            .homework__title {
-                @apply text-white font-semibold text-[16px] mb-1;
-            }
-
-            .homework__description {
-                @apply text-white/70;
-            }
-
-            .homework__form {
-                @apply max-sm:w-full;
-
-                .homework__file {
-                    @apply text-white/70 truncate w-full sm:max-w-[200px] mb-1;
-                }
-
-                .homework__input {
-                    @apply max-sm:w-full mb-1;
-                }
-    
-                .homework__hand-in {
-                    @apply w-full mt-1;
-                }
-            }
+        .page__undervideo {
+            @apply mb-3 flex max-sm:flex-col;
         }
     }
 
     .page__lessons {
-        @apply flex flex-col sm:max-lg:flex-row gap-2 w-full lg:max-w-[300px] max-lg:mt-4;
+        @apply flex flex-col sm:max-lg:flex-row gap-2 w-full lg:max-w-[300px] max-lg:mt-4 max-lg:justify-between;
 
         .page__title {
             @apply mb-0;
