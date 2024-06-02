@@ -1,21 +1,15 @@
-import { Routes } from "@/lib/routes.constants"
-import Link from "next/link"
+import BaseCourse, { BaseCourseProps } from "@/components/course/BaseCourse"
 import styles from "./Course.module.scss"
 
-export type TeacherCourseProps = {
-    imageSrc: string
-    title: string
+export type TeacherCourseProps = Omit<BaseCourseProps, "children"> & {
     studentsCount: number
-    id: number
 }
 
-const TeacherCourse = ({imageSrc, title, studentsCount, id}: TeacherCourseProps) => {
+const TeacherCourse = ({studentsCount, ...rest}: TeacherCourseProps) => {
   return (
-    <Link href={Routes.Profile.TeacherCourse(id)} className={`${styles.course}`}>
-        <img src={imageSrc} alt={title} className={styles.course__image} />
-        <h4 className={styles.course__title}>{title}</h4>
-        <span className={styles.course__level}>Cтудентів: {studentsCount}</span>
-    </Link>
+    <BaseCourse {...rest}>
+      <span className={styles.course__level}>Cтудентів: {studentsCount}</span>
+    </BaseCourse>
   )
 }
 

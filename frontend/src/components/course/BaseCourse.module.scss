@@ -1,0 +1,19 @@
+.course {
+    @apply w-[150px] p-3 rounded-md cursor-pointer transition flex flex-col items-center relative;
+
+    &.course--in-developing {
+        @apply grayscale;
+    }
+
+    .course__image {
+        @apply w-[126px] h-[126px] mb-3 rounded-md bg-contain bg-no-repeat bg-center;
+    }
+
+    .course__title {
+        @apply text-white font-bold text-center line-clamp-2 leading-5 mb-2;
+    }
+
+    &:hover {
+        @apply bg-white/10;
+    }
+}

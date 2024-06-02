@@ -1,22 +1,15 @@
-import { Routes } from "@/lib/routes.constants"
-import Link from "next/link"
+import BaseCourse, { BaseCourseProps } from "@/components/course/BaseCourse"
 import styles from "./Course.module.scss"
 
-export type CourseProps = {
-    imageSrc: string
-    title: string
+export type CourseProps = Omit<BaseCourseProps, "children"> & {
     level: string
-    id: number
-    inDeveloping?: boolean
 }
 
-const Course = ({imageSrc, title, level, id, inDeveloping}: CourseProps) => {
+const Course = ({level, ...rest}: CourseProps) => {
   return (
-    <Link href={inDeveloping ? "" : Routes.Course(id)} className={`${styles.course} ${inDeveloping && styles["course--in-developing"]}`}>
-        <img src={imageSrc} alt={title} className={styles.course__image} />
-        <h4 className={styles.course__title}>{title}</h4>
-        <span className={styles.course__level}>{level}</span>
-    </Link>
+    <BaseCourse {...rest}>
+      <span className={styles.level}>{level}</span>
+    </BaseCourse>
   )
 }
 
