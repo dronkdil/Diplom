@@ -10,5 +10,5 @@ public interface IHomeworkService
     Task<Response> EvaluateAsync(EvaluateHomeworkDto dto);
     Task<Response<IEnumerable<CompletedHomeworkDto>>> GetByLessonAsync(int lessonId);
     Task<Response> CancelSendingAsync(CancelHomeworkDto dto);
-    Task<Response<StudentHomeworkDto>> GetByStudentAsync(int studentId);
+    Task<Response<StudentHomeworkDto>> GetByStudentAsync(int studentId, int lessonId);
 }

@@ -57,8 +57,8 @@ public class HomeworkGateway : IHomeworkGateway
             .ToListAsync();
     }
 
-    public async Task<Homework?> GetByStudentIdAsync(int studentId)
+    public async Task<Homework?> GetByStudentAndLessonIdAsync(int studentId, int lessonId)
     {
-        return await _dataContext.Homeworks.FirstOrDefaultAsync(o => o.StudentId == studentId);
+        return await _dataContext.Homeworks.FirstOrDefaultAsync(o => o.StudentId == studentId && o.LessonId == lessonId);
     }
 }

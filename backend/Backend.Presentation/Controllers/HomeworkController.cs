@@ -33,9 +33,9 @@ public class HomeworkController : Controller
     
     [HttpGet("homework/get-by-student")]
     [Authorize(AuthorizationPolicies.Student)]
-    public async Task<Response<StudentHomeworkDto>> GetByStudent(int id)
+    public async Task<Response<StudentHomeworkDto>> GetByStudent(int id, int lessonId)
     {
-        return await _homeworkService.GetByStudentAsync(id);
+        return await _homeworkService.GetByStudentAsync(id, lessonId);
     }
     
     [HttpPost("homework/evaluate")]

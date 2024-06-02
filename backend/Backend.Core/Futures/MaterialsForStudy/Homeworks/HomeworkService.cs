@@ -56,9 +56,9 @@ public class HomeworkService : IHomeworkService
         return Response.Success();
     }
 
-    public async Task<Response<StudentHomeworkDto>> GetByStudentAsync(int studentId)
+    public async Task<Response<StudentHomeworkDto>> GetByStudentAsync(int studentId, int lessonId)
     {
-        var student = await _homeworkGateway.GetByStudentIdAsync(studentId);
+        var student = await _homeworkGateway.GetByStudentAndLessonIdAsync(studentId, lessonId);
         return Response.Success(_mapper.Map<StudentHomeworkDto>(student));
     }
 }

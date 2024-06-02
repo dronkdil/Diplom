@@ -8,5 +8,5 @@ public interface IHomeworkGateway
     Task CancelSendingAsync(int id);
     Task EvaluateAsync(int id, int? appraisal, string? comment);
     Task<IEnumerable<Homework>> GetByLessonIdWithStudentAsync(int lessonId);
-    Task<Homework?> GetByStudentIdAsync(int studentId);
+    Task<Homework?> GetByStudentAndLessonIdAsync(int studentId, int lessonId);
 }

@@ -3,16 +3,13 @@ import { LessonService } from "@/api/materialsForStudy/lesson/lesson.service"
 import { LessonForPageType } from "@/api/materialsForStudy/lesson/type/lesson-for-page.type"
 import { DefaultLink } from "@/components/links"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
-import { getUserData } from "@/lib/redux/slices/UserSlice"
 import { useParams } from "next/navigation"
-import { useSelector } from "react-redux"
 import LessonButton from "../../components/lesson/LessonButton"
 import styles from "./Lesson.module.scss"
 import Homework from "./components/homework/Homework"
 
 const LessonPage = () => {
   const {id} = useParams()
-  const user = useSelector(getUserData)
 
   const {data} = useTypedQuery<LessonForPageType>({
     name: `get-lesson-for-page-${id}`,

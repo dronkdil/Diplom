@@ -7,7 +7,8 @@ export const HomeworkEndpoints = {
 	send: '/homework/send',
 	cancel: '/homework/cancel',
 	evaluate: '/homework/evaluate',
-	getByStudent: (id: number) => `/homework/get-by-student?id=${id}`,
+	getByStudent: (id: number, lessonId: number) =>
+		`/homework/get-by-student?id=${id}&lessonId=${lessonId}`,
 	getByLesson: (id: number) => `/homework/get-by-lesson?id=${id}`
 }
 
@@ -18,8 +19,8 @@ export const HomeworkService = {
 		await $api.post(HomeworkEndpoints.cancel, data),
 	evaluate: async (data: EvaluateHomeworkType) =>
 		await $api.post(HomeworkEndpoints.evaluate, data),
-	getByStudent: async (id: number) =>
-		await $api.get(HomeworkEndpoints.getByStudent(id)),
+	getByStudent: async (id: number, lessonId: number) =>
+		await $api.get(HomeworkEndpoints.getByStudent(id, lessonId)),
 	getByLesson: async (id: number) =>
 		await $api.get(HomeworkEndpoints.getByLesson(id))
 }

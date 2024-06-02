@@ -24,7 +24,7 @@ const Homework = ({description}: HomeworkProps) => {
     
     const {data: homework, refetch: refetchHomework} = useTypedQuery<StudentHomeworkType>({
         name: `get-student-homework-${id}`,
-        request: () => HomeworkService.getByStudent(user.id),
+        request: () => HomeworkService.getByStudent(user.id, Number(id)),
         conditional: () => user.role == "Student"
     })
     
