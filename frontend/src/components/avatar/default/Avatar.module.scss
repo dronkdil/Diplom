@@ -1,0 +1,33 @@
+.avatar {
+    @apply rounded-md overflow-hidden relative;
+
+    &--small {
+        @apply w-[50px] h-[50px] text-[16px];
+    }
+
+    &--normal {
+        @apply md:w-[220px] md:h-[220px] md:text-[50px];
+    }
+
+    .avatar__image {
+        @apply w-full h-full object-cover;
+    }
+
+    .avatar__empty {
+        @apply w-full h-full bg-white/40 grid place-content-center font-bold;
+    }
+
+    &__edit-pen {
+        @apply pointer-events-none opacity-0 transition absolute bottom-1 right-1;
+
+        * {
+            @apply stroke-white;
+        }
+    }
+
+    &:hover {
+        .avatar__edit-pen {
+            @apply pointer-events-auto opacity-100;
+        }    
+    }
+}

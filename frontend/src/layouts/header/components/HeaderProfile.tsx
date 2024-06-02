@@ -1,6 +1,6 @@
 "use client"
 import { AuthenticationService } from "@/api/users/authentication/authentication.service"
-import Avatar from "@/components/avatar/Avatar"
+import AuthenticationAvatar from "@/components/avatar/AuthenticationAvatar"
 import { useReduxActions } from "@/hooks/useReduxActions"
 import { useTypedMutation } from "@/hooks/useTypedMutation"
 import { ProfileMenuItems } from "@/lib/profile-menu-items.constants"
@@ -32,7 +32,7 @@ const HeaderProfile = () => {
             <MenuButton>
                 {({active}) => <div className={`${styles.profile} ${active && styles["profile--active"]}`}>
                     {/* <div className={styles.profile__image}>{`${user.firstName[0] + (user.lastName?.[0] ?? '')}`.toUpperCase()}</div> */}
-                    <Avatar isSmall />
+                    <AuthenticationAvatar isSmall />
                     <div className={styles.profile__info}>
                         <div className={styles.profile__name}>{user.displayName}</div>
                         <div className={styles.profile__email}>{user.email}</div>

@@ -1,7 +1,7 @@
 "use client"
 import { StudentService } from "@/api/users/student/student.service"
 import { StudentDataType } from "@/api/users/student/types/student-data.type"
-import Avatar from "@/components/avatar/Avatar"
+import Avatar from "@/components/avatar/default/Avatar"
 import { DefaultLink } from "@/components/links"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { Routes } from "@/lib/routes.constants"
@@ -25,7 +25,7 @@ const StudentsPage = () => {
       <div className={styles.students__content}>
         {data?.map(o => <div key={o.id} className={styles.students__item}>
           <div>
-            <Avatar 
+            <Avatar
               isSmall 
               src={o.avatarUrl} 
               firstName={o.firstName}
