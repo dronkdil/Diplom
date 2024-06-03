@@ -1,8 +1,9 @@
 ﻿using Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Requests.Base;
+using Microsoft.AspNetCore.Http;
 
 namespace Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Requests;
 
-public class UpdateLessonVideoByUrlDto : UpdateLessonDto
+public class UpdateLessonVideoWithYoutubeDto : UpdateLessonDto
 {
-    public string VideoUrl { get; set; } = null!;
+    public IFormFile Video { get; set; } = null!;
 }

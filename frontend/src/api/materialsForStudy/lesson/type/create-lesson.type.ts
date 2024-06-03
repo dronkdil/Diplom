@@ -1,6 +1,6 @@
 export type CreateLessonType = {
 	title: string
 	description: string
-	videoUrl: string
+	youtubeLink: string
 	moduleId: number
 }

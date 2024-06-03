@@ -1,12 +1,11 @@
 ﻿using Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Requests;
-using Backend.Core.Interfaces.UrlTypeValidator;
 using FluentValidation;
 
 namespace Backend.Core.Futures.MaterialsForStudy.Lessons.Validators;
 
-public class CreateLessonValidator : AbstractValidator<CreateLessonDto>
+public class CreateLessonWithYoutubeValidator : AbstractValidator<CreateLessonWithYoutubeDto>
 {
-    public CreateLessonValidator(IUrlTypeCorrectValidator validator)
+    public CreateLessonWithYoutubeValidator()
     {
         RuleFor(o => o.Title)
             .NotEmpty()
@@ -16,10 +15,10 @@ public class CreateLessonValidator : AbstractValidator<CreateLessonDto>
             .NotEmpty()
             .WithMessage("Опис обов'язковий");
         
-        RuleFor(o => o.VideoUrl)
+        RuleFor(o => o.YoutubeLink)
             .NotEmpty()
             .WithMessage("Відео обов'язкове")
-            .Must((entity, value, context) => validator.Valid(value, UrlTypes.Video, required: true))
+            .Must((entity, value, context) => value.StartsWith("https://www.youtube.com/"))
             .WithMessage("Некоректний формат");
     }
 }

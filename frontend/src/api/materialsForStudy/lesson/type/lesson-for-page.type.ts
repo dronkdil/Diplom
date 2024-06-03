@@ -4,7 +4,9 @@ export type LessonForPageType = {
 	description: string
 	homeworkStatus: boolean
 	homeworkDescription: string
-	videoUrl: string
+	videoName: string
+	videoType: string
+	youtubeVideoId: string
 	otherLessons: LessonForLinkType[]
 }
 

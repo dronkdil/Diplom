@@ -4,3 +4,4 @@
 - lucide (icons)
 - @react-input/mask
 - redux, react-redux, @reduxjs/toolkit (save state)
+- react-youtube

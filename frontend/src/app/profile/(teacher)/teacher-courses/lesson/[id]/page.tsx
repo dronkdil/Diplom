@@ -30,12 +30,12 @@ const LessonPage = () => {
         <>
             <Setting 
                 title={"Відео"} 
-                actualData={data?.videoUrl}
-                request={(values) => LessonService.updateVideoByUrl({lessonId: Number(id), ...values} as UpdateLessonVideoByUrlType)}
+                actualData={data?.videoType}
+                request={(values) => LessonService.updateVideoWithYoutube({lessonId: Number(id), ...values} as UpdateLessonVideoByUrlType)}
                 onSuccess={(data) => setData(data)}
             >
                 {(register) => <>
-                    <DefaultInput icon={<VideoIcon />} defaultValue={data?.videoUrl} placeholder="Силка на відео" {...register("videoUrl")} />
+                    <DefaultInput icon={<VideoIcon />} placeholder="Силка на відео" {...register("youtubeLink")} />
                 </>}
             </Setting>
             <Setting 

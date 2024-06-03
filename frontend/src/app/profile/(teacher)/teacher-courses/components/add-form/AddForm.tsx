@@ -36,24 +36,17 @@ const AddForm = ({modules, addModule, addLesson}: AddFormProps) => {
     }
   })
 
-  const {register: registerLesson, getValues: getLessonValues, reset: resetLessonForm, control: lessonControl} = useForm({
-    defaultValues: {
-      title: "",
-      description: "",
-      videoUrl: "",
-      moduleId: 0
-    } as CreateLessonType
-  })
+  const {register: registerLesson, getValues: getLessonValues, reset: resetLessonForm, control: lessonControl} = useForm()
   const {isPending: lessonCreating, mutateAsync: createLesson, errors: lessonErrors} = useTypedMutation({
     name: "create-lesson",
-    request: () => LessonService.create(getLessonValues()),
+    request: () => LessonService.create(getLessonValues() as CreateLessonType),
     onSuccess: () => {
-      addLesson(getLessonValues())
+      addLesson(getLessonValues() as CreateLessonType)
       resetLessonForm()
     }
   })
 
-  const { field: moduleIdField } = useController({ control: lessonControl, name: "moduleId" });
+  const { field: moduleIdField } = useController({ control: lessonControl, name: "moduleId" })
   return (
     <div className={styles.forms}>
       <div className={styles.form}>
@@ -74,12 +67,11 @@ const AddForm = ({modules, addModule, addLesson}: AddFormProps) => {
             placeholder="Короткий опис" 
             {...registerLesson("description")} 
             error={lessonErrors.description} />
-          <DefaultInput 
+          <DefaultInput
             icon={<FileIcon />} 
-            placeholder="Силка на відео" 
-            {...registerLesson("videoUrl")} 
-            error={lessonErrors.videoUrl} />
-          <ListboxInput 
+            placeholder="Посилання на youtube відео"
+            {...registerLesson("youtubeLink")} />
+          <ListboxInput
             values={modules.map(o => ({id: o.id, text: o.title}))} 
             icon={<ComponentIcon />} 
             placeholder="Модуль" 

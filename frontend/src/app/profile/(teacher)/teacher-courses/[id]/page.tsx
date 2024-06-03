@@ -81,6 +81,7 @@ const TeacherCoursePage = () => {
                 </>}
 
                 {course?.modules.map(o => <Module 
+                    key={o.id}
                     description={o.description} 
                     title={o.title} 
                     id={o.id}

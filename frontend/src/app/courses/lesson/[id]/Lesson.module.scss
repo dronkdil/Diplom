@@ -5,7 +5,11 @@
         @apply w-full;
 
         .page__video {
-            @apply bg-black rounded-md w-full mb-2;
+            @apply rounded-md mb-2 overflow-hidden;
+
+            iframe {
+                @apply w-full max-sm:h-[200px] md:h-[500px];
+            }
         }
 
         .page__undervideo {

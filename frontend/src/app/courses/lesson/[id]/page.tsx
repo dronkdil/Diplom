@@ -4,6 +4,7 @@ import { LessonForPageType } from "@/api/materialsForStudy/lesson/type/lesson-fo
 import { DefaultLink } from "@/components/links"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { useParams } from "next/navigation"
+import YouTube from "react-youtube"
 import LessonButton from "../../components/lesson/LessonButton"
 import styles from "./Lesson.module.scss"
 import Homework from "./components/homework/Homework"
@@ -19,9 +20,27 @@ const LessonPage = () => {
   return (
     <div className={styles.page}>
       <div className={styles.page__content}>
-        <video src={data?.videoUrl} controls className={styles.page__video} />
+        <div className={styles.page__video}>
+            {data?.videoType == "YoutubeVideo" && <YouTube
+            videoId={data?.youtubeVideoId}
+            opts={{
+                playerVars: {
+                    autoplay: 0,
+                },
+            }}
+            onStateChange={(event) => {
+                const player = event.target
+                const duration = player.playerInfo.duration
+                const current = player.playerInfo.currentTime
+                // lesson completed, send request
+                // console.log(current > duration * 0.8)
+            }}
+            />}
+        </div>
+        
+        {data?.videoType != "YoutubeVideo" && <div className="text-white/50 mb-2">Тимчасово відео з усіх джерел окрім youtube не підтримуються</div>}
         <div className={styles.page__undervideo}>
-          <DefaultLink download={data?.title} href={data?.videoUrl ?? ''}>Завантажити відео</DefaultLink>
+            {data?.videoType == "YoutubeVideo" && <DefaultLink download={data?.title} href={`https://www.yotube.com/watch?v=${data?.youtubeVideoId}` ?? ''}>Перейти на youtube</DefaultLink>}
         </div>
         {data?.homeworkStatus && <Homework description={data?.homeworkDescription} />}
       </div>

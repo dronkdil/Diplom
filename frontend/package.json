@@ -25,6 +25,7 @@
     "react-hook-form": "^7.51.5",
     "react-merge-refs": "^2.1.1",
     "react-redux": "^9.1.2",
+    "react-youtube": "^10.1.0",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
     "sass": "^1.77.1",
