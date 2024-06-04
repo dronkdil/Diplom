@@ -6,5 +6,5 @@ public class ActualLessonDto
     public string Description { get; set; } = null!;
     public string HomeworkStatus { get; set; } = null!;
     public string HomeworkDescription { get; set; } = null!;
-    public string VideoUrl { get; set; } = null!;
+    public string VideoType { get; set; } = null!;
 }

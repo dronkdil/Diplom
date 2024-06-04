@@ -1,14 +1,18 @@
 ﻿using Backend.Core.Futures.Users.Teachers;
 using Backend.Core.Gateways;
+using Backend.Core.Interfaces.BlobStorage;
 using Backend.Core.Interfaces.JwtTokenFactory;
 using Backend.Core.Interfaces.PasswordHasher;
 using Backend.Core.Interfaces.UrlTypeValidator;
+using Backend.Core.Interfaces.YoutubeLink;
 using Backend.Domain.Options;
 using Backend.Infrastructure.EF;
 using Backend.Infrastructure.Gateways;
+using Backend.Infrastructure.Implementations.BlobStorage;
 using Backend.Infrastructure.Implementations.JwtTokenFactory;
 using Backend.Infrastructure.Implementations.PasswordHasher;
 using Backend.Infrastructure.Implementations.UrlTypeValidator;
+using Backend.Infrastructure.Implementations.YoutubeLink;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +38,8 @@ public static class ServiceExtension
         services.AddTransient<ILessonGateway, LessonGateway>();
         services.AddTransient<IHomeworkGateway, HomeworkGateway>();
         services.AddTransient<IUrlTypeCorrectValidator, UrlTypeCorrectValidator>();
+        services.AddTransient<IBlobStorage, BlobStorage>();
+        services.AddTransient<IYoutubeLinkParser, YoutubeLinkParser>();
         return services;
     }
 }

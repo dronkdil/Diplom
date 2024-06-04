@@ -2,7 +2,7 @@
 
 namespace Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Requests;
 
-public class CreateLessonDto
+public class CreateLessonWithYoutubeDto
 {
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;

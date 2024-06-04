@@ -5,5 +5,5 @@ namespace Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Requests;
 
 public class UpdateLessonVideoWithYoutubeDto : UpdateLessonDto
 {
-    public IFormFile Video { get; set; } = null!;
+    public string YoutubeLink { get; set; } = null!;
 }

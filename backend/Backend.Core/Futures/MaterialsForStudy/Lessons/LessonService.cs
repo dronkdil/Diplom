@@ -3,7 +3,11 @@ using Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Requests;
 using Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Responses;
 using Backend.Core.Futures.MaterialsForStudy.Lessons.Responses;
 using Backend.Core.Gateways;
+using Backend.Core.Interfaces.BlobStorage;
+using Backend.Core.Interfaces.YoutubeLink;
+using Backend.Domain.Constants;
 using Backend.Domain.Entities;
+using Backend.Domain.Entities.Enums;
 using Backend.Domain.Responses.Base;
 using FluentValidation;
 
@@ -13,21 +17,23 @@ public class LessonService : ILessonService
 {
     private readonly ILessonGateway _lessonGateway;
     private readonly IMapper _mapper;
-    private readonly IValidator<CreateLessonDto> _createLessonValidator;
+    private readonly IValidator<CreateLessonWithYoutubeDto> _createLessonValidator;
+    private readonly IYoutubeLinkParser _youtubeLinkParser;
 
-    public LessonService(ILessonGateway lessonGateway, IMapper mapper, IValidator<CreateLessonDto> createLessonValidator)
+    public LessonService(ILessonGateway lessonGateway, IMapper mapper, IValidator<CreateLessonWithYoutubeDto> createLessonValidator, IYoutubeLinkParser youtubeLinkParser)
     {
         _lessonGateway = lessonGateway;
         _mapper = mapper;
         _createLessonValidator = createLessonValidator;
+        _youtubeLinkParser = youtubeLinkParser;
     }
 
-    public async Task<Response> CreateAsync(CreateLessonDto dto)
+    public async Task<Response> CreateWithYoutubeAsync(CreateLessonWithYoutubeDto withYoutubeDto)
     {
-        if (await _createLessonValidator.ValidateAsync(dto) is { IsValid: false } result)
+        if (await _createLessonValidator.ValidateAsync(withYoutubeDto) is { IsValid: false } result)
             return Response.ValidationFailed(result.Errors);
-
-        var lesson = _mapper.Map<Lesson>(dto);
+        
+        var lesson = _mapper.Map<Lesson>(withYoutubeDto);
         await _lessonGateway.AddAsync(lesson);
         return Response.Success();
     }
@@ -54,11 +60,12 @@ public class LessonService : ILessonService
         });
     }
 
-    public async Task<Response<ActualLessonDto>> UpdateVideoByUrlAsync(UpdateLessonVideoByUrlDto dto)
+    public async Task<Response<ActualLessonDto>> UpdateVideoYoutubeAsync(UpdateLessonVideoWithYoutubeDto dto)
     {
         return await UpdateAsync(dto.LessonId, o =>
         {
-            o.VideoUrl = dto.VideoUrl;
+            o.YoutubeVideoId = _youtubeLinkParser.GetVideoId(dto.YoutubeLink);
+            o.VideoType = LessonVideoTypes.YoutubeVideo;
         });
     }
 
@@ -80,6 +87,14 @@ public class LessonService : ILessonService
     }
 
     private async Task<Response<ActualLessonDto>> UpdateAsync(int id, Action<Lesson> configure)
+    {
+        var actual = await _lessonGateway.UpdateAsync(id, configure);
+        return actual == null
+            ? ActualLessonResponseHelper.InvalidId()
+            : Response.Success(_mapper.Map<ActualLessonDto>(actual));
+    }
+    
+    private async Task<Response<ActualLessonDto>> UpdateWithAsyncConfigureAsync(int id, Func<Lesson, Task> configure)
     {
         var actual = await _lessonGateway.UpdateAsync(id, configure);
         return actual == null

@@ -20,9 +20,9 @@ public class LessonController : Controller
 
     [HttpPost("lesson/create")]
     [Authorize(AuthorizationPolicies.Teacher)]
-    public async Task<Response> Create([FromBody] CreateLessonDto dto)
+    public async Task<Response> Create([FromForm] CreateLessonWithYoutubeDto withYoutubeDto)
     {
-        return await _lessonService.CreateAsync(dto);
+        return await _lessonService.CreateWithYoutubeAsync(withYoutubeDto);
     }
     
     [HttpPost("lesson/remove")]
@@ -52,11 +52,11 @@ public class LessonController : Controller
         return await _lessonService.UpdateDescriptionAsync(dto);
     }
     
-    [HttpPost("lesson/update-video-by-id")]
+    [HttpPost("lesson/update-video-with-youtube")]
     [Authorize(AuthorizationPolicies.Teacher)]
-    public async Task<Response<ActualLessonDto>> UpdateVideoByUrl([FromBody] UpdateLessonVideoByUrlDto dto)
+    public async Task<Response<ActualLessonDto>> UpdateVideoWithYoutube([FromBody] UpdateLessonVideoWithYoutubeDto dto)
     {
-        return await _lessonService.UpdateVideoByUrlAsync(dto);
+        return await _lessonService.UpdateVideoYoutubeAsync(dto);
     }
     
     [HttpPost("lesson/update-homework")]

@@ -5,17 +5,17 @@ using Backend.Domain.Entities;
 
 namespace Backend.Core.Futures.MaterialsForStudy.Lessons.Mapper.Actions;
 
-public class YoutubeLinkParseAction : IMappingAction<CreateLessonWithYoutubeDto, Lesson>
+public class YoutubeVideoIdAction : IMappingAction<CreateLessonWithYoutubeDto, Lesson>
 {
     private readonly IYoutubeLinkParser _youtubeLinkParser;
 
-    public YoutubeLinkParseAction(IYoutubeLinkParser youtubeLinkParser)
+    public YoutubeVideoIdAction(IYoutubeLinkParser youtubeLinkParser)
     {
         _youtubeLinkParser = youtubeLinkParser;
     }
 
     public void Process(CreateLessonWithYoutubeDto source, Lesson destination, ResolutionContext context)
     {
-        destination.YoutubeVideoId = _youtubeLinkParser.GetVideoId();
+        destination.YoutubeVideoId = _youtubeLinkParser.GetVideoId(source.YoutubeLink);
     }
 }

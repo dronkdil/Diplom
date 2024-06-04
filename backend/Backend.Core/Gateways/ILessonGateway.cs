@@ -8,4 +8,5 @@ public interface ILessonGateway
     Task AddAsync(Lesson lesson);
     Task RemoveAsync(int id);
     Task<Lesson?> UpdateAsync(int id, Action<Lesson> configure);
+    Task<Lesson?> UpdateAsync(int id, Func<Lesson, Task> configure);
 }

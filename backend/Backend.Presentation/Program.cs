@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Azure.Storage.Blobs;
 using Backend.Core;
 using Backend.Core.UserContext;
 using Backend.Infrastructure;
@@ -25,6 +26,7 @@ builder.Services.AddControllers(options =>
     });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddConfiguredSwagger();
+builder.Services.AddSingleton(_ => new BlobServiceClient(builder.Configuration.GetConnectionString("StorageAccount")));
 
 var app = builder.Build();
 app.UseCors(policyBuilder => policyBuilder

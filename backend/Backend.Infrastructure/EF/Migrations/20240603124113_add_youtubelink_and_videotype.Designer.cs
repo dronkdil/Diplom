@@ -4,6 +4,7 @@ using Backend.Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240603124113_add_youtubelink_and_videotype")]
+    partial class add_youtubelink_and_videotype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,7 +170,7 @@ namespace Backend.Infrastructure.EF.Migrations
                     b.Property<int>("VideoType")
                         .HasColumnType("int");
 
-                    b.Property<string>("YoutubeVideoId")
+                    b.Property<string>("YoutubeUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

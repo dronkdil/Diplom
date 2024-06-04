@@ -44,4 +44,15 @@ public class LessonGateway : ILessonGateway
         await _dataContext.SaveChangesAsync();
         return lesson;
     }
+    
+    public async Task<Lesson?> UpdateAsync(int id, Func<Lesson, Task> configure)
+    {
+        var lesson = await _dataContext.Lessons.FirstOrDefaultAsync(o => o.Id == id);
+        if (lesson == null)
+            return null;
+
+        await configure(lesson);
+        await _dataContext.SaveChangesAsync();
+        return lesson;
+    }
 }

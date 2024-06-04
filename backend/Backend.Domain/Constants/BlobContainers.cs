@@ -1,6 +1,8 @@
-﻿namespace Backend.Core.Interfaces.BlobStorage;
+﻿namespace Backend.Domain.Constants;
 
 public enum BlobContainers
 {
-    Avatars
+    Avatars,
+    Lessons,
+    Courses
 }
