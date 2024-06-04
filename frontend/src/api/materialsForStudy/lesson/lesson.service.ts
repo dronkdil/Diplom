@@ -1,5 +1,6 @@
 import $api from '@/api/api'
 import { CreateLessonType } from './type/create-lesson.type'
+import { OnViewLessonType } from './type/on-view-lesson.type'
 import { UpdateLessonDescriptionType } from './type/update-description.type'
 import { UpdateLessonHomeworkType } from './type/update-homework.type'
 import { UpdateLessonTitleType } from './type/update-title.type'
@@ -12,7 +13,8 @@ export const LessonEndpoints = {
 	updateDescription: '/lesson/update-description',
 	updateVideoWithYoutube: '/lesson/update-video-with-youtube',
 	updateHomework: '/lesson/update-homework',
-	getForPage: (id: number) => `/lesson/get-for-page?id=${id}`
+	getForPage: (id: number) => `/lesson/get-for-page?id=${id}`,
+	onView: `/lesson/on-view`
 }
 
 export const LessonService = {
@@ -28,5 +30,7 @@ export const LessonService = {
 	updateHomework: async (data: UpdateLessonHomeworkType) =>
 		await $api.post(LessonEndpoints.updateHomework, data),
 	updateVideoWithYoutube: async (data: UpdateLessonVideoWithYoutubeType) =>
-		await $api.post(LessonEndpoints.updateVideoWithYoutube, data)
+		await $api.post(LessonEndpoints.updateVideoWithYoutube, data),
+	onView: async (data: OnViewLessonType) =>
+		await $api.post(LessonEndpoints.onView, data)
 }

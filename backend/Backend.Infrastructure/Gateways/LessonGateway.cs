@@ -19,6 +19,7 @@ public class LessonGateway : ILessonGateway
         return await _dataContext.Lessons
             .Include(o => o.Module)
             .ThenInclude(o => o.Lessons)
+            .ThenInclude(o => o.Homeworks)
             .FirstOrDefaultAsync(o => o.Id == id);
     }
 
@@ -54,5 +55,15 @@ public class LessonGateway : ILessonGateway
         await configure(lesson);
         await _dataContext.SaveChangesAsync();
         return lesson;
+    }
+
+    public async Task<bool> OnViewAsync(int lessonId, int studentId)
+    {
+        if (await _dataContext.ViewedLessons.AnyAsync(o => o.LessonId == lessonId && o.StudentId == studentId) == true)
+            return false;
+
+        _dataContext.ViewedLessons.Add(new ViewedLessons { LessonId = lessonId, StudentId = studentId });
+        await _dataContext.SaveChangesAsync();
+        return true;
     }
 }

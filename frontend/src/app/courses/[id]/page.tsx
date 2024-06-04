@@ -60,6 +60,7 @@ const CoursePage = () => {
                 >
                     <DisclosureButton className={styles.module__button}>
                         <span>{o.title}</span>
+                        {o.completedLessons > 0 && <span>{o.completedLessons}/{o.lessons.length}</span>}
                     </DisclosureButton>
                     <DisclosurePanel className={styles.module__content}>
                         <p className={styles.module__description}>{o.description}</p>
@@ -68,7 +69,7 @@ const CoursePage = () => {
                                 key={i}
                                 title={o1.title}
                                 id={o1.id}
-                                isCompleted={false}
+                                isCompleted={o1.completed}
                             />)}
                         </div>
                         {(!o.lessons || o.lessons.length == 0) && <span className={styles.module__empty}>Немає уроків</span>}

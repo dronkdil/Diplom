@@ -9,4 +9,5 @@ public interface ILessonGateway
     Task RemoveAsync(int id);
     Task<Lesson?> UpdateAsync(int id, Action<Lesson> configure);
     Task<Lesson?> UpdateAsync(int id, Func<Lesson, Task> configure);
+    Task<bool> OnViewAsync(int lessonId, int studentId);
 }

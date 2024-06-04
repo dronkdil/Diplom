@@ -13,4 +13,5 @@ public interface ILessonService
     Task<Response<ActualLessonDto>> UpdateVideoYoutubeAsync(UpdateLessonVideoWithYoutubeDto dto);
     Task<Response<ActualLessonDto>> UpdateHomeworkAsync(UpdateLessonHomeworkDto dto);
     Task<Response<LessonForPageDto>> GetForPageAsync(int id);
+    Task<Response> OnView(OnViewLessonDto dto);
 }

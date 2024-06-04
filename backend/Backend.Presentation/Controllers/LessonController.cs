@@ -65,4 +65,11 @@ public class LessonController : Controller
     {
         return await _lessonService.UpdateHomeworkAsync(dto);
     }
+    
+    [HttpPost("lesson/on-view")]
+    [Authorize(AuthorizationPolicies.Student)]
+    public async Task<Response> UpdateHomeworkOnView([FromBody] OnViewLessonDto dto)
+    {
+        return await _lessonService.OnView(dto);
+    }
 }

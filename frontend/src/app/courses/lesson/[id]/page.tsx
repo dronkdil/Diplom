@@ -2,8 +2,11 @@
 import { LessonService } from "@/api/materialsForStudy/lesson/lesson.service"
 import { LessonForPageType } from "@/api/materialsForStudy/lesson/type/lesson-for-page.type"
 import { DefaultLink } from "@/components/links"
+import { useTypedMutation } from "@/hooks/useTypedMutation"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
+import { getUserData } from "@/lib/redux/slices/UserSlice"
 import { useParams } from "next/navigation"
+import { useSelector } from "react-redux"
 import YouTube from "react-youtube"
 import LessonButton from "../../components/lesson/LessonButton"
 import styles from "./Lesson.module.scss"
@@ -11,10 +14,17 @@ import Homework from "./components/homework/Homework"
 
 const LessonPage = () => {
   const {id} = useParams()
+  const user = useSelector(getUserData)
 
   const {data} = useTypedQuery<LessonForPageType>({
     name: `get-lesson-for-page-${id}`,
     request: () => LessonService.getForPage(Number(id)),
+  })
+
+  const {mutateAsync: onView} = useTypedMutation({
+    name: `on-view-${id}`,
+    request: () => LessonService.onView({lessonId: Number(id)}),
+    conditional: () => user.role == "Student"
   })
 
   return (
@@ -32,9 +42,10 @@ const LessonPage = () => {
                 const player = event.target
                 const duration = player.playerInfo.duration
                 const current = player.playerInfo.currentTime
-                // lesson completed, send request
-                // console.log(current > duration * 0.8)
-            }}
+
+                if (current > duration * 0.8)
+                  onView()
+              }}
             />}
         </div>
         
@@ -42,7 +53,7 @@ const LessonPage = () => {
         <div className={styles.page__undervideo}>
             {data?.videoType == "YoutubeVideo" && <DefaultLink download={data?.title} href={`https://www.yotube.com/watch?v=${data?.youtubeVideoId}` ?? ''}>Перейти на youtube</DefaultLink>}
         </div>
-        {data?.homeworkStatus && <Homework description={data?.homeworkDescription} />}
+        {data?.haveHomework && <Homework description={data?.homeworkDescription} />}
       </div>
       <div className={styles.page__lessons}>
         <div className={styles.lessons__side}>

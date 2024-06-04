@@ -10,10 +10,11 @@ public class Lesson : BaseEntity
     public string? VideoName { get; set; }
     public string? YoutubeVideoId { get; set; }
     public LessonVideoTypes VideoType { get; set; }
-    public bool HomeworkStatus { get; set; }
+    public bool HaveHomework { get; set; }
     public string? HomeworkDescription { get; set; } = null!;
     
     public int ModuleId { get; set; }
     public Module Module { get; set; } = null!;
     public ICollection<Homework> Homeworks { get; set; } = null!;
+    public ICollection<ViewedLessons> ViewedLessons { get; set; } = null!;
 }

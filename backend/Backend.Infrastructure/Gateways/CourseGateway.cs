@@ -85,6 +85,10 @@ public class CourseGateway : ICourseGateway
             .Include(o => o.Teacher)
             .Include(o => o.Modules)
             .ThenInclude(o => o.Lessons)
+            .ThenInclude(o => o.Homeworks)
+            .Include(o => o.Modules)
+            .ThenInclude(o => o.Lessons)
+            .ThenInclude(o => o.ViewedLessons)
             .FirstOrDefaultAsync(o => o.Id == courseId);
     }
 

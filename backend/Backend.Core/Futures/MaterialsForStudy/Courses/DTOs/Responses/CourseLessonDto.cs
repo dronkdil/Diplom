@@ -1,6 +1,6 @@
 ﻿namespace Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Responses;
 
-public class ShortLessonDto
+public class CourseLessonDto
 {
     public int Id { get; set; }
     public string Title { get; set; } = null!;

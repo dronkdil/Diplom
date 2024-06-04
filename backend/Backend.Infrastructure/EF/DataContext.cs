@@ -19,6 +19,7 @@ public class DataContext : DbContext
     public DbSet<Homework> Homeworks { get; set; } = null!;
     public DbSet<HomeworkFile> HomeworkFiles { get; set; } = null!;
     public DbSet<Certificate> Certificates { get; set; } = null!;
+    public DbSet<ViewedLessons> ViewedLessons { get; set; } = null!;
 
     public DataContext(DbContextOptions<DataContext> options) : base(options)
     {

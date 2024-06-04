@@ -27,4 +27,5 @@ export type ModuleType = {
 export type LessonType = {
 	id: number
 	title: string
+	completed: boolean
 }

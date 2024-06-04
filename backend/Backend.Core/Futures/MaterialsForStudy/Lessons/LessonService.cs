@@ -3,9 +3,8 @@ using Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Requests;
 using Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Responses;
 using Backend.Core.Futures.MaterialsForStudy.Lessons.Responses;
 using Backend.Core.Gateways;
-using Backend.Core.Interfaces.BlobStorage;
 using Backend.Core.Interfaces.YoutubeLink;
-using Backend.Domain.Constants;
+using Backend.Core.UserContext;
 using Backend.Domain.Entities;
 using Backend.Domain.Entities.Enums;
 using Backend.Domain.Responses.Base;
@@ -19,13 +18,15 @@ public class LessonService : ILessonService
     private readonly IMapper _mapper;
     private readonly IValidator<CreateLessonWithYoutubeDto> _createLessonValidator;
     private readonly IYoutubeLinkParser _youtubeLinkParser;
+    private readonly IUserContext _userContext;
 
-    public LessonService(ILessonGateway lessonGateway, IMapper mapper, IValidator<CreateLessonWithYoutubeDto> createLessonValidator, IYoutubeLinkParser youtubeLinkParser)
+    public LessonService(ILessonGateway lessonGateway, IMapper mapper, IValidator<CreateLessonWithYoutubeDto> createLessonValidator, IYoutubeLinkParser youtubeLinkParser, IUserContext userContext)
     {
         _lessonGateway = lessonGateway;
         _mapper = mapper;
         _createLessonValidator = createLessonValidator;
         _youtubeLinkParser = youtubeLinkParser;
+        _userContext = userContext;
     }
 
     public async Task<Response> CreateWithYoutubeAsync(CreateLessonWithYoutubeDto withYoutubeDto)
@@ -74,7 +75,7 @@ public class LessonService : ILessonService
         return await UpdateAsync(dto.LessonId, o =>
         {
             o.HomeworkDescription = dto.Description;
-            o.HomeworkStatus = dto.Status;
+            o.HaveHomework = dto.Status;
         });
     }
 
@@ -84,6 +85,12 @@ public class LessonService : ILessonService
         return lesson == null
             ? Response.Failed<LessonForPageDto>()
             : Response.Success(_mapper.Map<LessonForPageDto>(lesson));
+    }
+
+    public async Task<Response> OnView(OnViewLessonDto dto)
+    {
+        await _lessonGateway.OnViewAsync(dto.LessonId, _userContext.UserId);
+        return Response.Success();
     }
 
     private async Task<Response<ActualLessonDto>> UpdateAsync(int id, Action<Lesson> configure)

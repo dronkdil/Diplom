@@ -60,7 +60,7 @@ const LessonPage = () => {
             </Setting>
             <Setting 
                 title={"Домашня робота"} 
-                actualData={data?.homeworkStatus ? 'Присутня' : 'Відсутня'}
+                actualData={data?.haveHomework ? 'Присутня' : 'Відсутня'}
                 request={(values) => LessonService.updateHomework({lessonId: Number(id), ...values} as UpdateLessonHomeworkType)}
                 onSuccess={(data) => setData(data)}
             >
@@ -72,7 +72,7 @@ const LessonPage = () => {
                             onLabel="вкл." 
                             offLabel="викл."
                             onChange={onChange}
-                            defaultValue={data?.homeworkStatus} />}
+                            defaultValue={data?.haveHomework} />}
                     />
                     <DefaultInput icon={<SquarePenIcon />} defaultValue={data?.homeworkDescription} placeholder="Опис домашньої роботи" {...register("description")} />
                 </>}

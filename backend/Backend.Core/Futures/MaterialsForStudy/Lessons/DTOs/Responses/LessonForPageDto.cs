@@ -7,7 +7,7 @@ public class LessonForPageDto
     public int Id { get; set; }
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public bool HomeworkStatus { get; set; }
+    public bool HaveHomework { get; set; }
     public string HomeworkDescription { get; set; } = null!;
     public string? VideoName { get; set; }
     public string? YoutubeVideoId { get; set; }
