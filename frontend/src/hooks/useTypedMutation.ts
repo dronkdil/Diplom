@@ -10,6 +10,7 @@ export type UseMutationOptions<TData> = {
 	name: string
 	request: () => Promise<MutationResponse<TData>>
 	onSuccess?: (response: MutationResponse<TData>) => void
+	onError?: (errors: Record<string, ResponseError>) => void
 	conditional?: () => boolean
 }
 
@@ -17,6 +18,7 @@ export const useTypedMutation = <TData>({
 	name,
 	request,
 	onSuccess,
+	onError,
 	conditional
 }: UseMutationOptions<TData>) => {
 	const [errors, setErrors] = useState<Record<string, ResponseError>>({})
@@ -38,6 +40,8 @@ export const useTypedMutation = <TData>({
 				{} as Record<string, ResponseError>
 			)
 			setErrors(recordedErrors ?? {})
+
+			onError && onError(recordedErrors ?? {})
 		},
 		onSuccess: (response) => {
 			onSuccess && onSuccess(response)

@@ -6,6 +6,7 @@ import { useTypedMutation } from "@/hooks/useTypedMutation"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { getUserData } from "@/lib/redux/slices/UserSlice"
 import { useParams } from "next/navigation"
+import { useState } from "react"
 import { useSelector } from "react-redux"
 import YouTube from "react-youtube"
 import LessonButton from "../../components/lesson/LessonButton"
@@ -24,8 +25,12 @@ const LessonPage = () => {
   const {mutateAsync: onView} = useTypedMutation({
     name: `on-view-${id}`,
     request: () => LessonService.onView({lessonId: Number(id)}),
-    conditional: () => user.role == "Student"
+    conditional: () => user.role == "Student",
+    onSuccess: () => setIsViewed(true),
+    onError: () => setIsViewed(false)
   })
+
+  const [isViewed, setIsViewed] = useState(false)
 
   return (
     <div className={styles.page}>
@@ -43,8 +48,10 @@ const LessonPage = () => {
                 const duration = player.playerInfo.duration
                 const current = player.playerInfo.currentTime
 
-                if (current > duration * 0.8)
+                if (!isViewed && current > duration * 0.8) {
                   onView()
+                  setIsViewed(true)
+                }
               }}
             />}
         </div>
