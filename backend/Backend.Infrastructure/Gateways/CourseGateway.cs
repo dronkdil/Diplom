@@ -98,6 +98,11 @@ public class CourseGateway : ICourseGateway
             .Include(o => o.Courses)
             .ThenInclude(o => o.Modules)
             .ThenInclude(o => o.Lessons)
+            .ThenInclude(o => o.Homeworks)
+            .Include(o => o.Courses)
+            .ThenInclude(o => o.Modules)
+            .ThenInclude(o => o.Lessons)
+            .ThenInclude(o => o.ViewedLessons)
             .FirstAsync(o => o.Id == studentId);
 
         return student.Courses;
