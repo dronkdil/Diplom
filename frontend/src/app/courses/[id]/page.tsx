@@ -3,6 +3,7 @@ import { CourseService } from "@/api/materialsForStudy/course/course.service"
 import { CourseTypeInfoType } from "@/api/materialsForStudy/course/types/course-page-info.type"
 import Skeleton from "@/components/skeleton/Skeleton"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
+import { getIsJoinedCourse } from "@/lib/redux/slices/IsJoinedCourseSlice"
 import { getUserData } from "@/lib/redux/slices/UserSlice"
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react"
 import { useParams } from "next/navigation"
@@ -14,10 +15,17 @@ import CourseHeader from "./components/header/CourseHeader"
 const CoursePage = () => {
     const { id } = useParams()
     const user = useSelector(getUserData)
+    const isJoinedCourse = useSelector(getIsJoinedCourse)
 
     const {data: course, isPending: coursePending, isFailedResponse} = useTypedQuery<CourseTypeInfoType>({
         name: `get-course-page-info-${id}`,
         request: () => CourseService.getCourse(Number(id))
+    })
+
+    const {data: averageScore, isPending: averageScorePending} = useTypedQuery<number>({
+        name: `get-average-score-${id}`,
+        request: () => CourseService.getAverageScore(Number(id)),
+        conditional: () => isJoinedCourse
     })
 
     if (isFailedResponse) {
@@ -35,8 +43,9 @@ const CoursePage = () => {
 
                 {course && <>
                     <img src={course?.imageUrl} alt={course?.title ?? ''} className={styles.course__image} />
-                    <h3>{course?.title}</h3>
+                    <h3 className={styles.course__title}>{course?.title}</h3>
                     <p className={styles.course__description}>{course?.description}</p>
+                    {isJoinedCourse && !averageScorePending && <p className={styles.course__description}>Середній бал {averageScore}</p>}
                 </>}
             </div>
             <div className={styles.course__modules}>

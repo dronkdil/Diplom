@@ -9,7 +9,7 @@ type QueryError = AxiosError<ApiResponse>
 export type UseQueryOptions<TData> = {
 	name: string
 	request: () => Promise<QueryResponse<TData>>
-	// onSuccess?: (response: QueryResponse<TData>) => void
+	onSuccess?: (response: QueryResponse<TData>) => void
 	conditional?: () => boolean
 	successConditional?: (response: QueryResponse<TData> | undefined) => boolean
 }
@@ -18,7 +18,8 @@ export const useTypedQuery = <TData>({
 	name,
 	request,
 	conditional,
-	successConditional
+	successConditional,
+	onSuccess
 }: UseQueryOptions<TData>) => {
 	successConditional ??= () => true
 
@@ -39,6 +40,9 @@ export const useTypedQuery = <TData>({
 
 	useEffect(() => {
 		setData(axiosResponse?.data.value)
+
+		if (axiosResponse && onSuccess) onSuccess(axiosResponse)
+
 		if (successConditional)
 			setSuccessConditionalResult(successConditional(axiosResponse))
 	}, [axiosResponse])

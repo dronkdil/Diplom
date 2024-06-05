@@ -13,4 +13,5 @@ public interface ICourseService
     Task<Response<ActualCourseDto>> UpdateDescriptionAsync(UpdateDescriptionDto dto);
     Task<Response<ActualCourseDto>> UpdateImageByUrlAsync(UpdateImageByUrlDto dto);
     Task<Response<CoursePageDto>> GetCoursePageDataAsync(int courseId);
+    Task<Response<double>> GetAverageScoreAsync(int courseId);
 }

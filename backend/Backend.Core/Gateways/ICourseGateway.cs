@@ -14,4 +14,5 @@ public interface ICourseGateway
     Task<bool> HaveStudentAsync(int userId, int courseId);
     Task<Course?> GetByIdWithTeacherAndModulesAsync(int courseId);
     Task<IEnumerable<Course>> GetStudentCoursesWithModulesAndLessonsAsync(int studentId);
+    Task<double?> GetAverageScoreAsync(int courseId, int studentId);
 }

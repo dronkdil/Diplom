@@ -3,6 +3,7 @@ using Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Requests;
 using Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Responses;
 using Backend.Core.Futures.Users.Teachers.DTOs;
 using Backend.Core.Gateways;
+using Backend.Core.UserContext;
 using Backend.Domain.Entities;
 using Backend.Domain.Responses.Base;
 using FluentValidation;
@@ -15,13 +16,15 @@ public class CourseService : ICourseService
     private readonly IMapper _mapper;
     private readonly IValidator<CreateCourseDto> _createCourseValidator;
     private readonly IValidator<UpdateImageByUrlDto> _updateImageByUrlValidator;
+    private readonly IUserContext _userContext;
 
-    public CourseService(ICourseGateway courseGateway, IMapper mapper, IValidator<CreateCourseDto> createCourseValidator, IValidator<UpdateImageByUrlDto> updateImageByUrlValidator)
+    public CourseService(ICourseGateway courseGateway, IMapper mapper, IValidator<CreateCourseDto> createCourseValidator, IValidator<UpdateImageByUrlDto> updateImageByUrlValidator, IUserContext userContext)
     {
         _courseGateway = courseGateway;
         _mapper = mapper;
         _createCourseValidator = createCourseValidator;
         _updateImageByUrlValidator = updateImageByUrlValidator;
+        _userContext = userContext;
     }
 
     public async Task<Response> CreateAsync(CreateCourseDto dto)
@@ -83,5 +86,11 @@ public class CourseService : ICourseService
             Response.Failed();
         
         return Response.Success(_mapper.Map<CoursePageDto>(course));
+    }
+
+    public async Task<Response<double>> GetAverageScoreAsync(int courseId)
+    {
+        var score = await _courseGateway.GetAverageScoreAsync(courseId, _userContext.UserId);
+        return Response.Success(score ?? 0);
     }
 }

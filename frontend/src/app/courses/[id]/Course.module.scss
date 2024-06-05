@@ -2,11 +2,15 @@
     @apply flex gap-2 w-full max-w-[850px] mx-auto mt-20;
 
     .course__info {
-        @apply w-full max-w-[300px] flex flex-col items-center gap-3;
-    }   
+        @apply w-full max-w-[300px] flex flex-col items-start gap-1;
+    }
 
     .course__image {
-        @apply rounded-md;
+        @apply rounded-md w-[200px] h-[200px];
+    }
+
+    .course__title {
+        @apply mt-1;
     }
 
     .course__description {

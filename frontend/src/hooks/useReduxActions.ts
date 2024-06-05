@@ -1,4 +1,5 @@
 import { authenticationSlice } from '@/lib/redux/slices/AuthenticationSlice'
+import { isJoinedCourseSlice } from '@/lib/redux/slices/IsJoinedCourseSlice'
 import { profileTitleSlice } from '@/lib/redux/slices/ProfileTitleSlice'
 import { shortUserDataSlice } from '@/lib/redux/slices/UserSlice'
 import { bindActionCreators } from '@reduxjs/toolkit'
@@ -14,7 +15,8 @@ export function useReduxActions() {
 				{
 					...profileTitleSlice.actions,
 					...authenticationSlice.actions,
-					...shortUserDataSlice.actions
+					...shortUserDataSlice.actions,
+					...isJoinedCourseSlice.actions
 				},
 				dispatch
 			),

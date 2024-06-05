@@ -64,4 +64,11 @@ public class CourseController : Controller
     {
         return await _courseService.GetCoursePageDataAsync(courseId);
     }
+    
+    [HttpGet("/course/get-average-score")]
+    [Authorize(AuthorizationPolicies.Student)]
+    public async Task<Response<double>> GetAverageScore(int courseId)
+    {
+        return await _courseService.GetAverageScoreAsync(courseId);
+    }
 }

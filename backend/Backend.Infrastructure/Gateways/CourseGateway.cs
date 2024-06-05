@@ -102,4 +102,16 @@ public class CourseGateway : ICourseGateway
 
         return student.Courses;
     }
+
+    public async Task<double?> GetAverageScoreAsync(int courseId, int studentId)
+    {
+        var lessons = await _dataContext.Lessons
+            .Include(o => o.Module)
+            .Include(o => o.Homeworks)
+            .Where(o => o.Module.CourseId == courseId)
+            .ToListAsync();
+            
+        return lessons
+            .Average(o => o.Homeworks.Average(o1 => o1.Appraisal));
+    }
 }

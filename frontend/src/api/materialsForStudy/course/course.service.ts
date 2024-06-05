@@ -10,7 +10,8 @@ export const CourseEndpoints = {
 	updateTitle: '/course/update-title',
 	updateDescription: '/course/update-description',
 	updateImageByUrl: '/course/update-image-by-url',
-	getCourse: (id: number) => `/course/get-page-data?courseId=${id}`
+	getCourse: (id: number) => `/course/get-page-data?courseId=${id}`,
+	getAverageScore: (id: number) => `/course/get-average-score?courseId=${id}`
 }
 
 export const CourseService = {
@@ -22,5 +23,7 @@ export const CourseService = {
 	updateDescription: async (data: UpdateCourseDescriptionType) =>
 		await $api.post(CourseEndpoints.updateDescription, data),
 	updateImageByUrl: async (data: UpdateCourseImageByUrlType) =>
-		await $api.post(CourseEndpoints.updateImageByUrl, data)
+		await $api.post(CourseEndpoints.updateImageByUrl, data),
+	getAverageScore: async (id: number) =>
+		await $api.get(CourseEndpoints.getAverageScore(id))
 }

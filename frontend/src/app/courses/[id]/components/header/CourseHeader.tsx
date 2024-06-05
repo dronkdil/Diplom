@@ -2,6 +2,7 @@ import { StudentService } from "@/api/users/student/student.service"
 import { AccentButton, DefaultButton } from "@/components/buttons"
 import AccentLink from "@/components/links/accent/AccentLink"
 import Skeleton from "@/components/skeleton/Skeleton"
+import { useReduxActions } from "@/hooks/useReduxActions"
 import { useTypedMutation } from "@/hooks/useTypedMutation"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { getAuthenticated } from "@/lib/redux/slices/AuthenticationSlice"
@@ -17,11 +18,15 @@ export type CourseHeaderType = {
 const CourseHeader = ({courseId}: CourseHeaderType) => {
     const user = useSelector(getUserData)
     const isAuthenticated = useSelector(getAuthenticated)
+    const {setIsJoinedCourse} = useReduxActions()
     
     const {data: isJoinedCourse, isPending: joinedCoursePending, refetch: joinedCourseRefetch, setData: setJoinedCourse} = useTypedQuery<boolean>({
         name: `already-joined-course-${courseId}`,
         request: () => StudentService.alreadyJoinedCourse(Number(courseId)),
-        conditional: () => user != undefined && user.role == "Student"
+        conditional: () => user != undefined && user.role == "Student",
+        onSuccess: (response) => {
+            setIsJoinedCourse(response.data.value)
+        }
     })
 
     const {mutateAsync: joinCourse, isPending: joinCoursePending} = useTypedMutation({

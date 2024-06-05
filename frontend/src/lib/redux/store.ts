@@ -12,6 +12,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/es/storage'
 import { authenticationSlice } from './slices/AuthenticationSlice'
+import { isJoinedCourseSlice } from './slices/IsJoinedCourseSlice'
 import { profileTitleSlice } from './slices/ProfileTitleSlice'
 import { shortUserDataSlice } from './slices/UserSlice'
 
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
 	userData: persistReducer(
 		{ key: 'user-data', storage },
 		shortUserDataSlice.reducer
-	)
+	),
+	joinedCourse: isJoinedCourseSlice.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
