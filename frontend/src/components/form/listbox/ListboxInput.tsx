@@ -1,6 +1,6 @@
 "use client"
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from "@headlessui/react"
-import { forwardRef, useState } from "react"
+import { forwardRef, useEffect, useState } from "react"
 import InputWrapper from "../input/wrapper/InputWrapper"
 import styles from "./ListboxInput.module.scss"
 
@@ -9,6 +9,7 @@ export type ListboxInputProps = {
     icon: React.ReactElement
     placeholder?: string
     onChange?: (item: ListboxInputItem) => void
+    valueId: number
 }
 
 export type ListboxInputItem = {
@@ -16,9 +17,13 @@ export type ListboxInputItem = {
     text: any
 }
 
-const ListboxInput = forwardRef<HTMLElement, ListboxInputProps>(({values, icon, placeholder, onChange}: ListboxInputProps, ref) => {
-    const [value, setValue] = useState<ListboxInputItem | null>(null)
+const ListboxInput = forwardRef<HTMLElement, ListboxInputProps>(({values, icon, placeholder, onChange, valueId}: ListboxInputProps, ref) => {
+    const [value, setValue] = useState<ListboxInputItem | undefined>(undefined)
 
+    useEffect(() => {
+        setValue(values.find(o => o.id == valueId))
+    }, [valueId])
+    
     return (
         <Listbox
             value={value?.id} 

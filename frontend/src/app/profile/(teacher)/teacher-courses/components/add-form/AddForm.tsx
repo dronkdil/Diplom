@@ -36,7 +36,14 @@ const AddForm = ({modules, addModule, addLesson}: AddFormProps) => {
     }
   })
 
-  const {register: registerLesson, getValues: getLessonValues, reset: resetLessonForm, control: lessonControl} = useForm()
+  const {register: registerLesson, getValues: getLessonValues, reset: resetLessonForm, control: lessonControl} = useForm({
+    defaultValues: {
+      title: "",
+      description: "",
+      youtubeLink: "",
+      moduleId: -1
+    } as CreateLessonType
+  })
   const {isPending: lessonCreating, mutateAsync: createLesson, errors: lessonErrors} = useTypedMutation({
     name: "create-lesson",
     request: () => LessonService.create(getLessonValues() as CreateLessonType),
@@ -51,8 +58,16 @@ const AddForm = ({modules, addModule, addLesson}: AddFormProps) => {
     <div className={styles.forms}>
       <div className={styles.form}>
           <h3>Додати модуль</h3>
-          <DefaultInput icon={<TypeIcon />} placeholder="Назва" {...registerModule("title")} error={moduleErrors.title} />
-          <DefaultInput icon={<AlignLeftIcon />} placeholder="Короткий опис" {...registerModule("description")} error={moduleErrors.description} />
+          <DefaultInput 
+            icon={<TypeIcon />} 
+            placeholder="Назва" 
+            {...registerModule("title")} 
+            error={moduleErrors.title} />
+          <DefaultInput 
+            icon={<AlignLeftIcon />} 
+            placeholder="Короткий опис" 
+            {...registerModule("description")} 
+            error={moduleErrors.description} />
           <AccentButton isLoading={moduleCreating} onClick={() => createModule()}>Додати</AccentButton>
       </div>
       <div className={styles.form}>
@@ -70,12 +85,14 @@ const AddForm = ({modules, addModule, addLesson}: AddFormProps) => {
           <DefaultInput
             icon={<FileIcon />} 
             placeholder="Посилання на youtube відео"
-            {...registerLesson("youtubeLink")} />
+            {...registerLesson("youtubeLink")}
+            error={lessonErrors.youtubeLink} />
           <ListboxInput
             values={modules.map(o => ({id: o.id, text: o.title}))} 
             icon={<ComponentIcon />} 
             placeholder="Модуль" 
-            onChange={o => moduleIdField.onChange(o.id)} />
+            onChange={o => moduleIdField.onChange(o.id)}
+            valueId={moduleIdField.value} />
           <AccentButton isLoading={lessonCreating} onClick={() => createLesson()}>Додати</AccentButton>
       </div>
     </div>

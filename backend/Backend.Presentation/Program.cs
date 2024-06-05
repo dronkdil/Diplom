@@ -1,7 +1,10 @@
+using System.Net.Mime;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Storage.Blobs;
 using Backend.Core;
 using Backend.Core.UserContext;
+using Backend.Domain.Responses.Base;
 using Backend.Infrastructure;
 using Backend.Presentation.Contexts;
 using Backend.Presentation.Filters;
@@ -35,6 +38,19 @@ app.UseCors(policyBuilder => policyBuilder
     .AllowAnyHeader()
     .AllowAnyMethod()
 );
+app.UseExceptionHandler(exceptionHandlerApp =>
+{
+    exceptionHandlerApp.Run(async context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        context.Response.ContentType = MediaTypeNames.Application.Json;
+
+        var options = new JsonSerializerOptions();
+        var enumConverter = new JsonStringEnumConverter();
+        options.Converters.Add(enumConverter);
+        await context.Response.WriteAsync(JsonSerializer.Serialize(Response.Failed("Server error"), options));
+    });
+});
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSwagger();

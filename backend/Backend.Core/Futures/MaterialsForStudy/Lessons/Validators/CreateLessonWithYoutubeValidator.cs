@@ -18,18 +18,18 @@ public class CreateLessonWithYoutubeValidator : AbstractValidator<CreateLessonWi
         RuleFor(o => o.YoutubeLink)
             .NotEmpty()
             .WithMessage("Відео обов'язкове")
-            .Must((entity, value, context) => IsValidYoutubeLink(new Uri(value)))
+            .Must((entity, value, context) => IsValidYoutubeLink(value))
             .WithMessage("Некоректний формат youtube");
     }
 
     // TODO: create a class to validate and parse youtube link
     private static readonly string[] ValidAuthorities = { "youtube.com", "www.youtube.com", "youtu.be", "www.youtu.be" };
     
-    private bool IsValidYoutubeLink(Uri uri)
+    private bool IsValidYoutubeLink(string link)
     {
         try
         {
-            var authority = new UriBuilder(uri).Uri.Authority.ToLower();
+            var authority = new UriBuilder(new Uri(link)).Uri.Authority.ToLower();
             return ValidAuthorities.Contains(authority);
         }
         catch

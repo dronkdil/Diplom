@@ -20,9 +20,9 @@ public class LessonController : Controller
 
     [HttpPost("lesson/create")]
     [Authorize(AuthorizationPolicies.Teacher)]
-    public async Task<Response> Create([FromForm] CreateLessonWithYoutubeDto withYoutubeDto)
+    public async Task<Response> Create([FromBody] CreateLessonWithYoutubeDto dto)
     {
-        return await _lessonService.CreateWithYoutubeAsync(withYoutubeDto);
+        return await _lessonService.CreateWithYoutubeAsync(dto);
     }
     
     [HttpPost("lesson/remove")]
