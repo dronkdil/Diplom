@@ -4,6 +4,7 @@ export type CourseTypeInfoType = {
 	title: string
 	description: string
 	limitOfStudents: number
+	chatLink: string
 	teacher: TeacherType
 	modules: ModuleType[]
 }

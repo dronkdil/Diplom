@@ -1,6 +1,7 @@
 "use client"
 import { CourseService } from "@/api/materialsForStudy/course/course.service"
 import { CourseTypeInfoType } from "@/api/materialsForStudy/course/types/course-page-info.type"
+import { UpdateCourseChatLinkType } from "@/api/materialsForStudy/course/types/update-chat-link.type"
 import { UpdateCourseDescriptionType } from "@/api/materialsForStudy/course/types/update-description.type"
 import { UpdateCourseImageByUrlType } from "@/api/materialsForStudy/course/types/update-image-by-url.type"
 import { UpdateCourseTitleType } from "@/api/materialsForStudy/course/types/update-title.type"
@@ -11,7 +12,7 @@ import Skeleton from "@/components/skeleton/Skeleton"
 import { useReduxActions } from "@/hooks/useReduxActions"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { Routes } from "@/lib/routes.constants"
-import { ImageIcon, SquarePenIcon } from "lucide-react"
+import { ImageIcon, LinkIcon, SquarePenIcon } from "lucide-react"
 import { useParams } from "next/navigation"
 import { useEffect } from "react"
 import AddForm from "../components/add-form/AddForm"
@@ -70,6 +71,16 @@ const TeacherCoursePage = () => {
                 >
                     {(register) => <>
                         <DefaultInput icon={<SquarePenIcon />} defaultValue={course?.description} placeholder="Опис" {...register("description")} />
+                    </>}
+                </Setting>
+                <Setting 
+                    title={"Посилання на чат"}
+                    actualData={course?.chatLink ?? 'Відсутня'}
+                    request={(values) => CourseService.updateChatLink({id: Number(id), ...values} as UpdateCourseChatLinkType)}
+                    onSuccess={(data) => setData({...course, ...data})}
+                >
+                    {(register) => <>
+                        <DefaultInput icon={<LinkIcon />} defaultValue={course?.chatLink} placeholder="Посилання" {...register("chatLink")} />
                     </>}
                 </Setting>
             </div>

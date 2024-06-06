@@ -1,4 +1,5 @@
 import $api from '@/api/api'
+import { UpdateCourseChatLinkType } from './types/update-chat-link.type'
 import { UpdateCourseDescriptionType } from './types/update-description.type'
 import { UpdateCourseImageByUrlType } from './types/update-image-by-url.type'
 import { UpdateCourseTitleType } from './types/update-title.type'
@@ -10,6 +11,7 @@ export const CourseEndpoints = {
 	updateTitle: '/course/update-title',
 	updateDescription: '/course/update-description',
 	updateImageByUrl: '/course/update-image-by-url',
+	updateChatLink: '/course/update-chat-link',
 	getCourse: (id: number) => `/course/get-page-data?courseId=${id}`,
 	getAverageScore: (id: number) => `/course/get-average-score?courseId=${id}`
 }
@@ -24,6 +26,8 @@ export const CourseService = {
 		await $api.post(CourseEndpoints.updateDescription, data),
 	updateImageByUrl: async (data: UpdateCourseImageByUrlType) =>
 		await $api.post(CourseEndpoints.updateImageByUrl, data),
+	updateChatLink: async (data: UpdateCourseChatLinkType) =>
+		await $api.post(CourseEndpoints.updateChatLink, data),
 	getAverageScore: async (id: number) =>
 		await $api.get(CourseEndpoints.getAverageScore(id))
 }

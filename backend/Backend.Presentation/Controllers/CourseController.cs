@@ -40,25 +40,32 @@ public class CourseController : Controller
     
     [HttpPost("/course/update-title")]
     [Authorize(AuthorizationPolicies.TeacherAndHigher)]
-    public async Task<Response<ActualCourseDto>> UpdateTitle([FromBody] UpdateTitleDto dto)
+    public async Task<Response<ActualCourseDto>> UpdateTitle([FromBody] UpdateCourseTitleDto dto)
     {
         return await _courseService.UpdateTitleAsync(dto);
     }
     
     [HttpPost("/course/update-image-by-url")]
     [Authorize(AuthorizationPolicies.TeacherAndHigher)]
-    public async Task<Response<ActualCourseDto>> UpdateImageByUrl([FromBody] UpdateImageByUrlDto dto)
+    public async Task<Response<ActualCourseDto>> UpdateImageByUrl([FromBody] UpdateCourseImageByUrlDto dto)
     {
         return await _courseService.UpdateImageByUrlAsync(dto);
     }
     
     [HttpPost("/course/update-description")]
     [Authorize(AuthorizationPolicies.TeacherAndHigher)]
-    public async Task<Response<ActualCourseDto>> UpdateDescription([FromBody] UpdateDescriptionDto dto)
+    public async Task<Response<ActualCourseDto>> UpdateDescription([FromBody] UpdateCourseDescriptionDto dto)
     {
         return await _courseService.UpdateDescriptionAsync(dto);
     }
     
+    [HttpPost("/course/update-chat-link")]
+    [Authorize(AuthorizationPolicies.TeacherAndHigher)]
+    public async Task<Response<ActualCourseDto>> UpdateChatLink([FromBody] UpdateCourseChatLinkDto dto)
+    {
+        return await _courseService.UpdateChatLinkAsync(dto);
+    }
+
     [HttpGet("/course/get-page-data")]
     public async Task<Response<CoursePageDto>> GetPageData(int courseId)
     {

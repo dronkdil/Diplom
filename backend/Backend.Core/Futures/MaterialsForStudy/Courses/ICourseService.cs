@@ -9,9 +9,10 @@ public interface ICourseService
     Task<Response> CreateAsync(CreateCourseDto dto);
     Task<Response> RemoveAsync(RemoveCourseDto dto);
     Task<Response<IEnumerable<ShortCourseDto>>> GetAllCourses();
-    Task<Response<ActualCourseDto>> UpdateTitleAsync(UpdateTitleDto dto);
-    Task<Response<ActualCourseDto>> UpdateDescriptionAsync(UpdateDescriptionDto dto);
-    Task<Response<ActualCourseDto>> UpdateImageByUrlAsync(UpdateImageByUrlDto dto);
+    Task<Response<ActualCourseDto>> UpdateTitleAsync(UpdateCourseTitleDto dto);
+    Task<Response<ActualCourseDto>> UpdateDescriptionAsync(UpdateCourseDescriptionDto dto);
+    Task<Response<ActualCourseDto>> UpdateImageByUrlAsync(UpdateCourseImageByUrlDto dto);
+    Task<Response<ActualCourseDto>> UpdateChatLinkAsync(UpdateCourseChatLinkDto dto);
     Task<Response<CoursePageDto>> GetCoursePageDataAsync(int courseId);
     Task<Response<double>> GetAverageScoreAsync(int courseId);
 }

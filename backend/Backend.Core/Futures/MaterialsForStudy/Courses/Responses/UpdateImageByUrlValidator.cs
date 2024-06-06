@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Backend.Core.Futures.MaterialsForStudy.Courses.Responses;
 
-public class UpdateImageByUrlValidator : AbstractValidator<UpdateImageByUrlDto>
+public class UpdateImageByUrlValidator : AbstractValidator<UpdateCourseImageByUrlDto>
 {
     public UpdateImageByUrlValidator(IUrlTypeCorrectValidator validator)
     {

@@ -15,10 +15,10 @@ public class CourseService : ICourseService
     private readonly ICourseGateway _courseGateway;
     private readonly IMapper _mapper;
     private readonly IValidator<CreateCourseDto> _createCourseValidator;
-    private readonly IValidator<UpdateImageByUrlDto> _updateImageByUrlValidator;
+    private readonly IValidator<UpdateCourseImageByUrlDto> _updateImageByUrlValidator;
     private readonly IUserContext _userContext;
 
-    public CourseService(ICourseGateway courseGateway, IMapper mapper, IValidator<CreateCourseDto> createCourseValidator, IValidator<UpdateImageByUrlDto> updateImageByUrlValidator, IUserContext userContext)
+    public CourseService(ICourseGateway courseGateway, IMapper mapper, IValidator<CreateCourseDto> createCourseValidator, IValidator<UpdateCourseImageByUrlDto> updateImageByUrlValidator, IUserContext userContext)
     {
         _courseGateway = courseGateway;
         _mapper = mapper;
@@ -49,7 +49,7 @@ public class CourseService : ICourseService
         return Response.Success(_mapper.Map<IEnumerable<ShortCourseDto>>(courses));
     }
 
-    public async Task<Response<ActualCourseDto>> UpdateTitleAsync(UpdateTitleDto dto)
+    public async Task<Response<ActualCourseDto>> UpdateTitleAsync(UpdateCourseTitleDto dto)
     {
         var actual = await _courseGateway.UpdateAsync(dto.Id, o =>
         {
@@ -58,7 +58,7 @@ public class CourseService : ICourseService
         return Response.Success(_mapper.Map<ActualCourseDto>(actual));
     }
 
-    public async Task<Response<ActualCourseDto>> UpdateDescriptionAsync(UpdateDescriptionDto dto)
+    public async Task<Response<ActualCourseDto>> UpdateDescriptionAsync(UpdateCourseDescriptionDto dto)
     {
         var actual = await _courseGateway.UpdateAsync(dto.Id, o =>
         {
@@ -67,7 +67,7 @@ public class CourseService : ICourseService
         return Response.Success(_mapper.Map<ActualCourseDto>(actual));
     }
 
-    public async Task<Response<ActualCourseDto>> UpdateImageByUrlAsync(UpdateImageByUrlDto dto)
+    public async Task<Response<ActualCourseDto>> UpdateImageByUrlAsync(UpdateCourseImageByUrlDto dto)
     {
         if (await _updateImageByUrlValidator.ValidateAsync(dto) is { IsValid: false } result)
             return Response.ValidationFailed<ActualCourseDto>(result.Errors);
@@ -75,6 +75,15 @@ public class CourseService : ICourseService
         var actual = await _courseGateway.UpdateAsync(dto.Id, o =>
         {
             o.ImageUrl = dto.ImageUrl;
+        });
+        return Response.Success(_mapper.Map<ActualCourseDto>(actual));
+    }
+
+    public async Task<Response<ActualCourseDto>> UpdateChatLinkAsync(UpdateCourseChatLinkDto dto)
+    {
+        var actual = await _courseGateway.UpdateAsync(dto.Id, o =>
+        {
+            o.ChatLink = dto.ChatLink;
         });
         return Response.Success(_mapper.Map<ActualCourseDto>(actual));
     }

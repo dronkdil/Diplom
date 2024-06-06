@@ -26,7 +26,7 @@ const CoursePage = () => {
     const {data: averageScore, isPending: averageScorePending} = useTypedQuery<number>({
         name: `get-average-score-${id}`,
         request: () => CourseService.getAverageScore(Number(id)),
-        conditional: () => isJoinedCourse
+        conditional: () => isJoinedCourse && user.role == "Student"
     })
 
     if (isFailedResponse) {
@@ -48,7 +48,7 @@ const CoursePage = () => {
                     <p className={styles.course__description}>{course?.description}</p>
                     {isJoinedCourse && !averageScorePending && <p className={styles.course__description}>Середній бал {averageScore}</p>}
                     <div className={styles.course__buttons}>
-                        <DefaultLink target="_blank" href={"https://web.telegram.org/k/"}>Спільний чат курсу</DefaultLink>
+                        {course.chatLink && <DefaultLink target="_blank" href={course.chatLink}>Спільний чат курсу</DefaultLink>}
                         <DefaultLink target="_blank" href={"https://www.dilovamova.com/index.php?page=10"}>Розклад семінарів</DefaultLink>
                     </div>
                 </>}

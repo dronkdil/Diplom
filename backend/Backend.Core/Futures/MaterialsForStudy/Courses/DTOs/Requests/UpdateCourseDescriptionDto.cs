@@ -1,7 +1,7 @@
 ﻿namespace Backend.Core.Futures.MaterialsForStudy.Courses.DTOs.Requests;
 
-public class UpdateImageByUrlDto
+public class UpdateCourseDescriptionDto
 {
     public int Id { get; set; }
-    public string ImageUrl { get; set; } = null!;
+    public string Description { get; set; } = null!;
 }
