@@ -1,6 +1,7 @@
 "use client"
 import { CourseService } from "@/api/materialsForStudy/course/course.service"
 import { CourseTypeInfoType } from "@/api/materialsForStudy/course/types/course-page-info.type"
+import { DefaultLink } from "@/components/links"
 import Skeleton from "@/components/skeleton/Skeleton"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { getIsJoinedCourse } from "@/lib/redux/slices/IsJoinedCourseSlice"
@@ -46,6 +47,10 @@ const CoursePage = () => {
                     <h3 className={styles.course__title}>{course?.title}</h3>
                     <p className={styles.course__description}>{course?.description}</p>
                     {isJoinedCourse && !averageScorePending && <p className={styles.course__description}>Середній бал {averageScore}</p>}
+                    <div className={styles.course__buttons}>
+                        <DefaultLink target="_blank" href={"https://web.telegram.org/k/"}>Спільний чат курсу</DefaultLink>
+                        <DefaultLink target="_blank" href={"https://www.dilovamova.com/index.php?page=10"}>Розклад семінарів</DefaultLink>
+                    </div>
                 </>}
             </div>
             <div className={styles.course__modules}>

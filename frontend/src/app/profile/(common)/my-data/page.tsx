@@ -30,7 +30,7 @@ const MyDataPage = () => {
         </>}
       </Setting>
       <Setting 
-        title="Ім'я фамілія" 
+        title="Ім'я прізвище"
         actualData={user.displayName} 
         request={(values) => SettingsService.updateNames(values as UpdateNamesType)}
         onSuccess={(data) => updateUserData(data)}

@@ -17,6 +17,10 @@
         @apply text-white/65;
     }
 
+    .course__buttons {
+        @apply mt-2 grid gap-2 w-full max-w-[230px];
+    }
+
     .course__modules {  
         @apply w-full flex flex-col gap-2;
 
