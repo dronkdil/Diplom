@@ -2,6 +2,8 @@
 using Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Requests;
 using Backend.Core.Futures.MaterialsForStudy.Lessons.DTOs.Responses;
 using Backend.Core.Futures.MaterialsForStudy.Lessons.Responses;
+using Backend.Core.Futures.Notification;
+using Backend.Core.Futures.Notification.DTOs.Requests;
 using Backend.Core.Gateways;
 using Backend.Core.Interfaces.YoutubeLink;
 using Backend.Core.UserContext;
@@ -19,14 +21,18 @@ public class LessonService : ILessonService
     private readonly IValidator<CreateLessonWithYoutubeDto> _createLessonValidator;
     private readonly IYoutubeLinkParser _youtubeLinkParser;
     private readonly IUserContext _userContext;
+    private readonly ICourseGateway _courseGateway;
+    private readonly INotificationService _notificationService;
 
-    public LessonService(ILessonGateway lessonGateway, IMapper mapper, IValidator<CreateLessonWithYoutubeDto> createLessonValidator, IYoutubeLinkParser youtubeLinkParser, IUserContext userContext)
+    public LessonService(ILessonGateway lessonGateway, IMapper mapper, IValidator<CreateLessonWithYoutubeDto> createLessonValidator, IYoutubeLinkParser youtubeLinkParser, IUserContext userContext, ICourseGateway courseGateway, INotificationService notificationService)
     {
         _lessonGateway = lessonGateway;
         _mapper = mapper;
         _createLessonValidator = createLessonValidator;
         _youtubeLinkParser = youtubeLinkParser;
         _userContext = userContext;
+        _courseGateway = courseGateway;
+        _notificationService = notificationService;
     }
 
     public async Task<Response> CreateWithYoutubeAsync(CreateLessonWithYoutubeDto withYoutubeDto)
@@ -90,6 +96,12 @@ public class LessonService : ILessonService
     public async Task<Response> OnView(OnViewLessonDto dto)
     {
         await _lessonGateway.OnViewAsync(dto.LessonId, _userContext.UserId);
+
+        var isCompleted = await _courseGateway.IsCompletedByLessonAsync(dto.LessonId, _userContext.UserId);
+        var courseName = await _courseGateway.GetCourseTitleByLessonAsync(dto.LessonId);
+        if (isCompleted)
+            await _notificationService.SendAsync(new StudentFinishedCourseDto(courseName));
+        
         return Response.Success();
     }
 

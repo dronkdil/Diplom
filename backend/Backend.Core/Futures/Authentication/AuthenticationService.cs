@@ -2,6 +2,8 @@
 using AutoMapper;
 using Backend.Core.Futures.Authentication.DTOs;
 using Backend.Core.Futures.Authentication.Reponses;
+using Backend.Core.Futures.Notification;
+using Backend.Core.Futures.Notification.DTOs.Requests;
 using Backend.Core.Gateways;
 using Backend.Core.Interfaces.JwtTokenFactory;
 using Backend.Core.Interfaces.PasswordHasher;
@@ -23,8 +25,10 @@ public class AuthenticationService : IAuthenticationService
     private readonly IJwtTokenFactory _jwtTokenFactory;
     private readonly IPasswordHasher _passwordHasher;
     private readonly IMapper _mapper;
+    
+    private readonly INotificationService _notificationService;
 
-    public AuthenticationService(IValidator<LoginDto> loginValidator, IValidator<RegistrationStudentDto> registrationValidator, IJwtTokenFactory jwtTokenFactory, IPasswordHasher passwordHasher, IMapper mapper, IUserGateway userGateway, IStudentGateway studentGateway)
+    public AuthenticationService(IValidator<LoginDto> loginValidator, IValidator<RegistrationStudentDto> registrationValidator, IJwtTokenFactory jwtTokenFactory, IPasswordHasher passwordHasher, IMapper mapper, IUserGateway userGateway, IStudentGateway studentGateway, INotificationService notificationService)
     {
         _loginValidator = loginValidator;
         _registrationValidator = registrationValidator;
@@ -33,6 +37,7 @@ public class AuthenticationService : IAuthenticationService
         _mapper = mapper;
         _userGateway = userGateway;
         _studentGateway = studentGateway;
+        _notificationService = notificationService;
     }
 
     public async Task<Response<SuccessAuthenticationDto>> LoginAsync(LoginDto dto)
@@ -67,6 +72,8 @@ public class AuthenticationService : IAuthenticationService
         var user = await _studentGateway.AddAsync(_mapper.Map<Student>(dto));
         var tokens = _jwtTokenFactory.CreateTokens(user.Id, Roles.Student.ToString());
 
+        await _notificationService.SendAsync(new StudentRegistrationSuccessfullyDto(), user.Id);
+        
         return Response.Success(new SuccessAuthenticationDto
         {
             AccessToken = tokens.AccessToken,

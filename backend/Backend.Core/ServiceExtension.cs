@@ -6,6 +6,7 @@ using Backend.Core.Futures.MaterialsForStudy.Homeworks;
 using Backend.Core.Futures.MaterialsForStudy.Homeworks.DTOs;
 using Backend.Core.Futures.MaterialsForStudy.Lessons;
 using Backend.Core.Futures.MaterialsForStudy.Modules;
+using Backend.Core.Futures.Notification;
 using Backend.Core.Futures.Users.Common.UpdateInformation;
 using Backend.Core.Futures.Users.Students;
 using Backend.Core.Futures.Users.Students.UpdateInformation;
@@ -33,6 +34,7 @@ public static class ServiceExtension
         services.AddTransient<IModuleService, ModuleService>();
         services.AddTransient<ILessonService, LessonService>();
         services.AddTransient<IHomeworkService, HomeworkService>();
+        services.AddTransient<INotificationService, NotificationService>();
         return services;
     }
 }

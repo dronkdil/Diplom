@@ -119,4 +119,46 @@ public class CourseGateway : ICourseGateway
         return lessons
             .Average(o => o.Homeworks.Average(o1 => o1.Appraisal));
     }
+
+    public async Task<bool> IsCompletedByLessonAsync(int lessonId, int studentId)
+    {
+        var course = await _dataContext.Courses
+            .Include(o => o.Modules)
+            .ThenInclude(o => o.Lessons)
+            .FirstAsync(o => o.Modules
+                .Any(o1 => o1.Lessons
+                    .Any(o2 => o2.Id == lessonId)));
+
+        var allLessons = course.Modules.SelectMany(o => o.Lessons).ToList();
+        var allLessonsCount = allLessons.Count;
+        var completedLessonsCount = allLessons.Count(o => IsLessonCompleted(o, studentId));
+
+        return allLessonsCount == completedLessonsCount;
+    }
+
+    public async Task<string> GetCourseTitleByLessonAsync(int lessonId)
+    {
+        var course = await _dataContext.Courses
+            .Include(o => o.Modules)
+            .ThenInclude(o => o.Lessons)
+            .FirstAsync(o => o.Modules
+                .Any(o1 => o1.Lessons
+                    .Any(o2 => o2.Id == lessonId)));
+
+        return course.Title;
+    }
+    
+    private bool IsLessonCompleted(Lesson lesson, int studentId)
+    {
+        if (lesson.HaveHomework)
+        {
+            var homeworkCompleted = lesson.Homeworks.Any(o => o.StudentId == studentId && o.Appraisal != null);
+            return homeworkCompleted;
+        }
+        else
+        {
+            var lessonViewed = lesson.ViewedLessons.Any(o => o.StudentId == studentId && o.LessonId == lesson.Id);
+            return lessonViewed;
+        }
+    }
 }

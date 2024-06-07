@@ -40,6 +40,7 @@ public static class ServiceExtension
         services.AddTransient<IUrlTypeCorrectValidator, UrlTypeCorrectValidator>();
         services.AddTransient<IBlobStorage, BlobStorage>();
         services.AddTransient<IYoutubeLinkParser, YoutubeLinkParser>();
+        services.AddTransient<INotificationGateway, NotificationGateway>();
         return services;
     }
 }

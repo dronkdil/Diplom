@@ -28,12 +28,6 @@ public class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<Notification>()
-            .Property(o => o.Type)
-            .HasConversion(
-                o => o.ToString(),
-                o => (NotificationType)Enum.Parse(typeof(NotificationType), o));
-
         builder.Entity<Role>()
             .HasData(Enum.GetValues(typeof(Roles)).Cast<Roles>().Select(o => new Role
             {

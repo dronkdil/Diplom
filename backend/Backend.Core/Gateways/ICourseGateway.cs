@@ -15,4 +15,6 @@ public interface ICourseGateway
     Task<Course?> GetByIdWithTeacherAndModulesAsync(int courseId);
     Task<IEnumerable<Course>> GetStudentCoursesWithModulesAndLessonsAsync(int studentId);
     Task<double?> GetAverageScoreAsync(int courseId, int studentId);
+    Task<bool> IsCompletedByLessonAsync(int lessonId, int studentId);
+    Task<string> GetCourseTitleByLessonAsync(int lessonId);
 }

@@ -1,13 +1,11 @@
+import { NotificationType } from "@/api/users/notification/type/notification.type"
 import styles from "./NotificationItem.module.scss"
 
-export type NotificationItemProps = {
-    title: string
-    description: string
+export type NotificationItemProps = NotificationType & {
     icon: React.ReactElement
-    buttons: React.ReactElement | React.ReactElement[]
 }
 
-const NotificationItem = ({title, description, icon, buttons}: NotificationItemProps) => {
+const NotificationItem = ({title, description, icon}: NotificationItemProps) => {
   return (
     <div className={styles.notification}>
            <div className={styles.notification__content}>
@@ -19,9 +17,6 @@ const NotificationItem = ({title, description, icon, buttons}: NotificationItemP
                     <p className={styles.notification__description}>{description}</p>
                 </div>
            </div>
-            <div className={styles.notification__buttons}>
-                {buttons}
-            </div>
       </div>
   )
 }
