@@ -1,11 +1,11 @@
 .logo {
     @apply inline-flex space-x-2 items-center transition cursor-pointer;
 
-    &__cube {
+    .logo__cube {
         @apply w-10 h-10 bg-white rounded-lg;
     }
 
-    &__text {
+    .logo__text {
         @apply font-bold text-white text-lg;
     }
 
