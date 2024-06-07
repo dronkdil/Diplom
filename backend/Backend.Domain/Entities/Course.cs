@@ -8,7 +8,7 @@ public class Course : BaseEntity
     public string Description { get; set; } = null!;
     public string ImageUrl { get; set; } = null!;
     public int LimitOfStudents { get; set; }
-    public string ChatLink { get; set; } = null!;
+    public string? ChatLink { get; set; }
 
     public int TeacherId { get; set; }
     public Teacher Teacher { get; set; } = null!;
