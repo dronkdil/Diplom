@@ -4,6 +4,7 @@ import { CourseTypeInfoType } from "@/api/materialsForStudy/course/types/course-
 import { UpdateCourseChatLinkType } from "@/api/materialsForStudy/course/types/update-chat-link.type"
 import { UpdateCourseDescriptionType } from "@/api/materialsForStudy/course/types/update-description.type"
 import { UpdateCourseImageByUrlType } from "@/api/materialsForStudy/course/types/update-image-by-url.type"
+import { UpdateCourseScheduleLinkType } from "@/api/materialsForStudy/course/types/update-schedule-link.type"
 import { UpdateCourseTitleType } from "@/api/materialsForStudy/course/types/update-title.type"
 import { DefaultInput } from "@/components/form/input"
 import { DefaultLink } from "@/components/links"
@@ -81,6 +82,16 @@ const TeacherCoursePage = () => {
                 >
                     {(register) => <>
                         <DefaultInput icon={<LinkIcon />} defaultValue={course?.chatLink} placeholder="Посилання" {...register("chatLink")} />
+                    </>}
+                </Setting>
+                <Setting 
+                    title={"Посилання на розклад"}
+                    actualData={course?.scheduleLink ?? 'Відсутня'}
+                    request={(values) => CourseService.updateScheduleLink({id: Number(id), ...values} as UpdateCourseScheduleLinkType)}
+                    onSuccess={(data) => setData({...course, ...data})}
+                >
+                    {(register) => <>
+                        <DefaultInput icon={<LinkIcon />} defaultValue={course?.scheduleLink} placeholder="Посилання" {...register("scheduleLink")} />
                     </>}
                 </Setting>
             </div>

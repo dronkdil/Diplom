@@ -1,7 +1,6 @@
 "use client"
 import { LessonService } from "@/api/materialsForStudy/lesson/lesson.service"
 import { LessonForPageType } from "@/api/materialsForStudy/lesson/type/lesson-for-page.type"
-import { DefaultLink } from "@/components/links"
 import { useTypedMutation } from "@/hooks/useTypedMutation"
 import { useTypedQuery } from "@/hooks/useTypedQuery"
 import { getUserData } from "@/lib/redux/slices/UserSlice"
@@ -57,9 +56,7 @@ const LessonPage = () => {
         </div>
         
         {data?.videoType != "YoutubeVideo" && <div className="text-white/50 mb-2">Тимчасово відео з усіх джерел окрім youtube не підтримуються</div>}
-        <div className={styles.page__undervideo}>
-            {data?.videoType == "YoutubeVideo" && <DefaultLink download={data?.title} href={`https://www.yotube.com/watch?v=${data?.youtubeVideoId}` ?? ''}>Перейти на youtube</DefaultLink>}
-        </div>
+        
         {data?.haveHomework && <Homework description={data?.homeworkDescription} />}
       </div>
       <div className={styles.page__lessons}>

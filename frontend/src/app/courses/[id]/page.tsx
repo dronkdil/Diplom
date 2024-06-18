@@ -49,7 +49,7 @@ const CoursePage = () => {
                     {isJoinedCourse && !averageScorePending && <p className={styles.course__description}>Середній бал {averageScore}</p>}
                     <div className={styles.course__buttons}>
                         {course.chatLink && <DefaultLink target="_blank" href={course.chatLink}>Спільний чат курсу</DefaultLink>}
-                        <DefaultLink target="_blank" href={"https://www.dilovamova.com/index.php?page=10"}>Розклад семінарів</DefaultLink>
+                        {course.scheduleLink && <DefaultLink target="_blank" href={course.scheduleLink}>Розклад семінарів</DefaultLink>}
                     </div>
                 </>}
             </div>
