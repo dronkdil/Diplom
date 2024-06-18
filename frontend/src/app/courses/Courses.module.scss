@@ -23,7 +23,7 @@
         }
 
         .row__content {
-            @apply flex gap-5;
+            @apply flex gap-4 flex-wrap;
 
             .row__empty-message {
                 @apply text-white;
