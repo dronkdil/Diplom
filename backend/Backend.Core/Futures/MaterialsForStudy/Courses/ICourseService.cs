@@ -13,6 +13,7 @@ public interface ICourseService
     Task<Response<ActualCourseDto>> UpdateDescriptionAsync(UpdateCourseDescriptionDto dto);
     Task<Response<ActualCourseDto>> UpdateImageByUrlAsync(UpdateCourseImageByUrlDto dto);
     Task<Response<ActualCourseDto>> UpdateChatLinkAsync(UpdateCourseChatLinkDto dto);
+    Task<Response<ActualCourseDto>> UpdateScheduleLinkAsync(UpdateCourseScheduleLinkDto dto);
     Task<Response<CoursePageDto>> GetCoursePageDataAsync(int courseId);
     Task<Response<double>> GetAverageScoreAsync(int courseId);
 }

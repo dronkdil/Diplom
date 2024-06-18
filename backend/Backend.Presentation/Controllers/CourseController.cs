@@ -65,6 +65,13 @@ public class CourseController : Controller
     {
         return await _courseService.UpdateChatLinkAsync(dto);
     }
+    
+    [HttpPost("/course/update-schedule-link")]
+    [Authorize(AuthorizationPolicies.TeacherAndHigher)]
+    public async Task<Response<ActualCourseDto>> UpdateScheduleLink([FromBody] UpdateCourseScheduleLinkDto dto)
+    {
+        return await _courseService.UpdateScheduleLinkAsync(dto);
+    }
 
     [HttpGet("/course/get-page-data")]
     public async Task<Response<CoursePageDto>> GetPageData(int courseId)

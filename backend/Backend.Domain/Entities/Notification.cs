@@ -10,4 +10,7 @@ public class Notification : BaseEntity
     
     public int UserId { get; set; }
     public User User { get; set; } = null!;
+
+    public int NotificationTypeId { get; set; }
+    public NotificationType NotificationType { get; set; } = null!;
 }

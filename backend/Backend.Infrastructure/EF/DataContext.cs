@@ -34,6 +34,13 @@ public class DataContext : DbContext
                 Id = (int)o,
                 Name = o.ToString()
             }));
+        
+        builder.Entity<NotificationType>()
+            .HasData(Enum.GetValues(typeof(NotificationTypes)).Cast<NotificationTypes>().Select(o => new NotificationType
+            {
+                Id = (int)o,
+                Slug = o.ToString()
+            }));
 
         builder.Entity<User>()
             .HasData(new User

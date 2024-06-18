@@ -88,6 +88,15 @@ public class CourseService : ICourseService
         return Response.Success(_mapper.Map<ActualCourseDto>(actual));
     }
 
+    public async Task<Response<ActualCourseDto>> UpdateScheduleLinkAsync(UpdateCourseScheduleLinkDto dto)
+    {
+        var actual = await _courseGateway.UpdateAsync(dto.Id, o =>
+        {
+            o.ScheduleLink = dto.ScheduleLink;
+        });
+        return Response.Success(_mapper.Map<ActualCourseDto>(actual));
+    }
+
     public async Task<Response<CoursePageDto>> GetCoursePageDataAsync(int courseId)
     {
         var course = await _courseGateway.GetByIdWithTeacherAndModulesAsync(courseId);

@@ -4,6 +4,7 @@ using Backend.Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240610121731_add_notification_types")]
+    partial class add_notification_types
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,9 +69,6 @@ namespace Backend.Infrastructure.EF.Migrations
 
                     b.Property<int>("LimitOfStudents")
                         .HasColumnType("int");
-
-                    b.Property<string>("ScheduleLink")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");

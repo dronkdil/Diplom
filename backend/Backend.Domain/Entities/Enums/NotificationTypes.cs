@@ -2,8 +2,8 @@
 
 public enum NotificationTypes
 {
-    CourseFinished = 1,
-    SuccessRegistration = 2,
-    ReportAboutStudentActivity = 3,
-    HomeworkMarked = 4,
+    CERT_STUD = 1,
+    REG_STUD = 2,
+    STUD_ACT = 3,
+    TEACH_GRD = 4,
 }
