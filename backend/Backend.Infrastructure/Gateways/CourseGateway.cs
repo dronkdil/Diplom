@@ -152,12 +152,12 @@ public class CourseGateway : ICourseGateway
     {
         if (lesson.HaveHomework)
         {
-            var homeworkCompleted = lesson.Homeworks.Any(o => o.StudentId == studentId && o.Appraisal != null);
+            var homeworkCompleted = lesson.Homeworks?.Any(o => o.StudentId == studentId && o.Appraisal != null) ?? false;
             return homeworkCompleted;
         }
         else
         {
-            var lessonViewed = lesson.ViewedLessons.Any(o => o.StudentId == studentId && o.LessonId == lesson.Id);
+            var lessonViewed = lesson.ViewedLessons?.Any(o => o.StudentId == studentId && o.LessonId == lesson.Id) ?? false;
             return lessonViewed;
         }
     }
