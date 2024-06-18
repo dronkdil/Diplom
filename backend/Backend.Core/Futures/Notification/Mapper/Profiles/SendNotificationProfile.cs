@@ -9,7 +9,7 @@ public class SendNotificationProfile : Profile
     public SendNotificationProfile()
     {
         CreateMap<SendNotificationDto, Domain.Entities.Notification>()
-            .ForMember(dest => dest.NotificationTypeId, opt => opt.MapFrom(src => (int)src.NotificationType));
+            .ForMember(dest => dest.NotificationTypeId, opt => opt.MapFrom(src => (int)src.NotificationTypeEnum));
         CreateMap<Domain.Entities.Notification, NotificationDto>();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Backend.Core.Futures.Notification.DTOs.Requests.Base;
+using Backend.Domain.Entities.Enums;
 
 namespace Backend.Core.Futures.Notification.DTOs.Requests;
 
@@ -8,5 +9,6 @@ public class StudentRegistrationSuccessfullyDto : SendNotificationDto
     {
         Title = "Реєстрація успішна";
         Description = "Для перегляду курсів перейдіть на сторінку, натиснувши на логотип зліва-зверху";
+        NotificationTypeEnum = NotificationTypes.REG_STUD;
     }
 }

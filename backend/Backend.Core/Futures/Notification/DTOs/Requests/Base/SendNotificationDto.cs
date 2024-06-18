@@ -6,5 +6,5 @@ public class SendNotificationDto
 {
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public NotificationTypes NotificationType { get; set; }
+    public NotificationTypes NotificationTypeEnum { get; set; }
 }

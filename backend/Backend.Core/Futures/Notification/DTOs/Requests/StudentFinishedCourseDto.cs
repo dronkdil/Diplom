@@ -9,6 +9,6 @@ public class StudentFinishedCourseDto : SendNotificationDto
     {
         Title = $"Ви завершили курс {courseName}";
         Description = $"Вітаємо з завершенням курсу, ви можете отримати сертифікат на сторінці сертифікатів під назвою {courseName}";
-        NotificationType = NotificationTypes.REG_STUD;
+        NotificationTypeEnum = NotificationTypes.REG_STUD;
     }
 }
